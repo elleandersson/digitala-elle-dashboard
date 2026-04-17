@@ -1,22 +1,23 @@
 <?php
 /**
- * Plugin Name: Instagram Dashboard (Digitala Elle)
- * Description: Shortcode [instagram_dashboard] som visar Instagram-statistik från GitHub-JSON.
- * Version: 1.0
+ * Instagram Dashboard shortcode för Digitala Elle.
  *
- * Installation: ladda upp denna fil (plus mappen instagram-dashboard/) till
- * /wp-content/mu-plugins/. WordPress laddar den automatiskt — ingen aktivering behövs.
+ * Placering: /wp-content/themes/<ditt-tema>/instagram-dashboard.php
+ * Aktivering: lägg till raden nedan längst ner i temats functions.php:
+ *
+ *     require_once get_theme_file_path( 'instagram-dashboard.php' );
+ *
+ * Användning: skriv [instagram_dashboard] i en shortcode-block på valfri sida.
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 define( 'IGDASH_DATA_URL', 'https://raw.githubusercontent.com/elleandersson/digitala-elle-dashboard/main/data/instagram.json' );
-define( 'IGDASH_ASSETS_URL', content_url( 'mu-plugins/instagram-dashboard' ) );
 
 function igdash_enqueue() {
-    wp_register_style( 'igdash-css', IGDASH_ASSETS_URL . '/dashboard.css', array(), '1.0' );
+    wp_register_style( 'igdash-css', get_theme_file_uri( 'dashboard.css' ), array(), '1.0' );
     wp_register_script( 'igdash-chartjs', 'https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js', array(), '4.4.1', true );
-    wp_register_script( 'igdash-js', IGDASH_ASSETS_URL . '/dashboard.js', array( 'igdash-chartjs' ), '1.0', true );
+    wp_register_script( 'igdash-js', get_theme_file_uri( 'dashboard.js' ), array( 'igdash-chartjs' ), '1.0', true );
 }
 add_action( 'wp_enqueue_scripts', 'igdash_enqueue' );
 
