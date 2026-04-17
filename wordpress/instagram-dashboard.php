@@ -24,9 +24,9 @@ add_action( 'wp_enqueue_scripts', 'igdash_enqueue' );
 function igdash_shortcode() {
     wp_enqueue_style( 'igdash-css' );
     wp_enqueue_script( 'igdash-js' );
-    wp_add_inline_script( 'igdash-js', 'window.DASHBOARD_DATA_URL = ' . wp_json_encode( IGDASH_DATA_URL ) . ';', 'before' );
 
     ob_start(); ?>
+    <script>window.DASHBOARD_DATA_URL = <?php echo wp_json_encode( IGDASH_DATA_URL ); ?>;</script>
     <main class="dashboard-wrap">
         <header class="dashboard-header">
             <h1>Instagram Dashboard</h1>
