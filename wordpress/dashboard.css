@@ -28,6 +28,42 @@
 }
 .kpi-label { font-size: .8rem; color: #777; text-transform: uppercase; letter-spacing: .05em; }
 .kpi-value { font-size: 1.85rem; font-weight: 600; }
+.kpi-hint { font-size: .75rem; color: #999; margin-top: .15rem; }
+.kpi-grid-secondary { margin-top: 0; }
+.kpi-grid-secondary .kpi-value { font-size: 1.5rem; }
+
+.best-posting {
+    background: #fff;
+    border: 1px solid #ececec;
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.5rem;
+}
+.best-posting h2 { font-size: 1.1rem; margin: 0 0 .5rem; }
+.best-posting-body { margin: 0; color: #333; }
+.best-posting-hint { display: block; font-size: .8rem; color: #999; margin-top: .25rem; }
+
+.daily-insights {
+    background: #fff;
+    border: 1px solid #ececec;
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.5rem;
+}
+.daily-insights h2 { font-size: 1.1rem; margin: 0 0 .5rem; }
+.daily-insights-hint { font-size: .8rem; color: #666; margin: 0 0 1rem; }
+.daily-insights-scroll { overflow-x: auto; }
+.daily-insights-table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+.daily-insights-table th, .daily-insights-table td {
+    text-align: left; padding: .5rem .75rem; border-bottom: 1px solid #f0f0f0;
+    white-space: nowrap;
+}
+.daily-insights-table th { font-weight: 600; color: #666; font-size: .8rem; text-transform: uppercase; letter-spacing: .04em; }
+.daily-insights-table tbody tr:hover { background: #fafafa; }
+
+.arrow-up   { color: #2e7d32; font-weight: 700; }
+.arrow-down { color: #c62828; font-weight: 700; }
+.arrow-flat { color: #1565c0; font-weight: 700; }
 
 .chart-card {
     background: #fff;

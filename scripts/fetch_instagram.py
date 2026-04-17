@@ -11,6 +11,7 @@ Krav (sätts som GitHub Secrets):
 import json
 import os
 import sys
+from collections import Counter, defaultdict
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -21,6 +22,8 @@ TOKEN = os.environ["IG_ACCESS_TOKEN"]
 IG_ID = os.environ["IG_USER_ID"]
 OUT = Path(__file__).resolve().parent.parent / "data" / "instagram.json"
 
+WEEKDAYS_SV = ["Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag", "Lördag", "Söndag"]
+
 
 def get(path, **params):
     params["access_token"] = TOKEN
@@ -30,7 +33,6 @@ def get(path, **params):
 
 
 def refresh_token():
-    """Förlänger long-lived token (giltig 60 dagar). Skriver ny token till GITHUB_OUTPUT."""
     try:
         data = get("oauth/access_token",
                    grant_type="fb_exchange_token",
@@ -52,41 +54,43 @@ def profile():
 def time_series(metric, days=30):
     until = datetime.now(timezone.utc).date()
     since = until - timedelta(days=days)
-    data = get(f"{IG_ID}/insights",
-               metric=metric,
-               period="day",
-               since=since.isoformat(),
-               until=until.isoformat())
-    series = []
-    for m in data.get("data", []):
-        for v in m["values"]:
-            series.append({"date": v["end_time"][:10], "value": v["value"]})
-    return series
-
-
-def total_value(metric, days=30):
-    """För metrics som kräver metric_type=total_value (views, profile_views m.fl.)."""
-    until = datetime.now(timezone.utc).date()
-    since = until - timedelta(days=days)
     try:
         data = get(f"{IG_ID}/insights",
                    metric=metric,
                    period="day",
-                   metric_type="total_value",
                    since=since.isoformat(),
                    until=until.isoformat())
-        return data["data"][0].get("total_value", {}).get("value", 0)
+        series = []
+        for m in data.get("data", []):
+            for v in m["values"]:
+                series.append({"date": v["end_time"][:10], "value": v["value"]})
+        return series
     except (requests.HTTPError, KeyError, IndexError) as e:
-        print(f"Kunde inte hämta {metric}: {e}", file=sys.stderr)
-        return 0
+        print(f"time_series {metric} misslyckades: {e}", file=sys.stderr)
+        return []
 
 
-def top_media(limit=5):
+def total_value(metric, days=30, breakdown=None):
+    until = datetime.now(timezone.utc).date()
+    since = until - timedelta(days=days)
+    params = dict(metric=metric, period="day", metric_type="total_value",
+                  since=since.isoformat(), until=until.isoformat())
+    if breakdown:
+        params["breakdown"] = breakdown
+    try:
+        data = get(f"{IG_ID}/insights", **params)
+        return data["data"][0].get("total_value", {})
+    except (requests.HTTPError, KeyError, IndexError) as e:
+        print(f"total_value {metric} misslyckades: {e}", file=sys.stderr)
+        return {}
+
+
+def fetch_recent_media(days=30):
+    """Alla inlägg senaste N dagarna med per-post insights."""
     media = get(f"{IG_ID}/media",
                 fields="id,caption,media_type,media_product_type,permalink,thumbnail_url,media_url,timestamp,like_count,comments_count",
-                limit=25).get("data", [])
-
-    cutoff = datetime.now(timezone.utc) - timedelta(days=30)
+                limit=50).get("data", [])
+    cutoff = datetime.now(timezone.utc) - timedelta(days=days)
     recent = []
     for m in media:
         ts = datetime.strptime(m["timestamp"], "%Y-%m-%dT%H:%M:%S%z")
@@ -101,13 +105,10 @@ def top_media(limit=5):
         m["engagement"] = (m.get("like_count", 0) + m.get("comments_count", 0)
                            + m.get("saved", 0) + m.get("shares", 0))
         recent.append(m)
-
-    recent.sort(key=lambda x: x.get("reach", 0), reverse=True)
-    return recent[:limit]
+    return recent
 
 
 def format_breakdown(media_list):
-    """Snitt-engagemang per format."""
     buckets = {"IMAGE": [], "CAROUSEL_ALBUM": [], "VIDEO": [], "REELS": []}
     for m in media_list:
         key = "REELS" if m.get("media_product_type") == "REELS" else m.get("media_type")
@@ -119,30 +120,119 @@ def format_breakdown(media_list):
     }
 
 
+def best_posting(media_list):
+    """Hitta veckodag/timme med högst genomsnittligt engagemang."""
+    by_weekday = defaultdict(list)
+    by_hour = defaultdict(list)
+    for m in media_list:
+        ts = datetime.strptime(m["timestamp"], "%Y-%m-%dT%H:%M:%S%z")
+        # Konvertera till svensk tid (UTC+1/UTC+2 — approximera UTC+2 för CEST)
+        local = ts + timedelta(hours=2)
+        by_weekday[local.weekday()].append(m.get("engagement", 0))
+        by_hour[local.hour].append(m.get("engagement", 0))
+
+    def top(d):
+        if not d:
+            return None
+        return max(d.items(), key=lambda kv: sum(kv[1]) / len(kv[1]))
+
+    w = top(by_weekday)
+    h = top(by_hour)
+    return {
+        "weekday": WEEKDAYS_SV[w[0]] if w else None,
+        "weekday_avg_engagement": round(sum(w[1]) / len(w[1]), 1) if w else 0,
+        "hour": h[0] if h else None,
+        "hour_avg_engagement": round(sum(h[1]) / len(h[1]), 1) if h else 0,
+        "posts_analyzed": len(media_list),
+    }
+
+
+def daily_insights(reach_series, follower_series, media_list):
+    """Kombinera daglig räckvidd, nya följare och post-engagemang per dag."""
+    reach_by_date = {d["date"]: d["value"] for d in reach_series}
+    followers_by_date = {d["date"]: d["value"] for d in follower_series}
+    engagement_by_date = defaultdict(int)
+    posts_by_date = defaultdict(int)
+    for m in media_list:
+        date = m["timestamp"][:10]
+        engagement_by_date[date] += m.get("engagement", 0)
+        posts_by_date[date] += 1
+
+    all_dates = sorted(set(reach_by_date) | set(followers_by_date))
+    rows = []
+    for date in all_dates:
+        rows.append({
+            "date": date,
+            "reach": reach_by_date.get(date, 0),
+            "new_followers": followers_by_date.get(date, 0),
+            "engagement": engagement_by_date.get(date, 0),
+            "posts": posts_by_date.get(date, 0),
+        })
+    return rows
+
+
+def extras_30d(media_list, totals):
+    """Engagement rate, saves+shares, räckvidd non-followers."""
+    saves = sum(m.get("saved", 0) for m in media_list)
+    shares = sum(m.get("shares", 0) for m in media_list)
+    interactions = totals.get("total_interactions", 0)
+    reach = totals.get("reach", 0)
+    engagement_rate = round((interactions / reach) * 100, 2) if reach else 0
+
+    # Försök hämta reach-breakdown follower/non-follower
+    reach_bd = total_value("reach", breakdown="follow_type")
+    non_follower_pct = None
+    if isinstance(reach_bd, dict) and "breakdowns" in reach_bd:
+        results = reach_bd["breakdowns"][0].get("results", [])
+        total = sum(r.get("value", 0) for r in results)
+        non = sum(r.get("value", 0) for r in results if "NON_FOLLOWER" in r.get("dimension_values", []))
+        if total:
+            non_follower_pct = round((non / total) * 100, 1)
+
+    return {
+        "saves": saves,
+        "shares": shares,
+        "engagement_rate_pct": engagement_rate,
+        "reach_non_followers_pct": non_follower_pct,
+    }
+
+
 def main():
     refresh_token()
     prof = profile()
-    media = top_media(limit=5)
+    media_list = fetch_recent_media(days=30)
+    reach = time_series("reach")
+    followers = time_series("follower_count")
+
+    totals = {
+        "views": _scalar(total_value("views")),
+        "profile_views": _scalar(total_value("profile_views")),
+        "accounts_engaged": _scalar(total_value("accounts_engaged")),
+        "total_interactions": _scalar(total_value("total_interactions")),
+        "reach": sum(d["value"] for d in reach),
+    }
 
     payload = {
         "updated_at": datetime.now(timezone.utc).isoformat(),
         "profile": prof,
-        "totals_30d": {
-            "views": total_value("views"),
-            "profile_views": total_value("profile_views"),
-            "accounts_engaged": total_value("accounts_engaged"),
-            "total_interactions": total_value("total_interactions"),
-        },
-        "time_series_30d": {
-            "reach": time_series("reach"),
-            "follower_count": time_series("follower_count"),
-        },
-        "top_media": media,
-        "format_breakdown": format_breakdown(media),
+        "totals_30d": totals,
+        "extras_30d": extras_30d(media_list, totals),
+        "time_series_30d": {"reach": reach, "follower_count": followers},
+        "daily_insights": daily_insights(reach, followers, media_list),
+        "best_posting": best_posting(media_list),
+        "top_media": sorted(media_list, key=lambda x: x.get("reach", 0), reverse=True)[:5],
+        "format_breakdown": format_breakdown(media_list),
     }
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(payload, indent=2, ensure_ascii=False))
     print(f"OK: skrev {OUT}")
+
+
+def _scalar(v):
+    """total_value() kan returnera {'value': N} eller {} — plocka ut talet."""
+    if isinstance(v, dict):
+        return v.get("value", 0)
+    return v or 0
 
 
 if __name__ == "__main__":
