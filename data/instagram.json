@@ -1,0 +1,361 @@
+{
+  "updated_at": "2026-04-17T05:31:49.696590+00:00",
+  "profile": {
+    "username": "digitalaelle.se",
+    "followers_count": 197,
+    "follows_count": 256,
+    "media_count": 90,
+    "id": "17841456498681952"
+  },
+  "totals_30d": {
+    "views": 3725,
+    "profile_views": 108,
+    "accounts_engaged": 35,
+    "total_interactions": 79
+  },
+  "time_series_30d": {
+    "reach": [
+      {
+        "date": "2026-03-18",
+        "value": 135
+      },
+      {
+        "date": "2026-03-19",
+        "value": 7
+      },
+      {
+        "date": "2026-03-20",
+        "value": 42
+      },
+      {
+        "date": "2026-03-21",
+        "value": 9
+      },
+      {
+        "date": "2026-03-22",
+        "value": 38
+      },
+      {
+        "date": "2026-03-23",
+        "value": 57
+      },
+      {
+        "date": "2026-03-24",
+        "value": 39
+      },
+      {
+        "date": "2026-03-25",
+        "value": 222
+      },
+      {
+        "date": "2026-03-26",
+        "value": 212
+      },
+      {
+        "date": "2026-03-27",
+        "value": 96
+      },
+      {
+        "date": "2026-03-28",
+        "value": 75
+      },
+      {
+        "date": "2026-03-29",
+        "value": 27
+      },
+      {
+        "date": "2026-03-30",
+        "value": 188
+      },
+      {
+        "date": "2026-03-31",
+        "value": 31
+      },
+      {
+        "date": "2026-04-01",
+        "value": 8
+      },
+      {
+        "date": "2026-04-02",
+        "value": 27
+      },
+      {
+        "date": "2026-04-03",
+        "value": 15
+      },
+      {
+        "date": "2026-04-04",
+        "value": 11
+      },
+      {
+        "date": "2026-04-05",
+        "value": 11
+      },
+      {
+        "date": "2026-04-06",
+        "value": 46
+      },
+      {
+        "date": "2026-04-07",
+        "value": 51
+      },
+      {
+        "date": "2026-04-08",
+        "value": 8
+      },
+      {
+        "date": "2026-04-09",
+        "value": 7
+      },
+      {
+        "date": "2026-04-10",
+        "value": 7
+      },
+      {
+        "date": "2026-04-11",
+        "value": 2
+      },
+      {
+        "date": "2026-04-12",
+        "value": 4
+      },
+      {
+        "date": "2026-04-13",
+        "value": 31
+      },
+      {
+        "date": "2026-04-14",
+        "value": 35
+      },
+      {
+        "date": "2026-04-15",
+        "value": 1
+      },
+      {
+        "date": "2026-04-16",
+        "value": 31
+      }
+    ],
+    "follower_count": [
+      {
+        "date": "2026-03-18",
+        "value": 2
+      },
+      {
+        "date": "2026-03-19",
+        "value": 0
+      },
+      {
+        "date": "2026-03-20",
+        "value": 2
+      },
+      {
+        "date": "2026-03-21",
+        "value": 0
+      },
+      {
+        "date": "2026-03-22",
+        "value": 0
+      },
+      {
+        "date": "2026-03-23",
+        "value": 1
+      },
+      {
+        "date": "2026-03-24",
+        "value": 0
+      },
+      {
+        "date": "2026-03-25",
+        "value": 2
+      },
+      {
+        "date": "2026-03-26",
+        "value": 0
+      },
+      {
+        "date": "2026-03-27",
+        "value": 2
+      },
+      {
+        "date": "2026-03-28",
+        "value": 0
+      },
+      {
+        "date": "2026-03-29",
+        "value": 2
+      },
+      {
+        "date": "2026-03-30",
+        "value": 0
+      },
+      {
+        "date": "2026-03-31",
+        "value": 2
+      },
+      {
+        "date": "2026-04-01",
+        "value": 1
+      },
+      {
+        "date": "2026-04-02",
+        "value": 0
+      },
+      {
+        "date": "2026-04-03",
+        "value": 0
+      },
+      {
+        "date": "2026-04-04",
+        "value": 0
+      },
+      {
+        "date": "2026-04-05",
+        "value": 0
+      },
+      {
+        "date": "2026-04-06",
+        "value": 0
+      },
+      {
+        "date": "2026-04-07",
+        "value": 1
+      },
+      {
+        "date": "2026-04-08",
+        "value": 0
+      },
+      {
+        "date": "2026-04-09",
+        "value": 0
+      },
+      {
+        "date": "2026-04-10",
+        "value": 0
+      },
+      {
+        "date": "2026-04-11",
+        "value": 0
+      },
+      {
+        "date": "2026-04-12",
+        "value": 0
+      },
+      {
+        "date": "2026-04-13",
+        "value": 0
+      },
+      {
+        "date": "2026-04-14",
+        "value": 1
+      },
+      {
+        "date": "2026-04-15",
+        "value": 0
+      },
+      {
+        "date": "2026-04-16",
+        "value": 0
+      }
+    ]
+  },
+  "top_media": [
+    {
+      "id": "18062724215675917",
+      "caption": "Nytt kunduppdrag! Under fyra veckor ska jag ta fram en grafisk profil samt implementera AI till den här kunden.\n\nDet ska bli väldigt spännande att få göra en helhet tillsammans med den här kunden. Och samtidigt få se rent praktiskt. Hur mycket effektivitet den här kunden upplever att den får tack vare att börja jobba med AI.\n\nKunden har idag inte jobbat med AI alls. Så det blir en grundkurs som den här kunden kommer att få. Samtidigt som jag hjälper kunden att sätta ihop olika program så de pratar med varandra och kan hjälpa kunder utföra olika uppgifter på ett effektivt sätt.\n\nÄr du också nyfiken på att implementera AI i din verksamhet. Då ska du följa mitt konto här på Instagram så får du uppdateringar och erbjudanden om tjänster du kan vara intresserad av.",
+      "media_type": "VIDEO",
+      "media_product_type": "REELS",
+      "permalink": "https://www.instagram.com/reel/DWWAx15iHTE/",
+      "thumbnail_url": "https://scontent.cdninstagram.com/v/t51.71878-15/657617461_1686595095716306_6876780187926989704_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=B9_wAuTkzKMQ7kNvwFilcAv&_nc_oc=AdqEKDe4b_Ny08nG_1MK8Y7UFdCUnsuzDXr9e2ZPOy1ZoVPT7Dd_GSzgOeolM-etDhYJNB45pk1kKOaymsw77NNI&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=Rvm2OkFDPBNj3xH4gHz3eg&_nc_tpa=Q5bMBQE82GYCxtM5hjsDoa919-tZOdkthVast0lRGeTa0wg6ZaxkaEai_yQ6L4-hEaKDp205jgP8AvtHSA&oh=00_Af10S77qkU48X8xl-qYv-K0flFAEWpuS7_UamhIRbnhGFA&oe=69E78494",
+      "media_url": "https://instagram.farn1-2.fna.fbcdn.net/o1/v/t2/f2/m86/AQOY0nUw5X4Sy3sounKuUDLgVGQvS9ta4z1nSwh58f4qpDZmAT3BenKbia69ojwlcgadO8a6G_l6alQu53WEmQyNiIDinzrOXyFYs1A.mp4?_nc_cat=106&_nc_oc=AdqQxLAIJ0SJlXOJIXZLoqjxFdpB5SZ98w-TPCdoarUeGli4gLQxD2eTXoXhyBlaWBODsjsM_5xPGkFnSeZ0a0mD&_nc_sid=5e9851&_nc_ht=instagram.farn1-2.fna.fbcdn.net&_nc_ohc=PfHn8N28SFUQ7kNvwGW8mTV&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5JTlNUQUdSQU0uQ0xJUFMuQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSIsInhwdl9hc3NldF9pZCI6MTgwMDQ1MDk1MDA4ODMyOTAsImFzc2V0X2FnZV9kYXlzIjoyMSwidmlfdXNlY2FzZV9pZCI6MTAwOTksImR1cmF0aW9uX3MiOjU4LCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&vs=2e9f5ba87bd28eec&_nc_vs=HBksFQIYUmlnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC9BMDQ5MzE4RkMwRTg5QjI5RjI2QzhEMUIyRTYyRjlCMF92aWRlb19kYXNoaW5pdC5tcDQVAALIARIAFQIYUWlnX3hwdl9wbGFjZW1lbnRfcGVybWFuZW50X3YyL0VGNDhDN0QxODI0OTJERkM0MEM3ODQwOTI5NDVGMUE4X2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACa0hb6SscD7PxUCKAJDMywXQE03bItDlYEYEmRhc2hfYmFzZWxpbmVfMV92MREAdf4HZeadAQA&_nc_gid=Rvm2OkFDPBNj3xH4gHz3eg&edm=AM6HXa8EAAAA&_nc_zt=28&oh=00_Af04xz7ALQAm31kUcWzLfUHA0ThYGHpUBKiIKtQzgy067Q&oe=69E3B7E7",
+      "timestamp": "2026-03-26T10:20:18+0000",
+      "like_count": 6,
+      "comments_count": 0,
+      "reach": 218,
+      "saved": 0,
+      "shares": 0,
+      "engagement": 6
+    },
+    {
+      "id": "18081126332346278",
+      "caption": "Jag har nyligen kommit fram till vad det är jag ska sälja. Nu är mitt fokus på att berätta vem jag är & vad jag gör för dig.\n\nFörsta steget i AIDA. \nDet handlar om att skapa uppmärksamhet, informera sin publik och berätta för sin kund vem man är. \n\nDu kan inte sälja innan din publik vet vem du är. Du behöver bygga upp en relation.\n\nNästa steg är att inspirera och berätta för din publik varför? Skapa ett intresse. \n\nI min utbildning så bakades en del utav de här stegen tillsammans. Som steget desire i AIDA-Modellen slogs ihop med intresset. Att man samtidigt som man skapar ett intresse väcker en önskan och en lust.\n\nDet sista steget i AIDA-modellen är action. Det är här du ska få kunden att konvertera och köpa av dig.\n\nVart är du i AIDA-modellen just nu?",
+      "media_type": "VIDEO",
+      "media_product_type": "REELS",
+      "permalink": "https://www.instagram.com/reel/DWBXsZWiMSZ/",
+      "thumbnail_url": "https://scontent.cdninstagram.com/v/t51.71878-15/652887350_910982771911689_6576364596831924125_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=106&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=by7a9j7np4oQ7kNvwHSucha&_nc_oc=AdqFv2xNL-Dzj9EGV-vmTS97VcyWziIGW-pxM6n2f_Ag-H1tNYxmDxijLnwYtZBwlANmG9mczol8RQrPxQZfs4Ta&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=Rvm2OkFDPBNj3xH4gHz3eg&_nc_tpa=Q5bMBQG-ebF52vfMIBGI42j4CUvWBbbcaMJTiQm9ddZjrg7Yflrhuc0hAZBqAfHdf8EQTyV6qmep_idGkA&oh=00_Af30Vw6M1KA5ON1m8-U5GJ9C2ZCHBM07ncst3SsuReYpqg&oe=69E78933",
+      "media_url": "https://instagram.farn1-2.fna.fbcdn.net/o1/v/t16/f2/m69/AQOG3E-cYN2lf7R-_8Rj_QkrHc-Fe-gsR2gwvvqe2s2YqOXiM_tP56eoLEo95zHdWrPgluC9h3hngc6tG1aZfF3Z.mp4?strext=1&_nc_cat=107&_nc_oc=Adqz9ESQCUCagSWKy-Qvai-KyljDRswSYlFFWtV7uNerGxxCcCN5RFePQDhsMD8n8wRRQne2l2waT2UD58wgv8zu&_nc_sid=5e9851&_nc_ht=instagram.farn1-2.fna.fbcdn.net&_nc_ohc=J44bCaKXClAQ7kNvwFzUCzu&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5JTlNUQUdSQU0uQ0xJUFMuQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSIsInhwdl9hc3NldF9pZCI6MTgwMDMzNzUyMTI4ODMyOTAsImFzc2V0X2FnZV9kYXlzIjoyOSwidmlfdXNlY2FzZV9pZCI6MTAwOTksImR1cmF0aW9uX3MiOjExNywidXJsZ2VuX3NvdXJjZSI6Ind3dyJ9&ccb=17-1&vs=d54e020147f14746&_nc_vs=HBksFQIYOnBhc3N0aHJvdWdoX2V2ZXJzdG9yZS9HTUh6MGlaQXNzUWU3QjRIQVBjVk1xTlFwcmQ3YnNwVEFRQUYVAALIARIAFQIYUWlnX3hwdl9wbGFjZW1lbnRfcGVybWFuZW50X3YyLzgyNDVGQ0Q5MDY4RTU2MzJDNDQyREM2QThERTZDNUIwX2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACa0tZOFrv76PxUCKAJDMywXQF1GZmZmZmYYEmRhc2hfYmFzZWxpbmVfMV92MREAdf4HZeadAQA&_nc_gid=Rvm2OkFDPBNj3xH4gHz3eg&edm=AM6HXa8EAAAA&_nc_zt=28&oh=00_Af3k-X_BfjskdL2PwVELoOzV63qUyspe9TY9Qxsqmsl-eA&oe=69E7A919",
+      "timestamp": "2026-03-25T07:25:00+0000",
+      "like_count": 4,
+      "comments_count": 0,
+      "reach": 218,
+      "saved": 0,
+      "shares": 0,
+      "engagement": 4
+    },
+    {
+      "id": "18148293862475992",
+      "caption": "Att börja är oftast den stora ribban man ska över när man ska börja med någonting nytt. Att börja och att börja testa.\n\nMin kund var väldigt skeptisk till AI när jag presenterade idén att han skulle implementera AI i sin verksamhet.\n\nEfter ett par dagar när min kund hade testat AI är han helt såld!\n\nSå nu ser jag fram emot att få lära min kund, hur han i sin tur lär sin AI att låta som sitt varumärke.\n\nÄr du nyfiken på vad du behöver lära din AI för att den ska förstå ditt varumärke? Kommentera ”AICHECK” så får du tillgång till en checklista som du kan stämma av.",
+      "media_type": "VIDEO",
+      "media_product_type": "REELS",
+      "permalink": "https://www.instagram.com/reel/DWg1td4MLQd/",
+      "thumbnail_url": "https://scontent.cdninstagram.com/v/t51.71878-15/656744026_1398594601954478_7835774402103834386_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=111&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=FmRQAG9qLlsQ7kNvwGtbw7e&_nc_oc=AdpK-X8FOovGDnAt8RbssFnIb1MEi9Pk_Y-pftWxpFd0NX8M-Jd4-102oiYPI2iNBh1Ri2PU4T1n_4lHAZZXa2f3&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=Rvm2OkFDPBNj3xH4gHz3eg&_nc_tpa=Q5bMBQHkelOrZZuEyNZBz9Au6eP0Qi3Hd5EGhxj-vbN02N2QckYr4HWb9E2P_DP-o5-EA0xg9gZq1z8uZQ&oh=00_Af3MKNFJyVWLoN-gRZl5n6DYolDnOpV4T4C1UCsaTGlCIw&oe=69E7830D",
+      "media_url": "https://instagram.farn1-2.fna.fbcdn.net/o1/v/t2/f2/m86/AQMHdpvL7h45R03bMUZCgmkxgjsTE2Kg31058wB8jNU1r0MBSoFaStKDR1Alt5OvkRz4bGiU9q0Hk_0Q3SmScP1L9WnXHHsUGCrkWSc.mp4?_nc_cat=103&_nc_oc=AdpVWym2_SIAbu1t9DshHFDbhQmYEzyHqPdoLPzij2wH3HAlNijamHUPl7eDsLYM-w52bKNEmmZ9pfFyRJA2Ne8B&_nc_sid=5e9851&_nc_ht=instagram.farn1-2.fna.fbcdn.net&_nc_ohc=u9T7oV1rUM8Q7kNvwGbyZIz&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5JTlNUQUdSQU0uQ0xJUFMuQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSIsInhwdl9hc3NldF9pZCI6MTgwMDQ1MTI4MzY4ODMyOTAsImFzc2V0X2FnZV9kYXlzIjoyMSwidmlfdXNlY2FzZV9pZCI6MTAwOTksImR1cmF0aW9uX3MiOjUyLCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&vs=a6e0632bc820ef5c&_nc_vs=HBksFQIYUmlnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC83MTQ1QTE2OTk0OEMwRTQwMTQ3NkFFQjc1N0Q5QTU4Rl92aWRlb19kYXNoaW5pdC5tcDQVAALIARIAFQIYUWlnX3hwdl9wbGFjZW1lbnRfcGVybWFuZW50X3YyLzVDNEE1MDZGRTMyMEY5NUU2NUFBOTRDQjVFN0JDQzg3X2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACa0zfj_ycD7PxUCKAJDMywXQEoAAAAAAAAYEmRhc2hfYmFzZWxpbmVfMV92MREAdf4HZeadAQA&_nc_gid=Rvm2OkFDPBNj3xH4gHz3eg&edm=AM6HXa8EAAAA&_nc_zt=28&oh=00_Af3YNYS2gKP64Zb0lICj360To4cBGDF_IdUnO1G6ILtOqQ&oe=69E38D38",
+      "timestamp": "2026-03-30T15:10:00+0000",
+      "like_count": 4,
+      "comments_count": 0,
+      "reach": 174,
+      "saved": 0,
+      "shares": 0,
+      "engagement": 4
+    },
+    {
+      "id": "18343648723240584",
+      "caption": "Att använda en AI är att ge dina deltagare service. Genom att effektivisera din verksamhet och använda AI som ett verktyg till de uppgifter som är bakom kulisserna. Så frigör du tid som du kan lägga på dina deltagare.\n\nAtt använda AI i min verksamhet ser jag som en självklarhet. Men jag är uppväxt inom service och älskar att jobba med människor. Man kan tro i dagens läge att AI tar över så att vi tappar kontakten med dem vi jobbar med. Men jag ser det faktiskt helt tvärtom.\n\nJag får tid till annat än att sköta administrativa uppgifter. Planera marknadsföring och bygga upp flöden som får min verksamhet att växa. Jag får tid till att säga ett extra hej i mitt flöde, på riktigt. Alltså jag som säger hej inte en AI. Det tycker jag är guld värt!",
+      "media_type": "VIDEO",
+      "media_product_type": "REELS",
+      "permalink": "https://www.instagram.com/reel/DWBB1NJiA9p/",
+      "thumbnail_url": "https://scontent.cdninstagram.com/v/t51.71878-15/653349264_2309848709504527_4023227152214140261_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=103&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=gH-o5LCJe3IQ7kNvwHUMiN2&_nc_oc=Adp4je1jNRJSksSHI8e7JM5v6KcjMMGrBaN5_100oNJqUvbTQwjHvE65oeGohSrH8Q8Q_lLhGKqVqnSK0RcTxJXC&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=Rvm2OkFDPBNj3xH4gHz3eg&_nc_tpa=Q5bMBQHmaOEhIWGr1vtY9DwwS9hWvNNx9YfIUJ_9E6WihEklxs7Cl-lPtLzw5_2hbkTdyVaB2TZ3pF0v8Q&oh=00_Af3LprebUPPrsw8Ppk6fRl83yND5xk3rjbv9tfTNOJu-EA&oe=69E77E7F",
+      "media_url": "https://instagram.farn1-2.fna.fbcdn.net/o1/v/t16/f2/m69/AQMsyx2aFvpRZHJHdf_4tj0fx_MMC1801SVxhnWGMbBxPrbIc5O-lKUYH5BAPsi8ljIh27J4Fxyxer0ngQycifU1.mp4?strext=1&_nc_cat=103&_nc_oc=AdpUugHwMSUSr8IgUqDmO1nvdW95YTKtAL1xwYEEibKgZ4z3Gj7JWAJwRiVeb3P__ADwVr6Z090o81aFekdTYtEl&_nc_sid=5e9851&_nc_ht=instagram.farn1-2.fna.fbcdn.net&_nc_ohc=v0hvTa74ydcQ7kNvwEiKRX3&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5JTlNUQUdSQU0uQ0xJUFMuQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSIsInhwdl9hc3NldF9pZCI6MTgwMDMzNTg1Njg4ODMyOTAsImFzc2V0X2FnZV9kYXlzIjoyOSwidmlfdXNlY2FzZV9pZCI6MTAwOTksImR1cmF0aW9uX3MiOjU2LCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&vs=f7fd16f2974c3002&_nc_vs=HBksFQIYOnBhc3N0aHJvdWdoX2V2ZXJzdG9yZS9HT0MwdmliNHpIYlhkcklGQUpTQk5nZWZWTElWYnNwVEFRQUYVAALIARIAFQIYUWlnX3hwdl9wbGFjZW1lbnRfcGVybWFuZW50X3YyLzRDNDIwNUM3Njc0QTlCRTAxODZFRjE3QUFFNTU2MkJBX2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACa0kZmEsv36PxUCKAJDMywXQExVP3ztkWgYEmRhc2hfYmFzZWxpbmVfMV92MREAdf4HZeadAQA&_nc_gid=Rvm2OkFDPBNj3xH4gHz3eg&edm=AM6HXa8EAAAA&_nc_zt=28&oh=00_Af3V9yWbcJlgBBVPai1cISo_BANjSOPjxuqzie-QRlp1Vw&oe=69E7AAB9",
+      "timestamp": "2026-03-18T06:40:37+0000",
+      "like_count": 3,
+      "comments_count": 0,
+      "reach": 161,
+      "saved": 1,
+      "shares": 1,
+      "engagement": 5
+    },
+    {
+      "id": "18334657606222060",
+      "caption": "Skulle du gå på en nätverksträff och bara prata med en enda person på hela kvällen?\n\nFörmodligen inte (och om du gör det går du miste om otroligt många bra kontakter). Ändå är det precis det misstaget du gör när du \"väljer\" din AI.\n\nDu hittar en favorit och försöker tvinga den att göra allt från att skriva säljande texter till att koda hemsidor och analysera data. \n\nSanningen är att olika AI-verktyg är experter på helt olika saker. Precis som du inte anlitar en rörmokare för att dra elen i ditt hus, bör du bygga en \"verktygslåda\" med olika AI-tjänster som får briljera på exakt det de gör bäst! \n\nOch kom ihåg sårbarheten. Vad händer om din enda AI plötsligt ligger nere, ändrar sina regler eller blir hackad? Att sprida ut dina arbetsflöden och integrera flera olika AI-verktyg är smart för resultatet. Men det är också en livsviktig säkerhetskopia för ditt varumärke.\n\n👇 Hur ser din AI-verktygslåda ut idag? Förlitar du dig på en enda eller har du flera olika favoriter? Berätta i kommentarerna!",
+      "media_type": "CAROUSEL_ALBUM",
+      "media_product_type": "FEED",
+      "permalink": "https://www.instagram.com/p/DWN4HuLDFzY/",
+      "media_url": "https://scontent.cdninstagram.com/v/t39.30808-6/655649348_122174904224426859_6909923515983373811_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=105&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=YOwg5nobCQYQ7kNvwFYktY8&_nc_oc=AdrwK__tjSRLsydGaIqu_hD0gwYehdxAIPpqtnjtUYcBFLLtRvTs2DOPu6Y99i1MvLdF54Tm3Fs75jW-qMWkqvC9&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=Rvm2OkFDPBNj3xH4gHz3eg&oh=00_Af3OZOOuJ_GdYSKqu5J0MeK7PKFZOfwZoJu5yy4Odz1c8g&oe=69E7A50B",
+      "timestamp": "2026-03-23T06:25:53+0000",
+      "like_count": 9,
+      "comments_count": 1,
+      "reach": 66,
+      "saved": 0,
+      "shares": 0,
+      "engagement": 10
+    }
+  ],
+  "format_breakdown": {
+    "IMAGE": {
+      "count": 0,
+      "avg_engagement": 0
+    },
+    "CAROUSEL_ALBUM": {
+      "count": 1,
+      "avg_engagement": 10.0
+    },
+    "VIDEO": {
+      "count": 0,
+      "avg_engagement": 0
+    },
+    "REELS": {
+      "count": 4,
+      "avg_engagement": 4.8
+    }
+  }
+}

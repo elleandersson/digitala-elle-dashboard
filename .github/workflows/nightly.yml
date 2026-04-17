@@ -1,0 +1,38 @@
+name: Nightly Instagram fetch
+
+on:
+  schedule:
+    # 23:00 UTC = 01:00 svensk sommartid (CEST) / 00:00 vintertid (CET)
+    - cron: "0 23 * * *"
+  workflow_dispatch:  # gör att du kan köra manuellt från GitHub-fliken "Actions"
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - run: pip install -r requirements.txt
+
+      - name: Hämta Instagram-data
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          FB_APP_ID: ${{ secrets.FB_APP_ID }}
+          FB_APP_SECRET: ${{ secrets.FB_APP_SECRET }}
+        run: python scripts/fetch_instagram.py
+
+      - name: Commit & push uppdaterad data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/instagram.json
+          git diff --staged --quiet || git commit -m "chore: nightly instagram update"
+          git push
