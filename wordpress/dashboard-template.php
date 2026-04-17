@@ -11,7 +11,7 @@
 
 get_header();
 
-$data_url = 'https://raw.githubusercontent.com/ANVANDARE/REPO/main/data/instagram.json';
+$data_url = 'https://raw.githubusercontent.com/elleandersson/digitala-elle-dashboard/main/data/instagram.json';
 ?>
 
 <main class="dashboard-wrap">
@@ -25,11 +25,11 @@ $data_url = 'https://raw.githubusercontent.com/ANVANDARE/REPO/main/data/instagra
         <div class="kpi"><span class="kpi-label">Följare</span><span class="kpi-value" id="kpi-followers">–</span></div>
         <div class="kpi"><span class="kpi-label">Inlägg totalt</span><span class="kpi-value" id="kpi-media">–</span></div>
         <div class="kpi"><span class="kpi-label">Räckvidd 30d</span><span class="kpi-value" id="kpi-reach">–</span></div>
-        <div class="kpi"><span class="kpi-label">Profilvisningar 30d</span><span class="kpi-value" id="kpi-views">–</span></div>
+        <div class="kpi"><span class="kpi-label">Visningar 30d</span><span class="kpi-value" id="kpi-views">–</span></div>
     </section>
 
     <section class="chart-card">
-        <h2>Räckvidd & visningar — senaste 30 dagarna</h2>
+        <h2>Räckvidd & nya följare — senaste 30 dagarna</h2>
         <canvas id="chart-reach" height="120"></canvas>
     </section>
 
