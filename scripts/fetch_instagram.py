@@ -52,9 +52,10 @@ def profile():
 
 
 def time_series(metric, days=30):
-    # IG API tolkar `until` som exklusivt slut. +1 dag = ta med igår.
-    until = datetime.now(timezone.utc).date() + timedelta(days=1)
-    since = until - timedelta(days=days + 1)
+    # IG API tillåter inte framtida `until`. Workflow körs 03:00 UTC = 05:00 CEST,
+    # då har "idag" UTC redan passerat midnatt sv. tid → gårdagens data ingår.
+    until = datetime.now(timezone.utc).date()
+    since = until - timedelta(days=days)
     try:
         data = get(f"{IG_ID}/insights",
                    metric=metric,
@@ -72,9 +73,9 @@ def time_series(metric, days=30):
 
 
 def total_value(metric, days=30, breakdown=None):
-    # IG API tolkar `until` som exklusivt slut. +1 dag = ta med igår.
-    until = datetime.now(timezone.utc).date() + timedelta(days=1)
-    since = until - timedelta(days=days + 1)
+    # IG API tillåter inte framtida `until`. Se kommentar i time_series().
+    until = datetime.now(timezone.utc).date()
+    since = until - timedelta(days=days)
     params = dict(metric=metric, period="day", metric_type="total_value",
                   since=since.isoformat(), until=until.isoformat())
     if breakdown:
