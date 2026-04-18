@@ -73,6 +73,8 @@
     margin-bottom: 1.5rem;
 }
 .chart-card h2 { font-size: 1.1rem; margin: 0 0 1rem; }
+.chart-card-hint { font-size: .8rem; color: #999; font-weight: 400; }
+.chart-card-status { margin: -.5rem 0 1rem; font-size: .9rem; }
 
 .top-media h2 { font-size: 1.1rem; margin: 2rem 0 1rem; }
 .top-media-grid {

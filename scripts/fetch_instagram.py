@@ -52,8 +52,9 @@ def profile():
 
 
 def time_series(metric, days=30):
-    until = datetime.now(timezone.utc).date()
-    since = until - timedelta(days=days)
+    # IG API tolkar `until` som exklusivt slut. +1 dag = ta med igår.
+    until = datetime.now(timezone.utc).date() + timedelta(days=1)
+    since = until - timedelta(days=days + 1)
     try:
         data = get(f"{IG_ID}/insights",
                    metric=metric,
@@ -71,8 +72,9 @@ def time_series(metric, days=30):
 
 
 def total_value(metric, days=30, breakdown=None):
-    until = datetime.now(timezone.utc).date()
-    since = until - timedelta(days=days)
+    # IG API tolkar `until` som exklusivt slut. +1 dag = ta med igår.
+    until = datetime.now(timezone.utc).date() + timedelta(days=1)
+    since = until - timedelta(days=days + 1)
     params = dict(metric=metric, period="day", metric_type="total_value",
                   since=since.isoformat(), until=until.isoformat())
     if breakdown:
@@ -171,6 +173,35 @@ def daily_insights(reach_series, follower_series, media_list):
     return rows
 
 
+def weekly_saves_shares(media_list, weeks=6):
+    """Summera sparningar + delningar per ISO-vecka baserat på postdatum."""
+    buckets = defaultdict(lambda: {"saves": 0, "shares": 0, "posts": 0})
+    for m in media_list:
+        ts = datetime.strptime(m["timestamp"], "%Y-%m-%dT%H:%M:%S%z")
+        iso_year, iso_week, _ = ts.isocalendar()
+        key = f"{iso_year}-W{iso_week:02d}"
+        buckets[key]["saves"] += m.get("saved", 0)
+        buckets[key]["shares"] += m.get("shares", 0)
+        buckets[key]["posts"] += 1
+
+    # Fyll i tomma veckor bakåt från idag
+    today = datetime.now(timezone.utc).date()
+    out = []
+    for i in range(weeks - 1, -1, -1):
+        d = today - timedelta(weeks=i)
+        iso_year, iso_week, _ = d.isocalendar()
+        key = f"{iso_year}-W{iso_week:02d}"
+        b = buckets.get(key, {"saves": 0, "shares": 0, "posts": 0})
+        out.append({
+            "week": key,
+            "saves": b["saves"],
+            "shares": b["shares"],
+            "total": b["saves"] + b["shares"],
+            "posts": b["posts"],
+        })
+    return out
+
+
 def extras_30d(media_list, totals):
     """Engagement rate, saves+shares, räckvidd non-followers."""
     saves = sum(m.get("saved", 0) for m in media_list)
@@ -219,6 +250,7 @@ def main():
         "extras_30d": extras_30d(media_list, totals),
         "time_series_30d": {"reach": reach, "follower_count": followers},
         "daily_insights": daily_insights(reach, followers, media_list),
+        "weekly_saves_shares": weekly_saves_shares(media_list, weeks=6),
         "best_posting": best_posting(media_list),
         "top_media": sorted(media_list, key=lambda x: x.get("reach", 0), reverse=True)[:5],
         "format_breakdown": format_breakdown(media_list),

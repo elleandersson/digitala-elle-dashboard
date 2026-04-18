@@ -57,6 +57,12 @@ function igdash_shortcode() {
             <canvas id="chart-format" height="120"></canvas>
         </section>
 
+        <section class="chart-card">
+            <h2>Sparningar &amp; delningar per vecka <span class="chart-card-hint">— mål: minst 3/vecka</span></h2>
+            <p class="chart-card-status" id="weekly-ss-status">–</p>
+            <canvas id="chart-weekly-ss" height="100"></canvas>
+        </section>
+
         <section class="best-posting">
             <h2>Bästa tid att posta</h2>
             <p class="best-posting-body">

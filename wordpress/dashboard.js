@@ -94,6 +94,46 @@
         }).join("");
     }
 
+    // Veckovis saves + shares (algoritmens starkaste signaler)
+    const wssCanvas = $("chart-weekly-ss");
+    if (wssCanvas) {
+        const wss = data.weekly_saves_shares || [];
+        const target = 3;
+        const labels = wss.map((w) => "v" + w.week.split("-W")[1]);
+        const saves = wss.map((w) => w.saves);
+        const shares = wss.map((w) => w.shares);
+        new Chart(wssCanvas, {
+            type: "bar",
+            data: {
+                labels,
+                datasets: [
+                    { label: "Sparningar", data: saves, backgroundColor: "#2e7d32", stack: "ss" },
+                    { label: "Delningar", data: shares, backgroundColor: "#66bb6a", stack: "ss" },
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { position: "bottom" } },
+                scales: { y: { stacked: true, beginAtZero: true, ticks: { precision: 0 } }, x: { stacked: true } }
+            }
+        });
+
+        // Senaste vecka vs förra
+        const last = wss[wss.length - 1] || { total: 0 };
+        const prev = wss[wss.length - 2] || { total: 0 };
+        const status = last.total >= target
+            ? { c: "arrow-up", s: `↑ Mål nått (${last.total} av ${target})` }
+            : last.total > prev.total
+                ? { c: "arrow-up", s: `↑ Bättre än förra veckan (${last.total} vs ${prev.total})` }
+                : last.total === prev.total
+                    ? { c: "arrow-flat", s: `→ Samma som förra veckan (${last.total})` }
+                    : { c: "arrow-down", s: `↓ Sämre än förra veckan (${last.total} vs ${prev.total})` };
+        const statusEl = $("weekly-ss-status");
+        if (statusEl) {
+            statusEl.innerHTML = `<span class="${status.c}">${status.s}</span>`;
+        }
+    }
+
     // Daglig insiktstabell med trend-pilar
     const insightsBody = $("daily-insights-body");
     if (insightsBody) {
