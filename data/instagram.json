@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-05-07T05:51:44.684503+00:00",
+  "updated_at": "2026-05-08T05:22:05.593939+00:00",
   "profile": {
     "username": "digitalaelle.se",
     "followers_count": 212,
@@ -8,24 +8,20 @@
     "id": "17841456498681952"
   },
   "totals_30d": {
-    "views": 2587,
-    "profile_views": 114,
+    "views": 2483,
+    "profile_views": 113,
     "accounts_engaged": 36,
-    "total_interactions": 48,
-    "reach": 949
+    "total_interactions": 47,
+    "reach": 901
   },
   "extras_30d": {
     "saves": 4,
     "shares": 1,
-    "engagement_rate_pct": 5.06,
-    "reach_non_followers_pct": 69.5
+    "engagement_rate_pct": 5.22,
+    "reach_non_followers_pct": 70.0
   },
   "time_series_30d": {
     "reach": [
-      {
-        "date": "2026-04-07",
-        "value": 51
-      },
       {
         "date": "2026-04-08",
         "value": 8
@@ -141,13 +137,13 @@
       {
         "date": "2026-05-06",
         "value": 4
+      },
+      {
+        "date": "2026-05-07",
+        "value": 3
       }
     ],
     "follower_count": [
-      {
-        "date": "2026-04-07",
-        "value": 1
-      },
       {
         "date": "2026-04-08",
         "value": 0
@@ -263,17 +259,14 @@
       {
         "date": "2026-05-06",
         "value": 0
+      },
+      {
+        "date": "2026-05-07",
+        "value": 0
       }
     ]
   },
   "daily_insights": [
-    {
-      "date": "2026-04-07",
-      "reach": 51,
-      "new_followers": 1,
-      "engagement": 0,
-      "posts": 0
-    },
     {
       "date": "2026-04-08",
       "reach": 8,
@@ -476,6 +469,13 @@
       "new_followers": 0,
       "engagement": 0,
       "posts": 0
+    },
+    {
+      "date": "2026-05-07",
+      "reach": 3,
+      "new_followers": 0,
+      "engagement": 0,
+      "posts": 0
     }
   ],
   "weekly_saves_shares": [
@@ -536,12 +536,12 @@
       "media_type": "VIDEO",
       "media_product_type": "REELS",
       "permalink": "https://www.instagram.com/reel/DXem2ldiNKj/",
-      "thumbnail_url": "https://scontent-sjc3-1.cdninstagram.com/v/t51.82787-15/670920521_18008041487883290_5640363356829959885_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=103&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=Jj_gC90zkK0Q7kNvwHxrM51&_nc_oc=AdqrpdJexHbIYLvg0Rk3o5q9qIg3T0vkkawisdDgyhLaLiP733gxOZDel5WsUZFdh24&_nc_zt=23&_nc_ht=scontent-sjc3-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=2NM2ChrvzFJRNtyyr8x3Ug&_nc_tpa=Q5bMBQGMOnQ-PhNCZ6Sb3Sr1AgWxvifUPBty40F2n3VAFoPbcoCf6-avlSHKBwCpYR7ajjp2Ou3tBCHa4A&oh=00_Af6-efG_7bHYMAtrfkw4e-8ScZ-2Qfa7iwZUz59Y7uTX4w&oe=6A01FFC9",
-      "media_url": "https://scontent-sjc6-1.cdninstagram.com/o1/v/t2/f2/m86/AQO0t1Ci6NXPPXwN1SQcpJlQ4kUj8Xz-GpugZqMdeHbPv98PiPOUy8IbJ4uFkx_nBAuQZ_EaTobqO3vM_HWZv6sGxy9Dvo3hoylIEyQ.mp4?_nc_cat=100&_nc_sid=5e9851&_nc_ht=scontent-sjc6-1.cdninstagram.com&_nc_ohc=LA8RiEjaqpgQ7kNvwGi7JyN&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5JTlNUQUdSQU0uQ0xJUFMuQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSIsInhwdl9hc3NldF9pZCI6MTgwMDgwNDA5Nzc4ODMyOTAsImFzc2V0X2FnZV9kYXlzIjoxMywidmlfdXNlY2FzZV9pZCI6MTAwOTksImR1cmF0aW9uX3MiOjQ3LCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&vs=23c2dd5caed854c0&_nc_vs=HBksFQIYUmlnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC83RjQ2OEUyNzMwQjAzNUFEOUE0REI2ODMyMDY0NkRBM192aWRlb19kYXNoaW5pdC5tcDQVAALIARIAFQIYUWlnX3hwdl9wbGFjZW1lbnRfcGVybWFuZW50X3YyLzZDNEY5OEYxRDg0NUI4RTVEMTgzQjdCRjU5QjIwRkJFX2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACa0grPZ-I39PxUCKAJDMywXQEfZmZmZmZoYEmRhc2hfYmFzZWxpbmVfMV92MREAdf4HZeadAQA&_nc_gid=2NM2ChrvzFJRNtyyr8x3Ug&edm=AM6HXa8EAAAA&_nc_zt=28&oh=00_Af6zMbPvdFZjml8pBitpIvYfgqItiNVF_KshwN6APbzTJg&oe=69FE13D5",
+      "thumbnail_url": "https://scontent-ord5-2.cdninstagram.com/v/t51.82787-15/670920521_18008041487883290_5640363356829959885_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=103&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=Hqj5CHe8qiQQ7kNvwE86cKD&_nc_oc=AdplqDPaCyL7WFWd0PkdoXc0u2JDYUZ3_dguk6NCOYNYYLOIbX2-zGwziNJqcK7dFg0&_nc_zt=23&_nc_ht=scontent-ord5-2.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=rd0Mq56P-pGQ48av9EQAAw&_nc_tpa=Q5bMBQFO0C-oCYvrPB0wV0yEnbrh88Jd3UT5hVkBU-MAXmnIQsUNSOcD3MsSRRNvEKSuZdpGrmvBgZi9hA&oh=00_Af47TsvTeFaf_LXN6eoo9V_TYKjx9AFB23R9EvpP5pMDeA&oe=6A035149",
+      "media_url": "https://scontent-ord5-3.cdninstagram.com/o1/v/t2/f2/m86/AQO0t1Ci6NXPPXwN1SQcpJlQ4kUj8Xz-GpugZqMdeHbPv98PiPOUy8IbJ4uFkx_nBAuQZ_EaTobqO3vM_HWZv6sGxy9Dvo3hoylIEyQ.mp4?_nc_cat=100&_nc_sid=5e9851&_nc_ht=scontent-ord5-3.cdninstagram.com&_nc_ohc=LA8RiEjaqpgQ7kNvwE4Edkn&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5JTlNUQUdSQU0uQ0xJUFMuQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSIsInhwdl9hc3NldF9pZCI6MTgwMDgwNDA5Nzc4ODMyOTAsImFzc2V0X2FnZV9kYXlzIjoxNCwidmlfdXNlY2FzZV9pZCI6MTAwOTksImR1cmF0aW9uX3MiOjQ3LCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&vs=23c2dd5caed854c0&_nc_vs=HBksFQIYUmlnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC83RjQ2OEUyNzMwQjAzNUFEOUE0REI2ODMyMDY0NkRBM192aWRlb19kYXNoaW5pdC5tcDQVAALIARIAFQIYUWlnX3hwdl9wbGFjZW1lbnRfcGVybWFuZW50X3YyLzZDNEY5OEYxRDg0NUI4RTVEMTgzQjdCRjU5QjIwRkJFX2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACa0grPZ-I39PxUCKAJDMywXQEfZmZmZmZoYEmRhc2hfYmFzZWxpbmVfMV92MREAdf4HZeadAQA&_nc_gid=rd0Mq56P-pGQ48av9EQAAw&edm=AM6HXa8EAAAA&_nc_zt=28&oh=00_Af7TKxHbt-Yd7wW_0hMpoEUUXJ6UeoJtPqqLca61spx5sw&oe=69FF6555",
       "timestamp": "2026-04-23T15:00:51+0000",
       "like_count": 7,
       "comments_count": 0,
-      "reach": 173,
+      "reach": 175,
       "saved": 0,
       "shares": 0,
       "engagement": 7
@@ -552,8 +552,8 @@
       "media_type": "VIDEO",
       "media_product_type": "REELS",
       "permalink": "https://www.instagram.com/reel/DXZpWUsiAd4/",
-      "thumbnail_url": "https://scontent-sjc3-1.cdninstagram.com/v/t51.82787-15/672458769_18007787405883290_6909818304733862555_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=110&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=8OdOcQQNYYgQ7kNvwHgdmka&_nc_oc=AdrT9VsM9HknuZHzGZkrowYm_jTxaxA3cGU-ZgigeaafH-KpN2b6f2VltTsIiS14Ux8&_nc_zt=23&_nc_ht=scontent-sjc3-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=2NM2ChrvzFJRNtyyr8x3Ug&_nc_tpa=Q5bMBQG5LRsbTDZIxFL9c8_egDqPDGyUQZvqylnY0CYIMY889e1ruyxfPiQGu4Gt_YybQ8s6dNhN1a6z_g&oh=00_Af4yOEC5JG2EiMLc7-gbwy1JVmTeMtZHw2n2i0IVBiiwgQ&oe=6A01ED61",
-      "media_url": "https://scontent-sjc6-1.cdninstagram.com/o1/v/t2/f2/m86/AQOFQjmYpF-avqb6fx8Cc3hledHjRS8RNBYnX_fRfgarhejEWfW9Up5FnwZPEuaoX7tdP0m_1SG7-39WPST-XVCrTXXr-GbfjTXMFXs.mp4?_nc_cat=109&_nc_sid=5e9851&_nc_ht=scontent-sjc6-1.cdninstagram.com&_nc_ohc=XFctkWna-C0Q7kNvwECPD5U&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5JTlNUQUdSQU0uQ0xJUFMuQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSIsInhwdl9hc3NldF9pZCI6MTgwMDc3ODY4MzI4ODMyOTAsImFzc2V0X2FnZV9kYXlzIjoxNSwidmlfdXNlY2FzZV9pZCI6MTAwOTksImR1cmF0aW9uX3MiOjE3MywidXJsZ2VuX3NvdXJjZSI6Ind3dyJ9&ccb=17-1&vs=977107dbc087f6b8&_nc_vs=HBksFQIYUmlnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC8wMzQzNzZDMUMxMTEwRDA5QURBQTE1NTgwM0Q5NzBBOV92aWRlb19kYXNoaW5pdC5tcDQVAALIARIAFQIYUWlnX3hwdl9wbGFjZW1lbnRfcGVybWFuZW50X3YyLzRGNDk0REJGNzVGNTBBQzg0MUJGMTQ4RkNGRjgzMzg2X2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACa0ueuVk__8PxUCKAJDMywXQGW-6XjU_fQYEmRhc2hfYmFzZWxpbmVfMV92MREAdf4HZeadAQA&_nc_gid=2NM2ChrvzFJRNtyyr8x3Ug&edm=AM6HXa8EAAAA&_nc_zt=28&oh=00_Af7JZX0PYjbf3Z1lGu04OhS9W4RYNc---cJ60MgqqmblIA&oe=69FDED22",
+      "thumbnail_url": "https://scontent-ord5-2.cdninstagram.com/v/t51.82787-15/672458769_18007787405883290_6909818304733862555_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=110&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=4NJGEBEtJWoQ7kNvwG_NaSt&_nc_oc=Adq-9BNp-QI4Xf7oq9MBJ6wesm2WQYuTq2RztjgPkFZLenX99QKmkOaF0Pm_CmkWq3Y&_nc_zt=23&_nc_ht=scontent-ord5-2.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=rd0Mq56P-pGQ48av9EQAAw&_nc_tpa=Q5bMBQHHba0Eh5TPV7VZ7Y2GOgNCAwjs4galcrXo-5WsjeAi7DjIFjdaQcmwLw4NLTthcOKtxkwgcgHYvg&oh=00_Af7BohDjkeeg-kNWlZVXFCZFomO-VEZSRfL_ry0WB3GiOQ&oe=6A033EE1",
+      "media_url": "https://scontent-ord5-3.cdninstagram.com/o1/v/t2/f2/m86/AQOFQjmYpF-avqb6fx8Cc3hledHjRS8RNBYnX_fRfgarhejEWfW9Up5FnwZPEuaoX7tdP0m_1SG7-39WPST-XVCrTXXr-GbfjTXMFXs.mp4?_nc_cat=109&_nc_sid=5e9851&_nc_ht=scontent-ord5-3.cdninstagram.com&_nc_ohc=Fo6072X1b4kQ7kNvwEXa9mm&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5JTlNUQUdSQU0uQ0xJUFMuQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSIsInhwdl9hc3NldF9pZCI6MTgwMDc3ODY4MzI4ODMyOTAsImFzc2V0X2FnZV9kYXlzIjoxNiwidmlfdXNlY2FzZV9pZCI6MTAwOTksImR1cmF0aW9uX3MiOjE3MywidXJsZ2VuX3NvdXJjZSI6Ind3dyJ9&ccb=17-1&vs=977107dbc087f6b8&_nc_vs=HBksFQIYUmlnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC8wMzQzNzZDMUMxMTEwRDA5QURBQTE1NTgwM0Q5NzBBOV92aWRlb19kYXNoaW5pdC5tcDQVAALIARIAFQIYUWlnX3hwdl9wbGFjZW1lbnRfcGVybWFuZW50X3YyLzRGNDk0REJGNzVGNTBBQzg0MUJGMTQ4RkNGRjgzMzg2X2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACa0ueuVk__8PxUCKAJDMywXQGW-6XjU_fQYEmRhc2hfYmFzZWxpbmVfMV92MREAdf4HZeadAQA&_nc_gid=rd0Mq56P-pGQ48av9EQAAw&edm=AM6HXa8EAAAA&_nc_zt=28&oh=00_Af5DEUqV5pwTXVUgDbbW4u5JWGjZZM5_CqSqqB5vmm-iew&oe=69FF3EA2",
       "timestamp": "2026-04-21T16:45:05+0000",
       "like_count": 3,
       "comments_count": 1,
@@ -568,7 +568,7 @@
       "media_type": "CAROUSEL_ALBUM",
       "media_product_type": "FEED",
       "permalink": "https://www.instagram.com/p/DXOV24nDMm1/",
-      "media_url": "https://scontent-sjc6-1.cdninstagram.com/v/t39.30808-6/671081810_122176920086426859_1123185733206977901_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=GiVKtnL4350Q7kNvwHX1ho7&_nc_oc=Adq7AiDht86THw7pbmv0hz8UJgVGlzI0uY2-mMvBcYz_qe2DDOm7B5nBUMuKDFKH8ek&_nc_zt=23&_nc_ht=scontent-sjc6-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=2NM2ChrvzFJRNtyyr8x3Ug&oh=00_Af72NcRl9p22n0tBpXkvHn5lG574Sq27Nze8ZBFy37B7hA&oe=6A01EA66",
+      "media_url": "https://scontent-ord5-3.cdninstagram.com/v/t39.30808-6/671081810_122176920086426859_1123185733206977901_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=uVt6Pnj0fyAQ7kNvwGZH0Bw&_nc_oc=AdqM0dGwxLbfifddvdbv8joCiEDLLZQrk_oZ3Xd2BPW8sDYfobsa8qySzmB4FekgC-I&_nc_zt=23&_nc_ht=scontent-ord5-3.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=rd0Mq56P-pGQ48av9EQAAw&oh=00_Af5z3bO0w9N1LT4jWbnnP_mOlXJd9YqyG5AHhs7NTdzPnQ&oe=6A033BE6",
       "timestamp": "2026-04-17T07:17:07+0000",
       "like_count": 3,
       "comments_count": 1,
@@ -583,7 +583,7 @@
       "media_type": "CAROUSEL_ALBUM",
       "media_product_type": "FEED",
       "permalink": "https://www.instagram.com/p/DXTd1ZVDV1O/",
-      "media_url": "https://scontent-sjc3-1.cdninstagram.com/v/t39.30808-6/675967672_122177115572426859_4285802442218442122_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=106&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=OAMvhXJjhKEQ7kNvwF0kZgQ&_nc_oc=Adrt_BEjuQFVfXplRYl9iqWz2et5uT0M-abYR6FiOcZm-7w0gkSsnsuvDvprsTc2C-Q&_nc_zt=23&_nc_ht=scontent-sjc3-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=2NM2ChrvzFJRNtyyr8x3Ug&oh=00_Af6xHZ9p-jdEYcGMhCmlMcCWgHae8-hyJId14iDxXce3_A&oe=6A01FCEB",
+      "media_url": "https://scontent-ord5-3.cdninstagram.com/v/t39.30808-6/675967672_122177115572426859_4285802442218442122_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=106&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=OAMvhXJjhKEQ7kNvwGvbALW&_nc_oc=AdoVfk5vQ3gxztq8jjtlEeCskPB6BlAoJNtIEWeNgt13DppGe9HjFRvvnHFQkomE7CU&_nc_zt=23&_nc_ht=scontent-ord5-3.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=rd0Mq56P-pGQ48av9EQAAw&oh=00_Af5SSAeuh2CenIT0VM_ipa2xa1I-pd6LTuCSwSOoO8l3lw&oe=6A034E6B",
       "timestamp": "2026-04-19T07:03:02+0000",
       "like_count": 11,
       "comments_count": 4,
@@ -598,11 +598,11 @@
       "media_type": "CAROUSEL_ALBUM",
       "media_product_type": "FEED",
       "permalink": "https://www.instagram.com/p/DXtAnUeiE8f/",
-      "media_url": "https://scontent-sjc6-1.cdninstagram.com/v/t51.82787-15/682041211_18008811596883290_562184361823132365_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=iZJL-meE6gsQ7kNvwGmc_QC&_nc_oc=Adqle8TlQTCbLX4eGNhBqCrQZg84S6trKNTxmtf26quawiEXMqJs4FRRlC-CEHULMbc&_nc_zt=23&_nc_ht=scontent-sjc6-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=2NM2ChrvzFJRNtyyr8x3Ug&oh=00_Af66737g0NgyTLK7hClY3Zavw28sgR5h_tx42gZDsj7mQQ&oe=6A01FBEB",
+      "media_url": "https://scontent-ord5-3.cdninstagram.com/v/t51.82787-15/682041211_18008811596883290_562184361823132365_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=iZJL-meE6gsQ7kNvwFgPFMB&_nc_oc=AdoRzve5RikMv-OdC-9cWs3tG_jOw8EmlgJL-fZ_4lNxGaHMI5jNvhBm582veHTlSuI&_nc_zt=23&_nc_ht=scontent-ord5-3.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=rd0Mq56P-pGQ48av9EQAAw&oh=00_Af5zc2ufdrcXDUuUKwFCx7DWQthW4RzqzLqPnFIQcIpkzQ&oe=6A034D6B",
       "timestamp": "2026-04-29T05:07:57+0000",
       "like_count": 2,
       "comments_count": 1,
-      "reach": 53,
+      "reach": 54,
       "saved": 0,
       "shares": 0,
       "engagement": 3
