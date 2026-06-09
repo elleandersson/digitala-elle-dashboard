@@ -1,31 +1,27 @@
 {
-  "updated_at": "2026-06-08T07:22:26.013342+00:00",
+  "updated_at": "2026-06-09T06:38:59.278306+00:00",
   "profile": {
     "username": "digitalaelle.se",
-    "followers_count": 219,
-    "follows_count": 282,
+    "followers_count": 218,
+    "follows_count": 283,
     "media_count": 99,
     "id": "17841456498681952"
   },
   "totals_30d": {
-    "views": 2950,
-    "profile_views": 83,
+    "views": 2841,
+    "profile_views": 82,
     "accounts_engaged": 61,
-    "total_interactions": 206,
-    "reach": 1137
+    "total_interactions": 205,
+    "reach": 1030
   },
   "extras_30d": {
     "saves": 1,
     "shares": 1,
-    "engagement_rate_pct": 18.12,
-    "reach_non_followers_pct": 75.8
+    "engagement_rate_pct": 19.9,
+    "reach_non_followers_pct": 70.5
   },
   "time_series_30d": {
     "reach": [
-      {
-        "date": "2026-05-09",
-        "value": 117
-      },
       {
         "date": "2026-05-10",
         "value": 38
@@ -141,13 +137,13 @@
       {
         "date": "2026-06-07",
         "value": 6
+      },
+      {
+        "date": "2026-06-08",
+        "value": 10
       }
     ],
     "follower_count": [
-      {
-        "date": "2026-05-09",
-        "value": 0
-      },
       {
         "date": "2026-05-10",
         "value": 0
@@ -263,23 +259,20 @@
       {
         "date": "2026-06-07",
         "value": 0
+      },
+      {
+        "date": "2026-06-08",
+        "value": 0
       }
     ]
   },
   "daily_insights": [
     {
-      "date": "2026-05-09",
-      "reach": 117,
-      "new_followers": 0,
-      "engagement": 0,
-      "posts": 0
-    },
-    {
       "date": "2026-05-10",
       "reach": 38,
       "new_followers": 0,
-      "engagement": 6,
-      "posts": 1
+      "engagement": 0,
+      "posts": 0
     },
     {
       "date": "2026-05-11",
@@ -476,6 +469,13 @@
       "new_followers": 0,
       "engagement": 0,
       "posts": 0
+    },
+    {
+      "date": "2026-06-08",
+      "reach": 10,
+      "new_followers": 0,
+      "engagement": 0,
+      "posts": 0
     }
   ],
   "weekly_saves_shares": [
@@ -484,7 +484,7 @@
       "saves": 0,
       "shares": 0,
       "total": 0,
-      "posts": 1
+      "posts": 0
     },
     {
       "week": "2026-W20",
@@ -527,7 +527,7 @@
     "weekday_avg_engagement": 80.0,
     "hour": 16,
     "hour_avg_engagement": 51.0,
-    "posts_analyzed": 6
+    "posts_analyzed": 5
   },
   "top_media": [
     {
@@ -536,7 +536,7 @@
       "media_type": "CAROUSEL_ALBUM",
       "media_product_type": "FEED",
       "permalink": "https://www.instagram.com/p/DYSA4W_CIeJ/",
-      "media_url": "https://scontent-ams2-1.cdninstagram.com/v/t51.82787-15/692389296_18010632065883290_2928084588080847075_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=110&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=-b9Gx1Wir0MQ7kNvwELmxL8&_nc_oc=AdoloqRFWQaM9_9OS12du3VzmuSfq2dEd2-fIYTlU4z6ZCGDDyo2iZqe4CYz9xpoyew&_nc_zt=23&_nc_ht=scontent-ams2-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=2t7hcc7APMCW5cFXSyFezA&oh=00_Af-fd3HTQqKKBrkth5WY6Ky_jG4MTH5v_1gKu_yhAXx9_Q&oe=6A2C4E67",
+      "media_url": "https://scontent-atl3-3.cdninstagram.com/v/t51.82787-15/692389296_18010632065883290_2928084588080847075_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=110&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=-b9Gx1Wir0MQ7kNvwHQtEGb&_nc_oc=Ado9kVbsZGlfFxKMJO1oXYotyq37Mt9f5oDyX7BVaLdzS8iRnNpiqRfCo3DjdhlaDZM&_nc_zt=23&_nc_ht=scontent-atl3-3.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=unKDSw9te1A9LmF4YsD3gA&oh=00_Af_dKhuQmJksWqCCs8x7XOxivoJI8kT7_JCV_3bHsdbS6g&oe=6A2D9FE7",
       "timestamp": "2026-05-13T14:02:11+0000",
       "like_count": 42,
       "comments_count": 38,
@@ -546,29 +546,13 @@
       "engagement": 80
     },
     {
-      "id": "17893010040464098",
-      "caption": "En multipassionerad kreatör som går vägen fram till att bli egen företagare, igen.\n\nTar examen från en 2-årig utbildning i ämnet Digital Innehållsproducent i maj 2026. \n\nJag har precis fått ett konsultuppdrag på timmar som jag kommer kunna ha som grund när jag tar uppdrag i projektform. \n\nÄr på väg att bli den där… tusenfotingen som jag beskriver mig som. 🤩🐛\n\nJag kanske är den där personen som just du letar efter? Jag har ett driv som får med vem som helst på vad som helst. \n\nFölj mig! 🧡",
-      "media_type": "VIDEO",
-      "media_product_type": "REELS",
-      "permalink": "https://www.instagram.com/reel/DYJSkN5IjM5/",
-      "thumbnail_url": "https://scontent-ams2-1.cdninstagram.com/v/t51.82787-15/687581139_18010217282883290_6628996004445753915_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=103&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=D1TVLbWBBpEQ7kNvwG6tSp8&_nc_oc=AdrpRXRgXeQ6gSfLpkQh0PDDbvvvqNQgHAZ0enpn5zeWCjBli_hdG888ng2sfwlieU0&_nc_zt=23&_nc_ht=scontent-ams2-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=2t7hcc7APMCW5cFXSyFezA&_nc_tpa=Q5bMBQG_JuaOrNeEHYEbrtywbFdEI-r_KOsgT1G01REcs6QrbU1UJg6SLLS_xiCpV8dcTIBxQPwraWSkwA&oh=00_Af99hMe33oY1kJsyUS3W7__OPaVDsyKJa27UoW_8Wmu6Cw&oe=6A2C590D",
-      "media_url": "https://scontent-ams2-1.cdninstagram.com/o1/v/t2/f2/m86/AQO7kVnCDE74v06eK8FgTy6yPzck4vpaINx35-P32-nK0Myk-DDzPXLqXiKeETT6G22tdNKGtusBnXU3E7hjsEHx9sSOo88QogBMz0Q.mp4?_nc_cat=100&_nc_sid=5e9851&_nc_ht=scontent-ams2-1.cdninstagram.com&_nc_ohc=4tap1XpRDjsQ7kNvwHbLyKg&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5JTlNUQUdSQU0uQ0xJUFMuQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSIsInhwdl9hc3NldF9pZCI6MTYxMjEyMzc1OTg2NjMxMywiYXNzZXRfYWdlX2RheXMiOjI5LCJ2aV91c2VjYXNlX2lkIjoxMDA5OSwiZHVyYXRpb25fcyI6MTEyLCJ1cmxnZW5fc291cmNlIjoid3d3In0%3D&ccb=17-1&vs=d15818e281d9635c&_nc_vs=HBksFQIYUmlnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC9ENDRBOUJFRDgwNzYyMjc4NTk5MzBFREY3RDM0QjE5OF92aWRlb19kYXNoaW5pdC5tcDQVAALIARIAFQIYUWlnX3hwdl9wbGFjZW1lbnRfcGVybWFuZW50X3YyLzY1NDIzN0VBRTNCN0NGQzE1Rjg4NTlGQzlCQjc3MEEyX2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACaSx9OA-o3dBRUCKAJDMywXQFwbtkWhysEYEmRhc2hfYmFzZWxpbmVfMV92MREAdf4HZeadAQA&_nc_gid=2t7hcc7APMCW5cFXSyFezA&edm=AM6HXa8EAAAA&_nc_zt=28&oh=00_Af_4EFkqD25zwkL0A_NdcmHNkKS-eULMZpm9Y4Jctk0J4A&oe=6A284289",
-      "timestamp": "2026-05-10T04:52:54+0000",
-      "like_count": 6,
-      "comments_count": 0,
-      "reach": 186,
-      "saved": 0,
-      "shares": 0,
-      "engagement": 6
-    },
-    {
       "id": "18422916739125232",
       "caption": "Jag har byggt ett verktyg som visualiserar dina varumärkesfärger samtidigt som du får veta om kontrasten är tillräcklig för att följa tillgänglighetslagen. \n\nMitt verktyg är nu redo att testas av några fler. Vill du vara en av dem som får testa innan alla andra?",
       "media_type": "VIDEO",
       "media_product_type": "REELS",
       "permalink": "https://www.instagram.com/reel/DZEgtyZIsFK/",
-      "thumbnail_url": "https://scontent-ams2-1.cdninstagram.com/v/t51.71878-15/710516814_1389261006592725_1879581933257435324_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=105&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=J9gDCBMnfsUQ7kNvwHwwnhL&_nc_oc=AdruJcw34dAvEkBECHC-U7xK2CLix0oDCFKnMkLDqxOqIusQwlrInY-WB1M9yl4JNY4&_nc_zt=23&_nc_ht=scontent-ams2-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=2t7hcc7APMCW5cFXSyFezA&_nc_tpa=Q5bMBQG7iWSuulns3XY4OrEv3RCectNQHyVAzAqMXciMvXl3U4qcdPw4qaASrkPFR-KS3eHBdkj2TYF31w&oh=00_Af873Z2ldXGMwETH9RrI9NqcarwIzizihFZkx17feeS1TA&oe=6A2C5A93",
-      "media_url": "https://scontent-ams2-1.cdninstagram.com/o1/v/t2/f2/m86/AQMsNkZZdllRlrvjbg8F5ud1wvwqPcmMgy7BHjKpT0wayPk9StOnPS5RJdQKrpOQnLkERiDlhfzUVF71hv7HNdysY2GlX3A25dardDQ.mp4?_nc_cat=111&_nc_sid=5e9851&_nc_ht=scontent-ams2-1.cdninstagram.com&_nc_ohc=QhNSiDN0r50Q7kNvwHo-14A&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5JTlNUQUdSQU0uQ0xJUFMuQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSIsInhwdl9hc3NldF9pZCI6MTkyMzk3ODE5NDkyMjQ0MywiYXNzZXRfYWdlX2RheXMiOjYsInZpX3VzZWNhc2VfaWQiOjEwMDk5LCJkdXJhdGlvbl9zIjo2MCwidXJsZ2VuX3NvdXJjZSI6Ind3dyJ9&ccb=17-1&vs=46b09ab881fc73e9&_nc_vs=HBksFQIYUmlnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC9GQTRDMzdFRUU0M0VGQzAxNDYyQkZEOEM0QzAxMDA5QV92aWRlb19kYXNoaW5pdC5tcDQVAALIARIAFQIYUWlnX3hwdl9wbGFjZW1lbnRfcGVybWFuZW50X3YyLzdGNDMzNTkzQzJBRDBDRUNGRjZFNDU2NDAyQkY3RUE4X2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACaWr-nNovbqBhUCKAJDMywXQE5mZmZmZmYYEmRhc2hfYmFzZWxpbmVfMV92MREAdf4HZeadAQA&_nc_gid=2t7hcc7APMCW5cFXSyFezA&edm=AM6HXa8EAAAA&_nc_zt=28&oh=00_Af-iGqdx7_V3-3R66oKz6QBiYVj5T_eycfxRnfigGMquNQ&oe=6A285190",
+      "thumbnail_url": "https://scontent-atl3-2.cdninstagram.com/v/t51.71878-15/710516814_1389261006592725_1879581933257435324_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=105&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=J9gDCBMnfsUQ7kNvwHPdrO3&_nc_oc=AdqQs6jPiEPaIidQUl3e9f-S8VNXTHa9bTyTkevwtYJYcjC9vrRko6ftq74kC-t_GNw&_nc_zt=23&_nc_ht=scontent-atl3-2.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=unKDSw9te1A9LmF4YsD3gA&_nc_tpa=Q5bMBQGOik86eJHoI3gIv0g7pRpVvu_QZ1jO914Z2nksXJXreq8Sera7o-7VLWWCmfZJGslSHwrSvsGNtg&oh=00_Af-uzpslm6RCvi-scvHaR_AhTeFvvgDSvgLeVsfo-E_pbw&oe=6A2D73D3",
+      "media_url": "https://scontent-atl3-3.cdninstagram.com/o1/v/t2/f2/m86/AQMsNkZZdllRlrvjbg8F5ud1wvwqPcmMgy7BHjKpT0wayPk9StOnPS5RJdQKrpOQnLkERiDlhfzUVF71hv7HNdysY2GlX3A25dardDQ.mp4?_nc_cat=111&_nc_sid=5e9851&_nc_ht=scontent-atl3-3.cdninstagram.com&_nc_ohc=7EC5LnEERQ8Q7kNvwECKGDw&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5JTlNUQUdSQU0uQ0xJUFMuQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSIsInhwdl9hc3NldF9pZCI6MTkyMzk3ODE5NDkyMjQ0MywiYXNzZXRfYWdlX2RheXMiOjcsInZpX3VzZWNhc2VfaWQiOjEwMDk5LCJkdXJhdGlvbl9zIjo2MCwidXJsZ2VuX3NvdXJjZSI6Ind3dyJ9&ccb=17-1&vs=46b09ab881fc73e9&_nc_vs=HBksFQIYUmlnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC9GQTRDMzdFRUU0M0VGQzAxNDYyQkZEOEM0QzAxMDA5QV92aWRlb19kYXNoaW5pdC5tcDQVAALIARIAFQIYUWlnX3hwdl9wbGFjZW1lbnRfcGVybWFuZW50X3YyLzdGNDMzNTkzQzJBRDBDRUNGRjZFNDU2NDAyQkY3RUE4X2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACaWr-nNovbqBhUCKAJDMywXQE5mZmZmZmYYEmRhc2hfYmFzZWxpbmVfMV92MREAdf4HZeadAQA&_nc_gid=unKDSw9te1A9LmF4YsD3gA&edm=AM6HXa8EAAAA&_nc_zt=28&oh=00_Af-sJKtGq1Cas-VfMVt34qMG4rRmjky7H7L7RRPKMNFlVQ&oe=6A29A310",
       "timestamp": "2026-06-02T04:47:22+0000",
       "like_count": 1,
       "comments_count": 0,
@@ -583,7 +567,7 @@
       "media_type": "CAROUSEL_ALBUM",
       "media_product_type": "FEED",
       "permalink": "https://www.instagram.com/p/DYciRYalwHM/",
-      "media_url": "https://scontent-ams2-1.cdninstagram.com/v/t39.30808-6/701301904_122179301294426859_5222444696216942667_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=110&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=xos5p6-7ZuQQ7kNvwENAA2K&_nc_oc=AdrJe3lXw-CYUVKvNxavHARLDJ_wSSBofWNB9y2m06ukuWwISdaHXJrb2S-42pwbJGw&_nc_zt=23&_nc_ht=scontent-ams2-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=2t7hcc7APMCW5cFXSyFezA&oh=00_Af8dvqe8_3JX9rR0tZOcAPp5ky4arBgyXLDzwfVja-dYLg&oe=6A2C3043",
+      "media_url": "https://scontent-atl3-3.cdninstagram.com/v/t39.30808-6/701301904_122179301294426859_5222444696216942667_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=110&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=-w_0I36puycQ7kNvwHSUVEC&_nc_oc=Adreiw6ZycV1YBdBJ-e_FoikSawcl87R7zCMYOFt08piJQmUAJIyifz8z2r20FB8kpc&_nc_zt=23&_nc_ht=scontent-atl3-3.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=unKDSw9te1A9LmF4YsD3gA&oh=00_Af_UrRc6B-Bg8iyg_wJmB6qyfyQRD3asCXWS4sgy7z2A4w&oe=6A2D81C3",
       "timestamp": "2026-05-17T16:06:21+0000",
       "like_count": 9,
       "comments_count": 0,
@@ -598,14 +582,29 @@
       "media_type": "IMAGE",
       "media_product_type": "FEED",
       "permalink": "https://www.instagram.com/p/DZE3pHNIeRu/",
-      "media_url": "https://scontent-ams2-1.cdninstagram.com/v/t51.82787-15/710351682_18013195238883290_6104789396863121462_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=111&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=dZtKJJNVIDkQ7kNvwE4SJyn&_nc_oc=AdqUgYwjXOAzVdDODZZspmfOBSecn8jm8SgAfV00P2gAv1CgO67UPXt8vJrm6xgeMGc&_nc_zt=23&_nc_ht=scontent-ams2-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=2t7hcc7APMCW5cFXSyFezA&oh=00_Af9bqPj9lmEiXDP-DCfFmEpbLPgl_zIWJe21XKrPJCRPKQ&oe=6A2C49FD",
+      "media_url": "https://scontent-atl3-3.cdninstagram.com/v/t51.82787-15/710351682_18013195238883290_6104789396863121462_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=111&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=dZtKJJNVIDkQ7kNvwH4k0Ly&_nc_oc=Adq1geOl4JKMSzuk5VHrlor4gb5-UDVRPIcef9NTwtGi5cGDQZN-SarNyfpWUdtrTWg&_nc_zt=23&_nc_ht=scontent-atl3-3.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=unKDSw9te1A9LmF4YsD3gA&oh=00_Af8MeHEQvHQRs54qDuDbJpGQ6nD-uGO7y-l13iQyFTDoBg&oe=6A2D9B7D",
       "timestamp": "2026-06-02T08:19:35+0000",
       "like_count": 20,
       "comments_count": 6,
-      "reach": 102,
+      "reach": 104,
       "saved": 0,
       "shares": 0,
       "engagement": 26
+    },
+    {
+      "id": "18323437330260785",
+      "caption": "Alla mina 1000 ben är inte digitala.\n\nIdag har jag jobbat som värdinna på Kalas i Norrköping. Det är ett event som galleria, Domino arrangerar. \n\nJag fick äran att hjälpa våra gäster att rita självporträtt och sedan fotografera dem. Superkul! \n\nJag älskar varierande arbetsuppgifter, service och att hjälpa människor. Det är precis det jag har fått göra idag. Ändra skifte ifrån datorn till att ge service live.\n\nHar du ett event, en mässa eller någonting liknande och behöver en person som älskar att planera och organisera? Då är jag rätt person för dig! \n\nHör gärna av dig om du tror att jag skulle kunna hjälpa dig göra ditt event till årets bästa event!\n\n#kalasdomino #digitalkonsult #fakturerautanföretag",
+      "media_type": "CAROUSEL_ALBUM",
+      "media_product_type": "FEED",
+      "permalink": "https://www.instagram.com/p/DY94onNCGbo/",
+      "media_url": "https://scontent-atl3-2.cdninstagram.com/v/t51.82787-15/709034632_18012823682883290_2439415375857219512_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=104&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=bQT4aT6hPfUQ7kNvwFHEwlV&_nc_oc=AdrmfxCtneW8O2iB9V9LDVKnffhzer2r7KRqhk8DoL3XuLE57Tn0lWeSWrfLGO975C0&_nc_zt=23&_nc_ht=scontent-atl3-2.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=unKDSw9te1A9LmF4YsD3gA&oh=00_Af8GQpngd5GR9P2ro-3n62xEJJ6kh_orCN8S1tCeovVP7w&oe=6A2D8D38",
+      "timestamp": "2026-05-30T14:56:42+0000",
+      "like_count": 17,
+      "comments_count": 4,
+      "reach": 100,
+      "saved": 0,
+      "shares": 1,
+      "engagement": 22
     }
   ],
   "format_breakdown": {
@@ -622,8 +621,8 @@
       "avg_engagement": 0
     },
     "REELS": {
-      "count": 2,
-      "avg_engagement": 3.5
+      "count": 1,
+      "avg_engagement": 1.0
     }
   }
 }
