@@ -177,6 +177,9 @@ def daily_insights(reach_series, follower_series, media_list):
 def weekly_saves_shares(media_list, weeks=6):
     """Summera sparningar + delningar per ISO-vecka baserat på postdatum."""
     buckets = defaultdict(lambda: {"saves": 0, "shares": 0, "posts": 0})
+    today = datetime.now(timezone.utc).date()
+    current_year, current_week, _ = today.isocalendar()
+    current_key = f"{current_year}-W{current_week:02d}"
     for m in media_list:
         ts = datetime.strptime(m["timestamp"], "%Y-%m-%dT%H:%M:%S%z")
         iso_year, iso_week, _ = ts.isocalendar()
@@ -199,8 +202,34 @@ def weekly_saves_shares(media_list, weeks=6):
             "shares": b["shares"],
             "total": b["saves"] + b["shares"],
             "posts": b["posts"],
+            "is_current": key == current_key,
         })
     return out
+
+
+def signal_media(media_list):
+    """Inlägg som skapat sparningar/delningar, sorterat på starkaste signal."""
+    rows = []
+    for m in media_list:
+        saves = m.get("saved", 0)
+        shares = m.get("shares", 0)
+        if saves + shares <= 0:
+            continue
+        rows.append({
+            "id": m.get("id"),
+            "caption": m.get("caption", ""),
+            "media_type": m.get("media_type"),
+            "media_product_type": m.get("media_product_type"),
+            "permalink": m.get("permalink"),
+            "thumbnail_url": m.get("thumbnail_url"),
+            "media_url": m.get("media_url"),
+            "timestamp": m.get("timestamp"),
+            "reach": m.get("reach", 0),
+            "saved": saves,
+            "shares": shares,
+            "signal_score": saves + shares,
+        })
+    return sorted(rows, key=lambda x: (x["signal_score"], x.get("reach", 0)), reverse=True)[:5]
 
 
 def extras_30d(media_list, totals):
@@ -252,6 +281,7 @@ def main():
         "time_series_30d": {"reach": reach, "follower_count": followers},
         "daily_insights": daily_insights(reach, followers, media_list),
         "weekly_saves_shares": weekly_saves_shares(media_list, weeks=6),
+        "signal_media": signal_media(media_list),
         "best_posting": best_posting(media_list),
         "top_media": sorted(media_list, key=lambda x: x.get("reach", 0), reverse=True)[:5],
         "format_breakdown": format_breakdown(media_list),

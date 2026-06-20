@@ -7,6 +7,13 @@
     const sumValues = (arr) => (arr || []).reduce((s, x) => s + (x.value || 0), 0);
     const sumPosts = (rows) => (rows || []).reduce((s, x) => s + (x.posts || 0), 0);
     const daysBetween = (a, b) => Math.max(0, Math.floor((a - b) / 86400000));
+    const mediaLabel = (m) => m.media_product_type === "REELS"
+        ? "Reel"
+        : ({ IMAGE: "Bild", CAROUSEL_ALBUM: "Karusell", VIDEO: "Video" }[m.media_type] || "Inlägg");
+    const shortCaption = (text, length = 95) => {
+        const clean = (text || "").replace(/\s+/g, " ").trim();
+        return clean.length > length ? `${clean.slice(0, length)}…` : clean || "Ingen caption";
+    };
 
     let data;
     try {
@@ -153,7 +160,11 @@
     if (wssCanvas) {
         const wss = data.weekly_saves_shares || [];
         const target = 3;
-        const labels = wss.map((w) => "v" + w.week.split("-W")[1]);
+        const currentIndex = wss.findIndex((w) => w.is_current);
+        const labels = wss.map((w) => {
+            const label = "v" + w.week.split("-W")[1];
+            return w.is_current ? `${label} (nu)` : label;
+        });
         const saves = wss.map((w) => w.saves);
         const shares = wss.map((w) => w.shares);
         new Chart(wssCanvas, {
@@ -161,30 +172,58 @@
             data: {
                 labels,
                 datasets: [
-                    { label: "Sparningar", data: saves, backgroundColor: "#2e7d32", stack: "ss" },
-                    { label: "Delningar", data: shares, backgroundColor: "#66bb6a", stack: "ss" },
+                    { label: "Sparningar", data: saves, backgroundColor: wss.map((w) => w.is_current ? "#14532d" : "#2e7d32"), stack: "ss" },
+                    { label: "Delningar", data: shares, backgroundColor: wss.map((w) => w.is_current ? "#22c55e" : "#66bb6a"), stack: "ss" },
                 ]
             },
             options: {
                 responsive: true,
                 plugins: { legend: { position: "bottom" } },
-                scales: { y: { stacked: true, beginAtZero: true, ticks: { precision: 0 } }, x: { stacked: true } }
+                scales: {
+                    y: { stacked: true, beginAtZero: true, ticks: { precision: 0 } },
+                    x: {
+                        stacked: true,
+                        ticks: {
+                            color: (ctx) => ctx.index === currentIndex ? "#111" : "#666",
+                            font: (ctx) => ctx.index === currentIndex ? { weight: "bold" } : { weight: "normal" },
+                        }
+                    }
+                }
             }
         });
 
         // Senaste vecka vs förra
-        const last = wss[wss.length - 1] || { total: 0 };
-        const prev = wss[wss.length - 2] || { total: 0 };
+        const last = currentIndex >= 0 ? wss[currentIndex] : (wss[wss.length - 1] || { total: 0 });
+        const prev = currentIndex > 0 ? wss[currentIndex - 1] : (wss[wss.length - 2] || { total: 0 });
         const status = last.total >= target
-            ? { c: "arrow-up", s: `↑ Mål nått (${last.total} av ${target})` }
+            ? { c: "arrow-up", s: `↑ Aktuell vecka: mål nått (${last.total} av ${target})` }
             : last.total > prev.total
-                ? { c: "arrow-up", s: `↑ Bättre än förra veckan (${last.total} vs ${prev.total})` }
+                ? { c: "arrow-up", s: `↑ Aktuell vecka bättre än förra (${last.total} vs ${prev.total})` }
                 : last.total === prev.total
-                    ? { c: "arrow-flat", s: `→ Samma som förra veckan (${last.total})` }
-                    : { c: "arrow-down", s: `↓ Sämre än förra veckan (${last.total} vs ${prev.total})` };
+                    ? { c: "arrow-flat", s: `→ Aktuell vecka samma som förra (${last.total})` }
+                    : { c: "arrow-down", s: `↓ Aktuell vecka lägre än förra (${last.total} vs ${prev.total})` };
         const statusEl = $("weekly-ss-status");
         if (statusEl) {
             statusEl.innerHTML = `<span class="${status.c}">${status.s}</span>`;
+        }
+
+        const signalList = $("signal-media-list");
+        if (signalList) {
+            const signals = data.signal_media || [];
+            signalList.innerHTML = signals.length ? signals.map((m) => {
+                const img = m.thumbnail_url || m.media_url || "";
+                const date = new Date(m.timestamp).toLocaleDateString("sv-SE", { month: "short", day: "numeric" });
+                return `
+                    <a class="signal-item" href="${m.permalink}" target="_blank" rel="noopener">
+                        ${img ? `<img src="${img}" alt="" loading="lazy">` : ""}
+                        <span class="signal-copy">
+                            <strong>${fmt(m.saved || 0)} sparningar · ${fmt(m.shares || 0)} delningar</strong>
+                            <span>${mediaLabel(m)} · ${date} · ${fmt(m.reach || 0)} räckvidd</span>
+                            <em>${shortCaption(m.caption)}</em>
+                        </span>
+                    </a>
+                `;
+            }).join("") : `<p class="signal-empty">Inga sparningar eller delningar registrerade för inlägg senaste 30 dagarna.</p>`;
         }
     }
 

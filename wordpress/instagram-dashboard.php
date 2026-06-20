@@ -80,6 +80,10 @@ function igdash_shortcode() {
             <h2>Sparningar &amp; delningar per vecka <span class="chart-card-hint">— mål: minst 3/vecka</span></h2>
             <p class="chart-card-status" id="weekly-ss-status">–</p>
             <canvas id="chart-weekly-ss" height="100"></canvas>
+            <div class="signal-media">
+                <h3>Inlägg som gav sparningar/delningar</h3>
+                <div id="signal-media-list" class="signal-media-list"></div>
+            </div>
         </section>
 
         <section class="best-posting">
