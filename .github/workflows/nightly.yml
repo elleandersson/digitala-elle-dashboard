@@ -23,6 +23,7 @@ jobs:
       - run: pip install -r requirements.txt
 
       - name: Hämta Instagram-data
+        id: fetch
         env:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
@@ -37,3 +38,17 @@ jobs:
           git add data/instagram.json
           git diff --staged --quiet || git commit -m "chore: nightly instagram update"
           git push
+
+      - name: Uppdatera IG_ACCESS_TOKEN secret
+        if: steps.fetch.outputs.new_token != ''
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.SECRET_UPDATE_TOKEN }}
+          NEW_TOKEN: ${{ steps.fetch.outputs.new_token }}
+        run: |
+          if [ -z "${GH_TOKEN:-}" ]; then
+            echo "::warning::SECRET_UPDATE_TOKEN saknas. IG_ACCESS_TOKEN kunde inte uppdateras automatiskt."
+            exit 0
+          fi
+
+          printf '%s' "$NEW_TOKEN" | gh secret set IG_ACCESS_TOKEN --body-file -

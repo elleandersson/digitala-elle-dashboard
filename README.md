@@ -16,6 +16,24 @@ WP-sidan läser JSON via fetch() från GitHub raw-URL
 Chart.js renderar grafer
 ```
 
+## Morgonrutinen
+
+Dashboarden ska vara redo när du börjar dagen:
+
+- GitHub Actions hämtar ny Instagram-data varje natt/tidig morgon.
+- `https://digitalaelle.se/dashboard` visar den senaste publicerade JSON-filen.
+- `scripts/open_dashboard.sh` öppnar dashboarden i webbläsaren.
+- `scripts/install_morning_dashboard.sh` installerar en macOS LaunchAgent som öppnar dashboarden varje dag kl. 08:00.
+
+Installera morgonöppningen på datorn:
+
+```bash
+cd "/Users/elleandersson/Claude på datorn/digitala-elle-dashboard"
+zsh scripts/install_morning_dashboard.sh
+```
+
+Vill du ändra tid senare: uppdatera `Hour`/`Minute` i `scripts/install_morning_dashboard.sh` och kör installeraren igen.
+
 ## Setup — gör detta en gång
 
 ### Steg 1 — Meta Developer-app
@@ -66,7 +84,7 @@ Enklaste vägen är via **Graph API Explorer**: https://developers.facebook.com/
 ### Steg 4 — Lägg in secrets i GitHub
 
 Gå till repot → **Settings → Secrets and variables → Actions → New repository secret**.
-Lägg till fyra:
+Lägg till fem:
 
 | Namn | Värde |
 |---|---|
@@ -74,6 +92,14 @@ Lägg till fyra:
 | `IG_USER_ID` | IG Business Account ID från steg 2 |
 | `FB_APP_ID` | App ID från steg 1 |
 | `FB_APP_SECRET` | App Secret från steg 1 |
+| `SECRET_UPDATE_TOKEN` | GitHub-token som får uppdatera repo secrets |
+
+`SECRET_UPDATE_TOKEN` behövs för att workflowet ska kunna spara tillbaka en refreshad Instagram-token till `IG_ACCESS_TOKEN`. Skapa den som en GitHub fine-grained personal access token:
+
+1. Gå till GitHub → **Settings → Developer settings → Personal access tokens → Fine-grained tokens**
+2. Skapa en token för repot `elleandersson/digitala-elle-dashboard`
+3. Ge den repository-behörigheten **Secrets: Read and write**
+4. Lägg token-värdet som repository secret med namnet `SECRET_UPDATE_TOKEN`
 
 ### Steg 5 — Testa workflow:et manuellt
 
@@ -82,25 +108,30 @@ Lägg till fyra:
 
 ### Steg 6 — Lägg dashboarden på digitalaelle.se
 
-1. Öppna `wordpress/dashboard-template.php` och ändra rad ~14:
+1. Kontrollera data-URL:en i `wordpress/instagram-dashboard.php`:
    ```php
-   $data_url = 'https://raw.githubusercontent.com/<DITT-ANVANDARNAMN>/digitala-elle-dashboard/main/data/instagram.json';
+   define( 'IGDASH_DATA_URL', 'https://raw.githubusercontent.com/elleandersson/digitala-elle-dashboard/main/data/instagram.json' );
    ```
 2. Ladda upp **alla tre filer** via FTP till ditt aktiva temas mapp:
-   - `dashboard-template.php` → `/wp-content/themes/<ditt-tema>/`
+   - `instagram-dashboard.php` → `/wp-content/themes/<ditt-tema>/`
    - `dashboard.css` → `/wp-content/themes/<ditt-tema>/`
    - `dashboard.js` → `/wp-content/themes/<ditt-tema>/`
-3. I WP-admin: **Sidor → Lägg till ny**
+3. Lägg till detta längst ner i temats `functions.php`:
+   ```php
+   require_once get_theme_file_path( 'instagram-dashboard.php' );
+   ```
+4. I WP-admin: **Sidor → Lägg till ny**
    - Titel: `Dashboard`
    - Permalänk: `dashboard`
-   - I sidofältet, under **Sidans attribut → Mall**: välj **Instagram Dashboard**
+   - Lägg in ett shortcode-block med `[instagram_dashboard]`
    - Publicera
-4. Besök `https://digitalaelle.se/dashboard` → grafer ska ladda.
+5. Besök `https://digitalaelle.se/dashboard` → grafer ska ladda.
 
 ## Underhåll
 
 - **Token förnyas automatiskt** varje natt av skriptet (giltig 60 dagar, refreshas i tid).
-  - *OBS:* Den nya token skrivs idag bara till GitHub Actions-loggen. När du vill kan vi bygga ut detta att skriva tillbaka till secret automatiskt — men kolla loggen var ~50:e dag och uppdatera `IG_ACCESS_TOKEN` manuellt om något går fel.
+  - När Meta returnerar en ny token skriver workflowet tillbaka den till GitHub-secret `IG_ACCESS_TOKEN`.
+  - Om `SECRET_UPDATE_TOKEN` saknas uppdateras dashboard-datan ändå, men workflowet visar en varning om att token inte kunde sparas automatiskt.
 - **Cron-tid:** Kör 23:00 UTC = **01:00 svensk sommartid** (CEST), **00:00 vintertid** (CET). GitHub Actions stödjer inte tidszoner.
 - **Manuell körning:** Actions-fliken → Run workflow.
 
