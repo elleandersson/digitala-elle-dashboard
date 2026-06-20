@@ -5,6 +5,8 @@
     const fmt = (n) => new Intl.NumberFormat("sv-SE").format(n ?? 0);
     const pct = (n) => (n == null ? "–" : `${n}%`);
     const sumValues = (arr) => (arr || []).reduce((s, x) => s + (x.value || 0), 0);
+    const sumPosts = (rows) => (rows || []).reduce((s, x) => s + (x.posts || 0), 0);
+    const daysBetween = (a, b) => Math.max(0, Math.floor((a - b) / 86400000));
 
     let data;
     try {
@@ -19,23 +21,75 @@
     const $ = (id) => document.getElementById(id);
     const set = (id, v) => { const el = $(id); if (el) el.textContent = v; };
 
+    const rows = data.daily_insights || [];
+    const recent7 = rows.slice(-7);
+    const posts7 = sumPosts(recent7);
+    const posts30 = sumPosts(rows);
+    const reach30 = sumValues(data.time_series_30d.reach);
+    const profileViews = data.totals_30d.profile_views || 0;
+    const updatedAt = new Date(data.updated_at);
+    const dataAge = daysBetween(new Date(), updatedAt);
+
     set("updated-at", new Date(data.updated_at).toLocaleString("sv-SE"));
     set("kpi-followers", fmt(data.profile.followers_count));
-    set("kpi-media", fmt(data.profile.media_count));
-    set("kpi-reach", fmt(sumValues(data.time_series_30d.reach)));
-    set("kpi-views", fmt(data.totals_30d.views));
+    set("kpi-reach", fmt(reach30));
+    set("kpi-profile-views", fmt(profileViews));
+    set("kpi-posts-30", fmt(posts30));
+    set("kpi-posts-7", fmt(posts7));
 
     // Extra KPIs
     const ex = data.extras_30d || {};
+    const savesShares = (ex.saves || 0) + (ex.shares || 0);
     set("kpi-engagement-rate", pct(ex.engagement_rate_pct));
-    set("kpi-saves-shares", fmt((ex.saves || 0) + (ex.shares || 0)));
+    set("kpi-saves-shares", fmt(savesShares));
     set("kpi-non-followers", pct(ex.reach_non_followers_pct));
+
+    // Morgonbrief: snabb tolkning för dagens beslut
+    const statusEl = $("brief-status");
+    const setBriefStatus = (label, level) => {
+        if (!statusEl) return;
+        statusEl.textContent = label;
+        statusEl.className = `brief-status ${level}`;
+    };
+    const nonFollowerPct = ex.reach_non_followers_pct;
+    const engagementRate = ex.engagement_rate_pct || 0;
+    let action = "Fortsätt på samma spår och återanvänd idén från inlägget som driver mest räckvidd.";
+    let status = { label: "Bra läge", level: "good" };
+
+    if (dataAge > 2) {
+        status = { label: "Kolla dataflödet", level: "needs-action" };
+        action = "Datan är äldre än två dagar. Kontrollera GitHub Actions innan du tolkar siffrorna.";
+    } else if (posts7 < 3) {
+        status = { label: "Behöver action", level: "needs-action" };
+        action = "Publicera eller planera ett delbart inlägg idag. Sikta på 3–5 inlägg per vecka för bättre signaler.";
+    } else if (savesShares < 3) {
+        status = { label: "Okej, men svag delning", level: "watch" };
+        action = "Skapa något sparbart: en checklista, konkret Claude-prompt eller karusell som löser ett tydligt problem.";
+    } else if (nonFollowerPct != null && nonFollowerPct < 50) {
+        status = { label: "Bygg räckvidd", level: "watch" };
+        action = "Prioritera innehåll som kan nå nya: tydlig hook, delbar vinkel och nyckelord som Claude, AI och soloentreprenör.";
+    } else if (engagementRate >= 5) {
+        status = { label: "Stark respons", level: "good" };
+        action = "Engagemanget är starkt. Gör en ny variant av bästa idén: byt hook, behåll vinkeln.";
+    }
+
+    setBriefStatus(status.label, status.level);
+    set("brief-summary", `Senaste 30 dagar: ${fmt(reach30)} i räckvidd, ${pct(engagementRate)} engagement rate och ${pct(nonFollowerPct)} räckvidd från icke-följare.`);
+    set("brief-action", action);
+    set("brief-posts-7", fmt(posts7));
+    set("brief-posts-30", fmt(posts30));
+    set("brief-profile-views", fmt(profileViews));
+    set("brief-freshness", dataAge === 0 ? "Idag" : `${dataAge} d`);
 
     // Best posting
     const bp = data.best_posting || {};
     if ($("best-weekday")) $("best-weekday").textContent = bp.weekday || "–";
     if ($("best-hour")) $("best-hour").textContent = bp.hour != null ? `kl ${bp.hour}:00` : "–";
     if ($("best-posts-analyzed")) $("best-posts-analyzed").textContent = fmt(bp.posts_analyzed || 0);
+    const bestHint = document.querySelector(".best-posting-hint");
+    if (bestHint && (bp.posts_analyzed || 0) < 8) {
+        bestHint.textContent += " För få inlägg för säker slutsats.";
+    }
 
     const reach = data.time_series_30d.reach || [];
     const followers = data.time_series_30d.follower_count || [];
@@ -137,7 +191,6 @@
     // Daglig insiktstabell med trend-pilar
     const insightsBody = $("daily-insights-body");
     if (insightsBody) {
-        const rows = data.daily_insights || [];
         // 7-dagars rullande snitt bakåt (exklusive dagen själv) för räckvidd
         const arrow = (value, avg) => {
             if (avg == null || avg === 0) return { c: "arrow-flat", s: "→" };

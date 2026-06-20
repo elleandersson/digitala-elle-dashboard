@@ -34,17 +34,36 @@ function igdash_shortcode() {
             <p class="dashboard-updated">Senast uppdaterad: <span id="updated-at">…</span></p>
         </header>
 
+        <section class="morning-brief">
+            <div class="brief-main">
+                <span class="brief-status" id="brief-status">Laddar…</span>
+                <h2>Dagens Instagram-läge</h2>
+                <p id="brief-summary">Analyserar senaste siffrorna…</p>
+            </div>
+            <div class="brief-action">
+                <span class="brief-action-label">Rekommenderad action idag</span>
+                <p id="brief-action">–</p>
+            </div>
+            <div class="brief-facts">
+                <div><span>Inlägg 7d</span><strong id="brief-posts-7">–</strong></div>
+                <div><span>Inlägg 30d</span><strong id="brief-posts-30">–</strong></div>
+                <div><span>Profilbesök</span><strong id="brief-profile-views">–</strong></div>
+                <div><span>Dataålder</span><strong id="brief-freshness">–</strong></div>
+            </div>
+        </section>
+
         <section class="kpi-grid">
             <div class="kpi"><span class="kpi-label">Följare</span><span class="kpi-value" id="kpi-followers">–</span></div>
-            <div class="kpi"><span class="kpi-label">Inlägg totalt</span><span class="kpi-value" id="kpi-media">–</span></div>
             <div class="kpi"><span class="kpi-label">Räckvidd 30d</span><span class="kpi-value" id="kpi-reach">–</span></div>
-            <div class="kpi"><span class="kpi-label">Visningar 30d</span><span class="kpi-value" id="kpi-views">–</span></div>
+            <div class="kpi"><span class="kpi-label">Profilbesök 30d</span><span class="kpi-value" id="kpi-profile-views">–</span></div>
+            <div class="kpi"><span class="kpi-label">Inlägg 30d</span><span class="kpi-value" id="kpi-posts-30">–</span></div>
         </section>
 
         <section class="kpi-grid kpi-grid-secondary">
             <div class="kpi"><span class="kpi-label">Engagement rate</span><span class="kpi-value" id="kpi-engagement-rate">–</span><span class="kpi-hint">interaktioner ÷ räckvidd · mål ≥ 3%</span></div>
             <div class="kpi"><span class="kpi-label">Sparningar + delningar</span><span class="kpi-value" id="kpi-saves-shares">–</span><span class="kpi-hint">starkaste algoritmsignalerna</span></div>
             <div class="kpi"><span class="kpi-label">Räckvidd från icke-följare</span><span class="kpi-value" id="kpi-non-followers">–</span><span class="kpi-hint">tillväxtindikator</span></div>
+            <div class="kpi"><span class="kpi-label">Inlägg 7d</span><span class="kpi-value" id="kpi-posts-7">–</span><span class="kpi-hint">hållbar takt: 3–5/vecka</span></div>
         </section>
 
         <section class="chart-card">

@@ -10,6 +10,76 @@
 .dashboard-sub { color: #666; margin: 0; }
 .dashboard-updated { color: #999; font-size: .85rem; margin-top: .5rem; }
 
+.morning-brief {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(260px, .8fr);
+    gap: 1rem;
+    align-items: stretch;
+    background: #101010;
+    color: #fff;
+    border-radius: 8px;
+    padding: 1.25rem;
+    margin: 2rem 0 1.25rem;
+}
+.brief-main h2 {
+    font-size: 1.45rem;
+    line-height: 1.15;
+    margin: .65rem 0 .5rem;
+}
+.brief-main p,
+.brief-action p {
+    margin: 0;
+    color: rgba(255,255,255,.78);
+    line-height: 1.5;
+}
+.brief-status {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding: .32rem .65rem;
+    font-size: .78rem;
+    font-weight: 700;
+    background: #f3d16b;
+    color: #1a1a1a;
+}
+.brief-status.good { background: #7ccf98; }
+.brief-status.watch { background: #f3d16b; }
+.brief-status.needs-action { background: #ff9d8f; }
+.brief-action {
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 8px;
+    padding: 1rem;
+    background: rgba(255,255,255,.06);
+}
+.brief-action-label {
+    display: block;
+    color: rgba(255,255,255,.58);
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    margin-bottom: .45rem;
+    text-transform: uppercase;
+}
+.brief-facts {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: .75rem;
+}
+.brief-facts div {
+    border-top: 1px solid rgba(255,255,255,.16);
+    padding-top: .7rem;
+}
+.brief-facts span {
+    display: block;
+    color: rgba(255,255,255,.55);
+    font-size: .76rem;
+    margin-bottom: .2rem;
+}
+.brief-facts strong {
+    font-size: 1.2rem;
+}
+
 .kpi-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -101,3 +171,12 @@
 .media-card .meta strong { display: block; font-size: 1.05rem; margin-bottom: .25rem; }
 .media-card a { color: #1a1a1a; text-decoration: none; }
 .media-card a:hover { text-decoration: underline; }
+
+@media (max-width: 760px) {
+    .morning-brief {
+        grid-template-columns: 1fr;
+    }
+    .brief-facts {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
