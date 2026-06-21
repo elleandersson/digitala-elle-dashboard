@@ -4,9 +4,9 @@ on:
   schedule:
     # Kör på ojämna minuter eftersom GitHub Actions kan tappa schemakörningar
     # vid hög belastning runt heltimmen. Första körningen är nattens huvudjobb,
-    # andra är fallback innan dashboarden öppnas på morgonen.
-    - cron: "37 3 * * *"  # 05:37 CEST / 04:37 CET
-    - cron: "37 5 * * *"  # 07:37 CEST / 06:37 CET
+    # andra är fallback. Båda tiderna är före 05:00 svensk tid även under CEST.
+    - cron: "37 1 * * *"  # 03:37 CEST / 02:37 CET
+    - cron: "37 2 * * *"  # 04:37 CEST / 03:37 CET
   workflow_dispatch:  # gör att du kan köra manuellt från GitHub-fliken "Actions"
 
 permissions:
