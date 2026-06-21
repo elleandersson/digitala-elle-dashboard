@@ -5,8 +5,10 @@ PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 PLIST_ID="se.digitalaelle.instagram-dashboard"
 PLIST_PATH="$HOME/Library/LaunchAgents/${PLIST_ID}.plist"
 OPEN_SCRIPT="$PROJECT_DIR/scripts/open_dashboard.sh"
+LOG_DIR="$HOME/Library/Logs/DigitalaElleDashboard"
 
 mkdir -p "$HOME/Library/LaunchAgents"
+mkdir -p "$LOG_DIR"
 chmod +x "$OPEN_SCRIPT"
 
 cat > "$PLIST_PATH" <<PLIST
@@ -32,8 +34,17 @@ cat > "$PLIST_PATH" <<PLIST
     <integer>0</integer>
   </dict>
 
+  <key>StartInterval</key>
+  <integer>900</integer>
+
   <key>RunAtLoad</key>
-  <false/>
+  <true/>
+
+  <key>StandardOutPath</key>
+  <string>${LOG_DIR}/morning-dashboard.log</string>
+
+  <key>StandardErrorPath</key>
+  <string>${LOG_DIR}/morning-dashboard.err</string>
 </dict>
 </plist>
 PLIST
@@ -41,5 +52,7 @@ PLIST
 launchctl unload "$PLIST_PATH" >/dev/null 2>&1 || true
 launchctl load "$PLIST_PATH"
 
-echo "Installerat: dashboarden öppnas varje dag kl 08:00."
+echo "Installerat: dashboarden öppnas en gång per dag efter kl 08:00."
+echo "Den kontrollerar även var 15:e minut, så den funkar bättre om datorn sover kl 08:00."
 echo "LaunchAgent: $PLIST_PATH"
+echo "Logg: ${LOG_DIR}/morning-dashboard.log"

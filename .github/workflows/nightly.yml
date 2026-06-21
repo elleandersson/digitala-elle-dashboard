@@ -2,9 +2,11 @@ name: Nightly Instagram fetch
 
 on:
   schedule:
-    # 03:00 UTC = 05:00 CEST / 04:00 CET. Sent nog så att Metas API har full data
-    # för gårdagen (svensk tid) i fönstret since/until.
-    - cron: "0 3 * * *"
+    # Kör på ojämna minuter eftersom GitHub Actions kan tappa schemakörningar
+    # vid hög belastning runt heltimmen. Första körningen är nattens huvudjobb,
+    # andra är fallback innan dashboarden öppnas på morgonen.
+    - cron: "37 3 * * *"  # 05:37 CEST / 04:37 CET
+    - cron: "37 5 * * *"  # 07:37 CEST / 06:37 CET
   workflow_dispatch:  # gör att du kan köra manuellt från GitHub-fliken "Actions"
 
 permissions:
