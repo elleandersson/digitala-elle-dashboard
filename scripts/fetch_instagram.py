@@ -23,6 +23,7 @@ IG_ID = os.environ["IG_USER_ID"]
 OUT = Path(__file__).resolve().parent.parent / "data" / "instagram.json"
 
 WEEKDAYS_SV = ["Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag", "Lördag", "Söndag"]
+UNSUPPORTED_MEDIA_METRICS = set()
 
 
 def get(path, **params):
@@ -72,7 +73,7 @@ def time_series(metric, days=30):
         return []
 
 
-def total_value(metric, days=30, breakdown=None):
+def total_value_result(metric, days=30, breakdown=None):
     # IG API tillåter inte framtida `until`. Se kommentar i time_series().
     until = datetime.now(timezone.utc).date()
     since = until - timedelta(days=days)
@@ -82,10 +83,52 @@ def total_value(metric, days=30, breakdown=None):
         params["breakdown"] = breakdown
     try:
         data = get(f"{IG_ID}/insights", **params)
-        return data["data"][0].get("total_value", {})
+        return {
+            "available": True,
+            "metric": metric,
+            "value": _scalar(data["data"][0].get("total_value", {})),
+        }
     except (requests.HTTPError, KeyError, IndexError) as e:
         print(f"total_value {metric} misslyckades: {e}", file=sys.stderr)
-        return {}
+        return {"available": False, "metric": metric, "value": 0}
+
+
+def total_value(metric, days=30, breakdown=None):
+    result = total_value_result(metric, days=days, breakdown=breakdown)
+    return {"value": result["value"]} if result["available"] else {}
+
+
+def first_total_value(metrics, days=30):
+    """Returnera första total_value-mått som Meta accepterar."""
+    for metric in metrics:
+        result = total_value_result(metric, days=days)
+        if result["available"]:
+            return result
+    return {"available": False, "metric": None, "value": 0}
+
+
+def media_insights(media_id, metrics, media_kind="unknown"):
+    """Hämta per-post insights och ignorera mått som inte stöds för formatet."""
+    out = {}
+    for metric in metrics:
+        metric_key = (media_kind, metric)
+        if metric_key in UNSUPPORTED_MEDIA_METRICS:
+            out[metric] = 0
+            continue
+        try:
+            ins = get(f"{media_id}/insights", metric=metric)
+            for v in ins.get("data", []):
+                values = v.get("values", [])
+                out[v["name"]] = values[0].get("value", 0) if values else 0
+        except requests.HTTPError as e:
+            status = e.response.status_code if e.response is not None else None
+            if status == 400:
+                UNSUPPORTED_MEDIA_METRICS.add(metric_key)
+                print(f"media insight {metric} stöds inte av Meta för {media_kind}; hoppar över.", file=sys.stderr)
+            else:
+                print(f"media insight {metric} misslyckades för {media_id}: {e}", file=sys.stderr)
+            out[metric] = 0
+    return out
 
 
 def fetch_recent_media(days=30):
@@ -99,12 +142,11 @@ def fetch_recent_media(days=30):
         ts = datetime.strptime(m["timestamp"], "%Y-%m-%dT%H:%M:%S%z")
         if ts < cutoff:
             continue
-        try:
-            ins = get(f"{m['id']}/insights", metric="reach,saved,shares")
-            for v in ins.get("data", []):
-                m[v["name"]] = v["values"][0]["value"]
-        except requests.HTTPError:
-            m["reach"] = m["saved"] = m["shares"] = 0
+        m.update(media_insights(
+            m["id"],
+            ["reach", "saved", "shares", "follows", "profile_activity", "profile_visits"],
+            "REELS" if m.get("media_product_type") == "REELS" else m.get("media_type", "unknown")
+        ))
         m["engagement"] = (m.get("like_count", 0) + m.get("comments_count", 0)
                            + m.get("saved", 0) + m.get("shares", 0))
         recent.append(m)
@@ -232,6 +274,36 @@ def signal_media(media_list):
     return sorted(rows, key=lambda x: (x["signal_score"], x.get("reach", 0)), reverse=True)[:5]
 
 
+def follower_media(media_list):
+    """Inlägg som bäst visar väg mot följare: follows om Meta ger det, annars profilaktivitet."""
+    rows = []
+    for m in media_list:
+        follows = m.get("follows", 0)
+        profile_activity = m.get("profile_activity", 0)
+        profile_visits = m.get("profile_visits", 0)
+        if follows + profile_activity + profile_visits <= 0:
+            continue
+        rows.append({
+            "id": m.get("id"),
+            "caption": m.get("caption", ""),
+            "media_type": m.get("media_type"),
+            "media_product_type": m.get("media_product_type"),
+            "permalink": m.get("permalink"),
+            "thumbnail_url": m.get("thumbnail_url"),
+            "media_url": m.get("media_url"),
+            "timestamp": m.get("timestamp"),
+            "reach": m.get("reach", 0),
+            "follows": follows,
+            "profile_activity": profile_activity,
+            "profile_visits": profile_visits,
+        })
+    return sorted(
+        rows,
+        key=lambda x: (x["follows"], x["profile_activity"], x["profile_visits"], x["reach"]),
+        reverse=True
+    )[:5]
+
+
 def extras_30d(media_list, totals):
     """Engagement rate, saves+shares, räckvidd non-followers."""
     saves = sum(m.get("saved", 0) for m in media_list)
@@ -265,9 +337,13 @@ def main():
     reach = time_series("reach")
     followers = time_series("follower_count")
 
+    link_clicks = first_total_value(["profile_links_taps", "website_clicks"])
     totals = {
         "views": _scalar(total_value("views")),
         "profile_views": _scalar(total_value("profile_views")),
+        "profile_link_clicks": link_clicks["value"],
+        "profile_link_clicks_metric": link_clicks["metric"],
+        "profile_link_clicks_available": link_clicks["available"],
         "accounts_engaged": _scalar(total_value("accounts_engaged")),
         "total_interactions": _scalar(total_value("total_interactions")),
         "reach": sum(d["value"] for d in reach),
@@ -282,6 +358,7 @@ def main():
         "daily_insights": daily_insights(reach, followers, media_list),
         "weekly_saves_shares": weekly_saves_shares(media_list, weeks=6),
         "signal_media": signal_media(media_list),
+        "follower_media": follower_media(media_list),
         "best_posting": best_posting(media_list),
         "top_media": sorted(media_list, key=lambda x: x.get("reach", 0), reverse=True)[:5],
         "format_breakdown": format_breakdown(media_list),

@@ -34,6 +34,8 @@
     const reach30 = sumValues(data.time_series_30d.reach);
     const newFollowers30 = sumValues(data.time_series_30d.follower_count);
     const profileViews = data.totals_30d.profile_views || 0;
+    const linkClicks = data.totals_30d.profile_link_clicks || 0;
+    const linkClicksAvailable = data.totals_30d.profile_link_clicks_available === true || data.totals_30d.profile_link_clicks_metric;
     const updatedAt = new Date(data.updated_at);
     const dataAge = daysBetween(new Date(), updatedAt);
 
@@ -42,6 +44,7 @@
     set("kpi-reach", fmt(reach30));
     set("kpi-new-followers", fmt(newFollowers30));
     set("kpi-profile-views", fmt(profileViews));
+    set("kpi-link-clicks", linkClicksAvailable ? fmt(linkClicks) : "–");
 
     // Extra KPIs
     const ex = data.extras_30d || {};
@@ -73,14 +76,17 @@
     }
 
     setOverviewStatus(dataAge === 0 ? "Uppdaterad idag" : `Uppdaterad för ${dataAge} dagar sedan`, dataAge > 2 ? "stale" : "fresh");
-    set("overview-summary", `Senaste 30 dagarna har kontot nått ${fmt(reach30)} konton och fått ${fmt(profileViews)} profilbesök. Här är signalerna som hjälper dig välja nästa innehåll.`);
+    set("overview-summary", `Senaste 30 dagarna har kontot nått ${fmt(reach30)} konton och fått ${fmt(profileViews)} profilbesök${linkClicksAvailable ? `, varav ${fmt(linkClicks)} klick vidare från profilen` : ""}. Här är signalerna som hjälper dig välja nästa innehåll.`);
     set("highlight-primary", reach30 > 0 ? `Räckvidden ger dig en tydlig bas att analysera: ${fmt(reach30)} konton senaste 30 dagarna.` : "Räckviddsdatan är på plats och fylls på i takt med nya inlägg.");
-    set("highlight-secondary", newFollowers30 > 0 ? `${fmt(newFollowers30)} nya följare visar att innehållet kan omvandlas till relationer.` : "Följarutvecklingen blir lättare att läsa när de kommande inläggen börjar jämföras över tid.");
-    set("highlight-tertiary", savesShares > 0 ? `${fmt(savesShares)} sparningar/delningar visar vilket innehåll som har extra värde för målgruppen.` : "Sparningar och delningar kommer visa vilka inlägg målgruppen vill behålla och skicka vidare.");
+    set("highlight-secondary", linkClicksAvailable ? `${fmt(linkClicks)} klick vidare visar hur profilen leder människor mot hemsidan.` : "Hemsidelänken följs upp här när Meta lämnar ut länk-klick via API:t.");
+    set("highlight-tertiary", newFollowers30 > 0 ? `${fmt(newFollowers30)} nya följare visar att innehållet kan omvandlas till relationer.` : "Följarutvecklingen blir lättare att läsa när de kommande inläggen börjar jämföras över tid.");
     set("focus-action", action);
     set("focus-posts-7", `${fmt(posts7)} inlägg`);
     set("focus-non-followers", pct(nonFollowerPct));
     set("focus-freshness", dataAge === 0 ? "Färsk" : `${dataAge} d`);
+    set("link-click-story", linkClicksAvailable
+        ? `${fmt(linkClicks)} personer har klickat vidare från Instagram-profilen till din länk/hemsida senaste 30 dagarna. Titta på inläggen nedan för att se vilket innehåll som verkar få människor att ta nästa steg.`
+        : "Här visas klick vidare från profilen när Meta skickar den datan via API:t. Under tiden använder vi profilbesök och följar-signaler för att se vilka inlägg som får människor att närma sig dig.");
 
     // Best posting
     const bp = data.best_posting || {};
@@ -147,6 +153,30 @@
                 </div>
             `;
         }).join("");
+    }
+
+    const followerList = $("follower-media-list");
+    if (followerList) {
+        const followerMedia = data.follower_media || [];
+        followerList.innerHTML = followerMedia.length ? followerMedia.map((m) => {
+            const img = m.thumbnail_url || m.media_url || "";
+            const date = new Date(m.timestamp).toLocaleDateString("sv-SE", { month: "short", day: "numeric" });
+            const leadMetric = (m.follows || 0) > 0
+                ? `${fmt(m.follows)} nya följare`
+                : (m.profile_activity || 0) > 0
+                    ? `${fmt(m.profile_activity)} profilaktiviteter`
+                    : `${fmt(m.profile_visits || 0)} profilbesök`;
+            return `
+                <a class="signal-item" href="${m.permalink}" target="_blank" rel="noopener">
+                    ${img ? `<img src="${img}" alt="" loading="lazy">` : ""}
+                    <span class="signal-copy">
+                        <strong>${leadMetric}</strong>
+                        <span>${mediaLabel(m)} · ${date} · ${fmt(m.reach || 0)} räckvidd</span>
+                        <em>${shortCaption(m.caption)}</em>
+                    </span>
+                </a>
+            `;
+        }).join("") : `<p class="signal-empty">När nästa hämtning har körts visas inlägg som gett nya följare eller profilaktivitet här.</p>`;
     }
 
     // Veckovis saves + shares (algoritmens starkaste signaler)

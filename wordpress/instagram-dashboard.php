@@ -55,8 +55,21 @@ function igdash_shortcode() {
             <div class="kpi"><span class="kpi-label">Räckvidd 30d</span><span class="kpi-value" id="kpi-reach">–</span><span class="kpi-hint">hur många konton innehållet når</span></div>
             <div class="kpi"><span class="kpi-label">Nya följare 30d</span><span class="kpi-value" id="kpi-new-followers">–</span><span class="kpi-hint">om räckvidden omvandlas till relation</span></div>
             <div class="kpi"><span class="kpi-label">Profilbesök 30d</span><span class="kpi-value" id="kpi-profile-views">–</span><span class="kpi-hint">hur många som vill veta mer</span></div>
+            <div class="kpi"><span class="kpi-label">Klick till hemsidan</span><span class="kpi-value" id="kpi-link-clicks">–</span><span class="kpi-hint">när någon går vidare från profilen</span></div>
             <div class="kpi"><span class="kpi-label">Engagement rate</span><span class="kpi-value" id="kpi-engagement-rate">–</span><span class="kpi-hint">interaktioner i relation till räckvidd</span></div>
             <div class="kpi"><span class="kpi-label">Sparningar + delningar</span><span class="kpi-value" id="kpi-saves-shares">–</span><span class="kpi-hint">innehåll som folk vill behålla eller skicka vidare</span></div>
+        </section>
+
+        <section class="conversion-card">
+            <div class="conversion-summary">
+                <span class="section-kicker">Vägen till hemsidan</span>
+                <h2>Innehåll som leder vidare</h2>
+                <p id="link-click-story">–</p>
+            </div>
+            <div>
+                <h3>Inlägg som kan ge nya följare</h3>
+                <div id="follower-media-list" class="signal-media-list"></div>
+            </div>
         </section>
 
         <section class="focus-card">

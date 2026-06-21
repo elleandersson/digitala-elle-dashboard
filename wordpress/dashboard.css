@@ -90,6 +90,33 @@
 .kpi-value { font-size: 1.85rem; font-weight: 600; }
 .kpi-hint { font-size: .78rem; color: #777; line-height: 1.35; margin-top: .15rem; }
 
+.conversion-card {
+    display: grid;
+    grid-template-columns: minmax(0, .9fr) minmax(320px, 1.1fr);
+    gap: 1.25rem;
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 8px;
+    padding: 1.4rem;
+    margin: 1.25rem 0 1.5rem;
+}
+.conversion-card h2,
+.conversion-card h3 {
+    font-size: 1.12rem;
+    margin: .35rem 0 .65rem;
+}
+.conversion-card p {
+    color: #444;
+    line-height: 1.5;
+    margin: 0;
+}
+.conversion-summary {
+    background: #f7fbf8;
+    border: 1px solid #e0eee5;
+    border-radius: 8px;
+    padding: 1rem;
+}
+
 .focus-card {
     display: grid;
     grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr);
@@ -248,6 +275,7 @@
 
 @media (max-width: 760px) {
     .dashboard-overview,
+    .conversion-card,
     .focus-card {
         grid-template-columns: 1fr;
     }
