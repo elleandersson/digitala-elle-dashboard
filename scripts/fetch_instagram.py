@@ -29,7 +29,31 @@ UNSUPPORTED_MEDIA_METRICS = set()
 def get(path, **params):
     params["access_token"] = TOKEN
     r = requests.get(f"{GRAPH}/{path}", params=params, timeout=30)
-    r.raise_for_status()
+    try:
+        r.raise_for_status()
+    except requests.HTTPError as e:
+        detail = ""
+        try:
+            payload = r.json()
+        except ValueError:
+            payload = None
+
+        if isinstance(payload, dict):
+            err = payload.get("error", {})
+            message = err.get("message") or payload.get("message") or ""
+            err_type = err.get("type") or "API error"
+            code = err.get("code")
+            detail = f"{err_type}"
+            if code is not None:
+                detail += f" {code}"
+            if message:
+                detail += f": {message}"
+        elif r.text:
+            detail = r.text[:300]
+
+        if detail:
+            raise requests.HTTPError(f"{e} | {detail}", response=r) from e
+        raise
     return r.json()
 
 
@@ -331,41 +355,51 @@ def extras_30d(media_list, totals):
 
 
 def main():
-    refresh_token()
-    prof = profile()
-    media_list = fetch_recent_media(days=30)
-    reach = time_series("reach")
-    followers = time_series("follower_count")
+    try:
+        refresh_token()
+        prof = profile()
+        media_list = fetch_recent_media(days=30)
+        reach = time_series("reach")
+        followers = time_series("follower_count")
 
-    link_clicks = first_total_value(["profile_links_taps", "website_clicks"])
-    totals = {
-        "views": _scalar(total_value("views")),
-        "profile_views": _scalar(total_value("profile_views")),
-        "profile_link_clicks": link_clicks["value"],
-        "profile_link_clicks_metric": link_clicks["metric"],
-        "profile_link_clicks_available": link_clicks["available"],
-        "accounts_engaged": _scalar(total_value("accounts_engaged")),
-        "total_interactions": _scalar(total_value("total_interactions")),
-        "reach": sum(d["value"] for d in reach),
-    }
+        link_clicks = first_total_value(["profile_links_taps", "website_clicks"])
+        totals = {
+            "views": _scalar(total_value("views")),
+            "profile_views": _scalar(total_value("profile_views")),
+            "profile_link_clicks": link_clicks["value"],
+            "profile_link_clicks_metric": link_clicks["metric"],
+            "profile_link_clicks_available": link_clicks["available"],
+            "accounts_engaged": _scalar(total_value("accounts_engaged")),
+            "total_interactions": _scalar(total_value("total_interactions")),
+            "reach": sum(d["value"] for d in reach),
+        }
 
-    payload = {
-        "updated_at": datetime.now(timezone.utc).isoformat(),
-        "profile": prof,
-        "totals_30d": totals,
-        "extras_30d": extras_30d(media_list, totals),
-        "time_series_30d": {"reach": reach, "follower_count": followers},
-        "daily_insights": daily_insights(reach, followers, media_list),
-        "weekly_saves_shares": weekly_saves_shares(media_list, weeks=6),
-        "signal_media": signal_media(media_list),
-        "follower_media": follower_media(media_list),
-        "best_posting": best_posting(media_list),
-        "top_media": sorted(media_list, key=lambda x: x.get("reach", 0), reverse=True)[:5],
-        "format_breakdown": format_breakdown(media_list),
-    }
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text(json.dumps(payload, indent=2, ensure_ascii=False))
-    print(f"OK: skrev {OUT}")
+        payload = {
+            "updated_at": datetime.now(timezone.utc).isoformat(),
+            "profile": prof,
+            "totals_30d": totals,
+            "extras_30d": extras_30d(media_list, totals),
+            "time_series_30d": {"reach": reach, "follower_count": followers},
+            "daily_insights": daily_insights(reach, followers, media_list),
+            "weekly_saves_shares": weekly_saves_shares(media_list, weeks=6),
+            "signal_media": signal_media(media_list),
+            "follower_media": follower_media(media_list),
+            "best_posting": best_posting(media_list),
+            "top_media": sorted(media_list, key=lambda x: x.get("reach", 0), reverse=True)[:5],
+            "format_breakdown": format_breakdown(media_list),
+        }
+        OUT.parent.mkdir(parents=True, exist_ok=True)
+        OUT.write_text(json.dumps(payload, indent=2, ensure_ascii=False))
+        print(f"OK: skrev {OUT}")
+    except requests.HTTPError as e:
+        msg = str(e)
+        if "Invalid OAuth access token" in msg or "OAuthException" in msg:
+            print(
+                "IG_ACCESS_TOKEN verkar ogiltig eller utgången. Uppdatera GitHub-secret "
+                "IG_ACCESS_TOKEN med en ny long-lived token om felet återkommer.",
+                file=sys.stderr,
+            )
+        raise
 
 
 def _scalar(v):

@@ -2,15 +2,20 @@ name: Nightly Instagram fetch
 
 on:
   schedule:
-    # Kör på ojämna minuter eftersom GitHub Actions kan tappa schemakörningar
-    # vid hög belastning runt heltimmen. Första körningen är nattens huvudjobb,
-    # andra är fallback. Båda tiderna är före 05:00 svensk tid även under CEST.
+    # GitHub Actions kan tappa schemakörningar. Vi sprider därför ut flera
+    # försök på ojämna minuter före 05:00 svensk tid även under CEST.
+    - cron: "7 1 * * *"   # 03:07 CEST / 02:07 CET
     - cron: "37 1 * * *"  # 03:37 CEST / 02:37 CET
+    - cron: "7 2 * * *"   # 04:07 CEST / 03:07 CET
     - cron: "37 2 * * *"  # 04:37 CEST / 03:37 CET
   workflow_dispatch:  # gör att du kan köra manuellt från GitHub-fliken "Actions"
 
 permissions:
   contents: write
+
+concurrency:
+  group: instagram-nightly-fetch
+  cancel-in-progress: false
 
 jobs:
   fetch:
@@ -31,7 +36,17 @@ jobs:
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
           FB_APP_ID: ${{ secrets.FB_APP_ID }}
           FB_APP_SECRET: ${{ secrets.FB_APP_SECRET }}
-        run: python scripts/fetch_instagram.py
+        run: |
+          for attempt in 1 2 3; do
+            if python scripts/fetch_instagram.py; then
+              exit 0
+            fi
+            if [ "$attempt" -lt 3 ]; then
+              echo "::warning::Instagram-hämtning misslyckades i försök $attempt. Försöker igen om 20 sekunder."
+              sleep 20
+            fi
+          done
+          exit 1
 
       - name: Commit & push uppdaterad data
         run: |
