@@ -1,0 +1,68 @@
+name: Instagram watchdog refresh
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/instagram-watchdog.txt"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: instagram-nightly-fetch
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - run: pip install -r requirements.txt
+
+      - name: Hämta Instagram-data
+        id: fetch
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          FB_APP_ID: ${{ secrets.FB_APP_ID }}
+          FB_APP_SECRET: ${{ secrets.FB_APP_SECRET }}
+        run: |
+          for attempt in 1 2 3; do
+            if python scripts/fetch_instagram.py; then
+              exit 0
+            fi
+            if [ "$attempt" -lt 3 ]; then
+              echo "::warning::Instagram-hämtning misslyckades i försök $attempt. Försöker igen om 20 sekunder."
+              sleep 20
+            fi
+          done
+          exit 1
+
+      - name: Commit & push uppdaterad data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/instagram.json
+          git diff --staged --quiet || git commit -m "chore: nightly instagram update"
+          git push
+
+      - name: Uppdatera IG_ACCESS_TOKEN secret
+        if: steps.fetch.outputs.new_token != ''
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.SECRET_UPDATE_TOKEN }}
+          NEW_TOKEN: ${{ steps.fetch.outputs.new_token }}
+        run: |
+          if [ -z "${GH_TOKEN:-}" ]; then
+            echo "::warning::SECRET_UPDATE_TOKEN saknas. IG_ACCESS_TOKEN kunde inte uppdateras automatiskt."
+            exit 0
+          fi
+
+          printf '%s' "$NEW_TOKEN" | gh secret set IG_ACCESS_TOKEN --body-file -
