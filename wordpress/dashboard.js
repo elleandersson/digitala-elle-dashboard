@@ -3,13 +3,24 @@
     if (!url) return;
 
     const fmt = (n) => new Intl.NumberFormat("sv-SE").format(n ?? 0);
-    const pct = (n) => (n == null ? "–" : `${n}%`);
+    const pct = (n) => {
+        if (n == null) return "–";
+        return `${new Intl.NumberFormat("sv-SE", { maximumFractionDigits: 1 }).format(n)}%`;
+    };
     const sumValues = (arr) => (arr || []).reduce((s, x) => s + (x.value || 0), 0);
     const sumPosts = (rows) => (rows || []).reduce((s, x) => s + (x.posts || 0), 0);
     const daysBetween = (a, b) => Math.max(0, Math.floor((a - b) / 86400000));
+    const profileDayValue = (r) => r.profile_views || r.content_profile_visits || 0;
+    const outboundDayValue = (r) => r.profile_link_clicks || r.bio_link_clicks || r.story_link_clicks || 0;
     const mediaLabel = (m) => m.media_product_type === "REELS"
         ? "Reel"
         : ({ IMAGE: "Bild", CAROUSEL_ALBUM: "Karusell", VIDEO: "Video" }[m.media_type] || "Inlägg");
+    const deltaText = (n) => {
+        if (n == null) return null;
+        if (n > 0) return `${pct(n)} högre`;
+        if (n < 0) return `${pct(Math.abs(n))} lägre`;
+        return "oförändrad";
+    };
     const shortCaption = (text, length = 95) => {
         const clean = (text || "").replace(/\s+/g, " ").trim();
         return clean.length > length ? `${clean.slice(0, length)}…` : clean || "Ingen caption";
@@ -29,28 +40,142 @@
     const set = (id, v) => { const el = $(id); if (el) el.textContent = v; };
 
     const rows = data.daily_insights || [];
+    const timeSeries = data.time_series_30d || {};
+    const totals30 = data.totals_30d || {};
+    const profileSummary = data.profile_summary_30d || {};
+    const profileTotals = profileSummary.totals || {};
+    const profileRates = profileSummary.rates || {};
     const recent7 = rows.slice(-7);
     const posts7 = sumPosts(recent7);
-    const reach30 = sumValues(data.time_series_30d.reach);
-    const newFollowers30 = sumValues(data.time_series_30d.follower_count);
-    const profileViews = data.totals_30d.profile_views || 0;
-    const linkClicks = data.totals_30d.profile_link_clicks || 0;
-    const linkClicksAvailable = data.totals_30d.profile_link_clicks_available === true || data.totals_30d.profile_link_clicks_metric;
+    const reach30 = profileTotals.reach != null ? profileTotals.reach : sumValues(timeSeries.reach);
+    const newFollowers30 = profileTotals.new_followers != null ? profileTotals.new_followers : sumValues(timeSeries.follower_count);
+    const profileViews = profileTotals.profile_views != null ? profileTotals.profile_views : (totals30.profile_views || 0);
+    const linkClicks = profileTotals.profile_link_clicks != null ? profileTotals.profile_link_clicks : (totals30.profile_link_clicks || 0);
+    const outboundClicks = profileTotals.outbound_clicks != null ? profileTotals.outbound_clicks : linkClicks;
+    const linkClicksAvailable = profileSummary.link_clicks_available === true || totals30.profile_link_clicks_available === true || totals30.profile_link_clicks_metric;
+    const rateOf = (part, whole) => whole ? Math.round((part / whole) * 1000) / 10 : null;
+    const profileVisitRate = profileRates.profile_visit_rate_pct ?? profileRates.content_profile_visit_rate_pct ?? rateOf(profileViews, reach30);
+    const linkClickRate = profileRates.link_click_rate_pct ?? ((linkClicksAvailable || outboundClicks) ? rateOf(outboundClicks, profileViews) : null);
+    const followRate = profileRates.follow_rate_pct ?? rateOf(newFollowers30, profileViews);
     const updatedAt = new Date(data.updated_at);
     const dataAge = daysBetween(new Date(), updatedAt);
 
     set("updated-at", new Date(data.updated_at).toLocaleString("sv-SE"));
-    set("kpi-followers", fmt(data.profile.followers_count));
+    set("kpi-followers", fmt((data.profile || {}).followers_count));
     set("kpi-reach", fmt(reach30));
     set("kpi-new-followers", fmt(newFollowers30));
     set("kpi-profile-views", fmt(profileViews));
-    set("kpi-link-clicks", linkClicksAvailable ? fmt(linkClicks) : "–");
+    set("kpi-link-clicks", linkClicksAvailable ? fmt(linkClicks) : outboundClicks ? fmt(outboundClicks) : "–");
 
     // Extra KPIs
     const ex = data.extras_30d || {};
     const savesShares = (ex.saves || 0) + (ex.shares || 0);
     set("kpi-engagement-rate", pct(ex.engagement_rate_pct));
     set("kpi-saves-shares", fmt(savesShares));
+
+    set("funnel-reach", fmt(reach30));
+    set("funnel-profile-views", fmt(profileViews));
+    set("funnel-outbound-clicks", fmt(outboundClicks));
+    set("funnel-new-followers", fmt(newFollowers30));
+    set("profile-rate", pct(profileVisitRate));
+    set("profile-click-rate", pct(linkClickRate));
+    set("profile-follow-rate", pct(followRate));
+
+    const profileHint = $("funnel-profile-hint");
+    if (profileHint) {
+        profileHint.textContent = profileSummary.profile_views_series_available
+            ? "faktiska profilbesök"
+            : profileTotals.content_profile_visits
+                ? "kopplat till inlägg"
+                : "ville veta mer";
+    }
+    const outboundHint = $("funnel-outbound-hint");
+    if (outboundHint) {
+        outboundHint.textContent = linkClicksAvailable
+            ? "klick från profilen"
+            : profileTotals.bio_link_clicks || profileTotals.story_link_clicks
+                ? "bio-/story-klick"
+                : "väntar på klickdata";
+    }
+
+    const profileFunnelStory = $("profile-funnel-story");
+    if (profileFunnelStory) {
+        const clickSentence = outboundClicks
+            ? `${fmt(outboundClicks)} tog ett mätbart nästa steg från profil, bio eller Story.`
+            : linkClicksAvailable
+                ? "Inga klick vidare har registrerats i perioden."
+                : "Meta lämnar inte alltid ut klick vidare från profilen, så dashboarden visar bio-/Story-klick när de finns.";
+        profileFunnelStory.textContent = `${fmt(profileViews)} profilbesök på ${fmt(reach30)} nådda konton ger en profilbesöksgrad på ${pct(profileVisitRate)}. ${clickSentence}`;
+    }
+
+    const profileChartStatus = $("profile-chart-status");
+    if (profileChartStatus) {
+        profileChartStatus.textContent = profileSummary.profile_views_series_available
+            ? "Visar faktiska profilbesök per dag när Meta lämnar ut tidsserien."
+            : profileTotals.content_profile_visits
+                ? "Meta ger inte alltid dagliga profilbesök; grafen visar profilbesök som kan kopplas till publicerat innehåll."
+                : "När nästa hämtning hittar daglig profilaktivitet fylls grafen på här.";
+    }
+
+    const profileDayList = $("profile-day-list");
+    if (profileDayList) {
+        const bestDays = profileSummary.best_days || [];
+        profileDayList.innerHTML = bestDays.length ? bestDays.map((day) => {
+            const date = new Date(day.date + "T00:00:00").toLocaleDateString("sv-SE", { weekday: "short", month: "short", day: "numeric" });
+            const links = day.link_clicks ? ` · ${fmt(day.link_clicks)} vidare` : "";
+            const posts = day.posts ? `${fmt(day.posts)} inlägg` : day.stories ? `${fmt(day.stories)} händelser` : "ingen publicering";
+            return `
+                <div class="profile-day-item">
+                    <span>${date}</span>
+                    <strong>${fmt(day.profile_visits || day.content_profile_visits || 0)} profilbesök</strong>
+                    <em>${fmt(day.reach || 0)} räckvidd · ${posts}${links}</em>
+                </div>
+            `;
+        }).join("") : `<p class="signal-empty">När profilbesök kan kopplas till dagar visas toppdagarna här.</p>`;
+    }
+
+    const storySummary = data.story_summary_30d || {};
+    const storyTotals = storySummary.totals || {};
+    const recentStories = storySummary.recent_stories || [];
+    set("kpi-stories", fmt(storyTotals.stories || 0));
+    set("story-reach", fmt(storyTotals.reach || 0));
+    set("story-impressions", fmt(storyTotals.impressions || 0));
+    set("story-replies", fmt(storyTotals.replies || 0));
+    set("story-taps-back", fmt(storyTotals.taps_back || 0));
+
+    const storyResult = $("stories-result");
+    if (storyResult) {
+        if (storySummary.tracking_started) {
+            const storyDelta = deltaText(storySummary.story_day_reach_delta_pct);
+            const tuesdayDelta = deltaText(storySummary.tuesday_reach_delta_pct);
+            const storyCompare = storyDelta
+                ? `Det är ${storyDelta} än övriga dagar.`
+                : "Det behövs fler jämförelsedagar innan händelseeffekten går att läsa säkert.";
+            const tuesdayCompare = tuesdayDelta
+                ? `Det är ${tuesdayDelta} än 30-dagarsnittet.`
+                : "Tisdagsmönstret behöver fler dagar innan det går att läsa säkert.";
+            storyResult.textContent = `Dashboarden har fångat ${fmt(storyTotals.stories || 0)} händelser på ${fmt(storySummary.story_days || 0)} dagar. Dagar med fångade händelser har i snitt ${fmt(storySummary.avg_reach_story_days || 0)} räckvidd. ${storyCompare} Tisdagar ligger på ${fmt(storySummary.avg_reach_tuesdays || 0)} i snitt. ${tuesdayCompare}`;
+        } else {
+            storyResult.textContent = `Händelser mäts inte historiskt i den nuvarande datan. Från och med nästa körning försöker dashboarden fånga aktiva Stories och jämföra tisdagar mot övriga dagar. Tisdagarna i befintlig kontodata ligger på ${fmt(storySummary.avg_reach_tuesdays || 0)} räckvidd i snitt jämfört med ${fmt(storySummary.avg_reach_all_days || 0)} totalt.`;
+        }
+    }
+
+    const storyList = $("story-list");
+    if (storyList) {
+        storyList.innerHTML = recentStories.length ? recentStories.map((s) => {
+            const date = new Date(s.timestamp || s.first_seen_at).toLocaleDateString("sv-SE", { weekday: "short", month: "short", day: "numeric" });
+            const img = s.thumbnail_url || s.media_url || "";
+            return `
+                <a class="story-item" href="${s.permalink || "#"}" target="_blank" rel="noopener">
+                    ${img ? `<img src="${img}" alt="" loading="lazy">` : ""}
+                    <span>
+                        <strong>${date}</strong>
+                        <em>${fmt(s.reach || 0)} räckvidd · ${fmt(s.impressions || 0)} visningar · ${fmt(s.replies || 0)} svar</em>
+                    </span>
+                </a>
+            `;
+        }).join("") : `<p class="signal-empty">Inga händelser har fångats ännu. När tisdagens Story fortfarande är aktiv vid nattkörningen sparas den här.</p>`;
+    }
 
     // Överblick: börja med fakta och det som går att bygga vidare på.
     const statusEl = $("overview-status");
@@ -76,17 +201,23 @@
     }
 
     setOverviewStatus(dataAge === 0 ? "Uppdaterad idag" : `Uppdaterad för ${dataAge} dagar sedan`, dataAge > 2 ? "stale" : "fresh");
-    set("overview-summary", `Senaste 30 dagarna har kontot nått ${fmt(reach30)} konton och fått ${fmt(profileViews)} profilbesök${linkClicksAvailable ? `, varav ${fmt(linkClicks)} klick vidare från profilen` : ""}. Här är signalerna som hjälper dig välja nästa innehåll.`);
+    set("overview-summary", `Senaste 30 dagarna har kontot nått ${fmt(reach30)} konton och fått ${fmt(profileViews)} profilbesök${outboundClicks ? `, med ${fmt(outboundClicks)} mätbara nästa steg` : ""}. Här är signalerna som hjälper dig välja nästa innehåll.`);
     set("highlight-primary", reach30 > 0 ? `Räckvidden ger dig en tydlig bas att analysera: ${fmt(reach30)} konton senaste 30 dagarna.` : "Räckviddsdatan är på plats och fylls på i takt med nya inlägg.");
-    set("highlight-secondary", linkClicksAvailable ? `${fmt(linkClicks)} klick vidare visar hur profilen leder människor mot hemsidan.` : "Hemsidelänken följs upp här när Meta lämnar ut länk-klick via API:t.");
+    set("highlight-secondary", linkClicksAvailable
+        ? `${fmt(linkClicks)} klick vidare visar hur profilen leder människor mot hemsidan.`
+        : outboundClicks
+            ? `${fmt(outboundClicks)} vidare-signaler visar att vissa redan tar nästa steg via bio, Story eller kontakt.`
+            : "Hemsidelänken följs upp här när Meta lämnar ut länk-klick via API:t.");
     set("highlight-tertiary", newFollowers30 > 0 ? `${fmt(newFollowers30)} nya följare visar att innehållet kan omvandlas till relationer.` : "Följarutvecklingen blir lättare att läsa när de kommande inläggen börjar jämföras över tid.");
     set("focus-action", action);
     set("focus-posts-7", `${fmt(posts7)} inlägg`);
     set("focus-non-followers", pct(nonFollowerPct));
     set("focus-freshness", dataAge === 0 ? "Färsk" : `${dataAge} d`);
     set("link-click-story", linkClicksAvailable
-        ? `${fmt(linkClicks)} personer har klickat vidare från Instagram-profilen till din länk/hemsida senaste 30 dagarna. Titta på inläggen nedan för att se vilket innehåll som verkar få människor att ta nästa steg.`
-        : "Här visas klick vidare från profilen när Meta skickar den datan via API:t. Under tiden använder vi profilbesök och följar-signaler för att se vilka inlägg som får människor att närma sig dig.");
+        ? `${fmt(linkClicks)} klick vidare från Instagram-profilen har registrerats senaste 30 dagarna. Listan visar vilket innehåll som verkar få människor att först besöka profilen och sedan ta nästa steg.`
+        : outboundClicks
+            ? `${fmt(outboundClicks)} vidare-signaler har registrerats via bio-/Story-klick eller kontaktåtgärder. För exakt destination efter profilen behöver länken mätas på din egen sida.`
+            : "Här visas klick vidare från profilen när Meta skickar den datan via API:t. Under tiden använder vi profilbesök, bio-klick och följar-signaler för att se vilka inlägg som får människor att närma sig dig.");
 
     // Best posting
     const bp = data.best_posting || {};
@@ -98,8 +229,32 @@
         bestHint.textContent += " För få inlägg för säker slutsats.";
     }
 
-    const reach = data.time_series_30d.reach || [];
-    const followers = data.time_series_30d.follower_count || [];
+    const profileCanvas = $("chart-profile");
+    if (profileCanvas) {
+        const profileValues = rows.map(profileDayValue);
+        const outboundValues = rows.map(outboundDayValue);
+        new Chart(profileCanvas, {
+            type: "bar",
+            data: {
+                labels: rows.map((r) => r.date),
+                datasets: [
+                    { label: "Profilbesök", data: profileValues, backgroundColor: "#6d5bd0", yAxisID: "y" },
+                    { label: "Vidare", data: outboundValues, type: "line", borderColor: "#0f766e", backgroundColor: "rgba(15,118,110,.12)", tension: .3, fill: false, yAxisID: "y1" }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { position: "bottom" } },
+                scales: {
+                    y: { beginAtZero: true, ticks: { precision: 0 }, title: { display: true, text: "Profil" } },
+                    y1: { beginAtZero: true, position: "right", ticks: { precision: 0 }, title: { display: true, text: "Vidare" }, grid: { drawOnChartArea: false } }
+                }
+            }
+        });
+    }
+
+    const reach = timeSeries.reach || [];
+    const followers = timeSeries.follower_count || [];
     new Chart($("chart-reach"), {
         type: "line",
         data: {
@@ -157,26 +312,35 @@
 
     const followerList = $("follower-media-list");
     if (followerList) {
-        const followerMedia = data.follower_media || [];
-        followerList.innerHTML = followerMedia.length ? followerMedia.map((m) => {
+        const profileMedia = data.profile_media || data.follower_media || [];
+        followerList.innerHTML = profileMedia.length ? profileMedia.map((m) => {
             const img = m.thumbnail_url || m.media_url || "";
             const date = new Date(m.timestamp).toLocaleDateString("sv-SE", { month: "short", day: "numeric" });
-            const leadMetric = (m.follows || 0) > 0
-                ? `${fmt(m.follows)} nya följare`
-                : (m.profile_activity || 0) > 0
-                    ? `${fmt(m.profile_activity)} profilaktiviteter`
-                    : `${fmt(m.profile_visits || 0)} profilbesök`;
+            const rate = m.profile_visit_rate_pct != null ? ` · ${pct(m.profile_visit_rate_pct)} av räckvidd` : "";
+            const leadMetric = (m.profile_visits || 0) > 0
+                ? `${fmt(m.profile_visits)} profilbesök`
+                : (m.bio_link_clicks || 0) > 0
+                    ? `${fmt(m.bio_link_clicks)} bio-klick`
+                    : (m.profile_activity || 0) > 0
+                        ? `${fmt(m.profile_activity)} profilaktiviteter`
+                        : `${fmt(m.follows || 0)} nya följare`;
+            const actionLine = [
+                m.bio_link_clicks ? `${fmt(m.bio_link_clicks)} bio-klick` : "",
+                m.contact_actions ? `${fmt(m.contact_actions)} kontakt` : "",
+                m.follows ? `${fmt(m.follows)} följare` : "",
+            ].filter(Boolean).join(" · ");
             return `
                 <a class="signal-item" href="${m.permalink}" target="_blank" rel="noopener">
                     ${img ? `<img src="${img}" alt="" loading="lazy">` : ""}
                     <span class="signal-copy">
                         <strong>${leadMetric}</strong>
-                        <span>${mediaLabel(m)} · ${date} · ${fmt(m.reach || 0)} räckvidd</span>
+                        <span>${mediaLabel(m)} · ${date} · ${fmt(m.reach || 0)} räckvidd${rate}</span>
+                        ${actionLine ? `<span>${actionLine}</span>` : ""}
                         <em>${shortCaption(m.caption)}</em>
                     </span>
                 </a>
             `;
-        }).join("") : `<p class="signal-empty">När nästa hämtning har körts visas inlägg som gett nya följare eller profilaktivitet här.</p>`;
+        }).join("") : `<p class="signal-empty">När nästa hämtning har körts visas inlägg som gett profilbesök, bio-klick eller nya följare här.</p>`;
     }
 
     // Veckovis saves + shares (algoritmens starkaste signaler)
@@ -276,13 +440,18 @@
             const engagementArrow = arrow(r.engagement, rollingAvg(origIdx, "engagement"));
             const d = new Date(r.date + "T00:00:00");
             const label = `${weekdayShort[d.getDay()]} ${r.date.slice(5)}`;
+            const profileValue = profileDayValue(r);
+            const outboundValue = outboundDayValue(r);
             return `
                 <tr>
                     <td>${label}</td>
                     <td>${fmt(r.reach)} <span class="${reachArrow.c}">${reachArrow.s}</span></td>
                     <td>${fmt(r.new_followers)} <span class="${followersArrow.c}">${followersArrow.s}</span></td>
+                    <td>${profileValue ? fmt(profileValue) : "–"}</td>
+                    <td>${outboundValue ? fmt(outboundValue) : "–"}</td>
                     <td>${fmt(r.engagement)} <span class="${engagementArrow.c}">${engagementArrow.s}</span></td>
                     <td>${r.posts ? fmt(r.posts) : "–"}</td>
+                    <td>${r.stories ? `${fmt(r.stories)} (${fmt(r.story_reach || 0)})` : "–"}</td>
                 </tr>
             `;
         }).join("");

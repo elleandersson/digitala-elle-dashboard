@@ -20,7 +20,9 @@ Chart.js renderar grafer
 
 Dashboarden ska vara redo när du börjar dagen:
 
-- GitHub Actions hämtar ny Instagram-data varje natt/tidig morgon.
+- GitHub Actions hämtar ny Instagram-data en gång per natt/tidig morgon.
+- Aktiva händelser/Stories försöker hämtas vid varje körning och sparas som 30-dagarshistorik i JSON-filen.
+- Watchdoggen kan trigga en separat reservkörning om den schemalagda nattkörningen inte har uppdaterat datan i tid.
 - `https://digitalaelle.se/dashboard` visar den senaste publicerade JSON-filen.
 - `scripts/open_dashboard.sh` öppnar dashboarden i webbläsaren.
 - `scripts/install_morning_dashboard.sh` installerar en macOS LaunchAgent som öppnar dashboarden varje dag kl. 08:00.
@@ -132,7 +134,8 @@ Lägg till fem:
 - **Token förnyas automatiskt** varje natt av skriptet (giltig 60 dagar, refreshas i tid).
   - När Meta returnerar en ny token skriver workflowet tillbaka den till GitHub-secret `IG_ACCESS_TOKEN`.
   - Om `SECRET_UPDATE_TOKEN` saknas uppdateras dashboard-datan ändå, men workflowet visar en varning om att token inte kunde sparas automatiskt.
-- **Cron-tid:** Kör 23:00 UTC = **01:00 svensk sommartid** (CEST), **00:00 vintertid** (CET). GitHub Actions stödjer inte tidszoner.
+- **Händelser/Stories:** Instagram Graph API lämnar bara ut händelser medan de är aktiva. Dashboarden kan därför inte återskapa gamla händelse-resultat, men den bygger historik framåt när nattkörningen eller watchdoggen hinner fånga aktiva Stories.
+- **Cron-tid:** Kör `00:17 UTC` varje natt, vilket motsvarar **02:17 svensk sommartid** och **01:17 vintertid**. GitHub Actions kan starta schemalagda jobb senare än utsatt tid, men watchdoggen fungerar som reserv om nattkörningen inte har uppdaterat datan.
 - **Manuell körning:** Actions-fliken → Run workflow.
 
 ## Felsökning

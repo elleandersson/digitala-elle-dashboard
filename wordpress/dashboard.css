@@ -90,6 +90,193 @@
 .kpi-value { font-size: 1.85rem; font-weight: 600; }
 .kpi-hint { font-size: .78rem; color: #777; line-height: 1.35; margin-top: .15rem; }
 
+.profile-funnel-card {
+    display: grid;
+    grid-template-columns: minmax(0, .95fr) minmax(340px, 1.2fr);
+    gap: 1.25rem;
+    background: #f6f4ff;
+    border: 1px solid #dfdbf2;
+    border-radius: 8px;
+    padding: 1.4rem;
+    margin: 1.25rem 0 1.5rem;
+}
+.profile-funnel-summary h2 {
+    font-size: 1.2rem;
+    margin: .35rem 0 .5rem;
+}
+.profile-funnel-summary p {
+    color: #37324a;
+    line-height: 1.5;
+    margin: 0;
+}
+.funnel-steps {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: .65rem;
+}
+.funnel-steps div,
+.profile-rates div,
+.profile-day-item {
+    background: rgba(255,255,255,.78);
+    border: 1px solid rgba(74,63,122,.14);
+    border-radius: 8px;
+    padding: .8rem;
+}
+.funnel-steps span,
+.profile-rates span,
+.profile-day-item span {
+    display: block;
+    color: #6c6680;
+    font-size: .72rem;
+    margin-bottom: .22rem;
+}
+.funnel-steps strong {
+    display: block;
+    color: #1a1a1a;
+    font-size: 1.25rem;
+    line-height: 1.15;
+}
+.funnel-steps em {
+    display: block;
+    color: #655f78;
+    font-size: .76rem;
+    font-style: normal;
+    line-height: 1.3;
+    margin-top: .25rem;
+}
+.profile-rates {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: .65rem;
+}
+.profile-rates strong {
+    color: #1a1a1a;
+    font-size: 1rem;
+}
+.profile-chart,
+.profile-days {
+    grid-column: 1 / -1;
+    border-top: 1px solid #dfdbf2;
+    padding-top: 1rem;
+}
+.profile-chart {
+    display: grid;
+    grid-template-columns: minmax(210px, .42fr) minmax(0, 1fr);
+    gap: 1rem;
+    align-items: center;
+}
+.profile-chart h3,
+.profile-days h3 {
+    font-size: .95rem;
+    margin: 0 0 .45rem;
+}
+.profile-chart p {
+    color: #5f5874;
+    font-size: .86rem;
+    line-height: 1.45;
+    margin: 0;
+}
+.profile-day-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: .65rem;
+}
+.profile-day-item strong {
+    display: block;
+    color: #1a1a1a;
+    font-size: .95rem;
+    margin-bottom: .18rem;
+}
+.profile-day-item em {
+    display: block;
+    color: #5f5874;
+    font-size: .78rem;
+    font-style: normal;
+    line-height: 1.35;
+}
+
+.stories-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(260px, .8fr);
+    gap: 1rem;
+    background: #fff8f1;
+    border: 1px solid #f0dfca;
+    border-radius: 8px;
+    padding: 1.4rem;
+    margin: 1.25rem 0 1.5rem;
+}
+.stories-summary h2 {
+    font-size: 1.15rem;
+    margin: .35rem 0 .5rem;
+}
+.stories-summary p {
+    color: #4b3b2c;
+    line-height: 1.5;
+    margin: 0;
+}
+.story-metrics {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .75rem;
+}
+.story-metrics div {
+    background: rgba(255,255,255,.76);
+    border: 1px solid #eedbc4;
+    border-radius: 8px;
+    padding: .75rem;
+}
+.story-metrics span {
+    display: block;
+    color: #7b6856;
+    font-size: .72rem;
+    margin-bottom: .2rem;
+}
+.story-metrics strong {
+    color: #1a1a1a;
+    font-size: 1.05rem;
+}
+.story-days {
+    grid-column: 1 / -1;
+    border-top: 1px solid #edd9c2;
+    padding-top: 1rem;
+}
+.story-days h3 {
+    font-size: .95rem;
+    margin: 0 0 .75rem;
+}
+.story-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: .75rem;
+}
+.story-item {
+    display: grid;
+    grid-template-columns: 52px minmax(0, 1fr);
+    gap: .7rem;
+    color: #1a1a1a;
+    text-decoration: none;
+}
+.story-item:hover strong { text-decoration: underline; }
+.story-item img {
+    width: 52px;
+    height: 52px;
+    border-radius: 8px;
+    object-fit: cover;
+    background: #f4eadf;
+}
+.story-item span {
+    display: flex;
+    flex-direction: column;
+    gap: .15rem;
+}
+.story-item strong { font-size: .9rem; }
+.story-item em {
+    color: #685744;
+    font-size: .8rem;
+    font-style: normal;
+    line-height: 1.35;
+}
+
 .conversion-card {
     display: grid;
     grid-template-columns: minmax(0, .9fr) minmax(320px, 1.1fr);
@@ -275,8 +462,15 @@
 
 @media (max-width: 760px) {
     .dashboard-overview,
+    .profile-funnel-card,
+    .stories-card,
     .conversion-card,
     .focus-card {
+        grid-template-columns: 1fr;
+    }
+    .funnel-steps,
+    .profile-rates,
+    .profile-chart {
         grid-template-columns: 1fr;
     }
     .focus-facts {

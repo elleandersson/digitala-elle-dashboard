@@ -55,19 +55,84 @@ function igdash_shortcode() {
             <div class="kpi"><span class="kpi-label">Räckvidd 30d</span><span class="kpi-value" id="kpi-reach">–</span><span class="kpi-hint">hur många konton innehållet når</span></div>
             <div class="kpi"><span class="kpi-label">Nya följare 30d</span><span class="kpi-value" id="kpi-new-followers">–</span><span class="kpi-hint">om räckvidden omvandlas till relation</span></div>
             <div class="kpi"><span class="kpi-label">Profilbesök 30d</span><span class="kpi-value" id="kpi-profile-views">–</span><span class="kpi-hint">hur många som vill veta mer</span></div>
-            <div class="kpi"><span class="kpi-label">Klick till hemsidan</span><span class="kpi-value" id="kpi-link-clicks">–</span><span class="kpi-hint">när någon går vidare från profilen</span></div>
+            <div class="kpi"><span class="kpi-label">Klick vidare</span><span class="kpi-value" id="kpi-link-clicks">–</span><span class="kpi-hint">länk- eller kontaktsteg från profilen</span></div>
             <div class="kpi"><span class="kpi-label">Engagement rate</span><span class="kpi-value" id="kpi-engagement-rate">–</span><span class="kpi-hint">interaktioner i relation till räckvidd</span></div>
             <div class="kpi"><span class="kpi-label">Sparningar + delningar</span><span class="kpi-value" id="kpi-saves-shares">–</span><span class="kpi-hint">innehåll som folk vill behålla eller skicka vidare</span></div>
+            <div class="kpi"><span class="kpi-label">Händelser fångade</span><span class="kpi-value" id="kpi-stories">–</span><span class="kpi-hint">Stories som API:t hunnit läsa innan de försvinner</span></div>
+        </section>
+
+        <section class="profile-funnel-card">
+            <div class="profile-funnel-summary">
+                <span class="section-kicker">Profiltratten</span>
+                <h2>Från räckvidd till nästa steg</h2>
+                <p id="profile-funnel-story">–</p>
+            </div>
+            <div class="funnel-steps">
+                <div>
+                    <span>Räckvidd</span>
+                    <strong id="funnel-reach">–</strong>
+                    <em>konton såg innehållet</em>
+                </div>
+                <div>
+                    <span>Profilbesök</span>
+                    <strong id="funnel-profile-views">–</strong>
+                    <em id="funnel-profile-hint">ville veta mer</em>
+                </div>
+                <div>
+                    <span>Vidare</span>
+                    <strong id="funnel-outbound-clicks">–</strong>
+                    <em id="funnel-outbound-hint">klick eller kontakt</em>
+                </div>
+                <div>
+                    <span>Nya följare</span>
+                    <strong id="funnel-new-followers">–</strong>
+                    <em>relationer skapade</em>
+                </div>
+            </div>
+            <div class="profile-rates">
+                <div><span>Profilbesöksgrad</span><strong id="profile-rate">–</strong></div>
+                <div><span>Klick från profil</span><strong id="profile-click-rate">–</strong></div>
+                <div><span>Följare från profil</span><strong id="profile-follow-rate">–</strong></div>
+            </div>
+            <div class="profile-chart">
+                <div>
+                    <h3>Profilbesök över tid</h3>
+                    <p id="profile-chart-status">–</p>
+                </div>
+                <canvas id="chart-profile" height="110"></canvas>
+            </div>
+            <div class="profile-days">
+                <h3>Dagar som stack ut</h3>
+                <div id="profile-day-list" class="profile-day-list"></div>
+            </div>
+        </section>
+
+        <section class="stories-card">
+            <div class="stories-summary">
+                <span class="section-kicker">Händelser på tisdagar</span>
+                <h2>Ger tisdagmorgon effekt?</h2>
+                <p id="stories-result">–</p>
+            </div>
+            <div class="story-metrics">
+                <div><span>Story-räckvidd</span><strong id="story-reach">–</strong></div>
+                <div><span>Visningar</span><strong id="story-impressions">–</strong></div>
+                <div><span>Svar</span><strong id="story-replies">–</strong></div>
+                <div><span>Bakåttryck</span><strong id="story-taps-back">–</strong></div>
+            </div>
+            <div class="story-days">
+                <h3>Senaste fångade händelser</h3>
+                <div id="story-list" class="story-list"></div>
+            </div>
         </section>
 
         <section class="conversion-card">
             <div class="conversion-summary">
-                <span class="section-kicker">Vägen till hemsidan</span>
-                <h2>Innehåll som leder vidare</h2>
+                <span class="section-kicker">Vägen vidare</span>
+                <h2>Profilbesök som leder vidare</h2>
                 <p id="link-click-story">–</p>
             </div>
             <div>
-                <h3>Inlägg som kan ge nya följare</h3>
+                <h3>Inlägg som driver profilbesök</h3>
                 <div id="follower-media-list" class="signal-media-list"></div>
             </div>
         </section>
@@ -123,8 +188,11 @@ function igdash_shortcode() {
                             <th>Datum</th>
                             <th>Räckvidd</th>
                             <th>Nya följare</th>
+                            <th>Profil</th>
+                            <th>Vidare</th>
                             <th>Engagemang</th>
                             <th>Inlägg</th>
+                            <th>Händelser</th>
                         </tr>
                     </thead>
                     <tbody id="daily-insights-body"></tbody>
