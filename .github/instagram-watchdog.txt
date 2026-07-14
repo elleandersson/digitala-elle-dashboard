@@ -1,4 +1,4 @@
-triggered_at=2026-07-13T02:45:10Z
-triggered_local=2026-07-13T04:45:10+0200
+triggered_at=2026-07-14T02:45:07Z
+triggered_local=2026-07-14T04:45:07+0200
 reason=stale-dashboard-data
-details=updated_at_utc=2026-07-12T03:57:20.528163+00:00;updated_at_local=2026-07-12T05:57:20.528163+02:00;today_local=2026-07-13;STALE;
+details=updated_at_utc=2026-07-13T03:59:35.867181+00:00;updated_at_local=2026-07-13T05:59:35.867181+02:00;today_local=2026-07-14;STALE;
