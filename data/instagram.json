@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-03T03:53:50.122643+00:00",
+  "updated_at": "2026-08-04T02:45:37.808240+00:00",
   "profile": {
     "username": "digitalaelle.se",
     "followers_count": 221,
@@ -8,27 +8,23 @@
     "id": "17841456498681952"
   },
   "totals_30d": {
-    "views": 750,
-    "profile_views": 33,
+    "views": 649,
+    "profile_views": 32,
     "profile_link_clicks": 0,
     "profile_link_clicks_metric": "profile_links_taps",
     "profile_link_clicks_available": true,
-    "accounts_engaged": 14,
-    "total_interactions": 27,
-    "reach": 249
+    "accounts_engaged": 12,
+    "total_interactions": 22,
+    "reach": 215
   },
   "extras_30d": {
     "saves": 0,
     "shares": 0,
-    "engagement_rate_pct": 10.84,
-    "reach_non_followers_pct": 21.4
+    "engagement_rate_pct": 10.23,
+    "reach_non_followers_pct": 21.8
   },
   "time_series_30d": {
     "reach": [
-      {
-        "date": "2026-07-04",
-        "value": 35
-      },
       {
         "date": "2026-07-05",
         "value": 41
@@ -144,13 +140,13 @@
       {
         "date": "2026-08-02",
         "value": 1
+      },
+      {
+        "date": "2026-08-03",
+        "value": 1
       }
     ],
     "follower_count": [
-      {
-        "date": "2026-07-04",
-        "value": 0
-      },
       {
         "date": "2026-07-05",
         "value": 0
@@ -266,30 +262,16 @@
       {
         "date": "2026-08-02",
         "value": 0
+      },
+      {
+        "date": "2026-08-03",
+        "value": 0
       }
     ],
     "profile_views": [],
     "profile_link_clicks": []
   },
   "daily_insights": [
-    {
-      "date": "2026-07-04",
-      "reach": 35,
-      "new_followers": 0,
-      "profile_views": 0,
-      "profile_link_clicks": 0,
-      "content_profile_visits": 2,
-      "content_profile_activity": 0,
-      "content_follows": 0,
-      "bio_link_clicks": 0,
-      "contact_actions": 0,
-      "engagement": 2,
-      "posts": 1,
-      "stories": 0,
-      "story_reach": 0,
-      "story_replies": 0,
-      "story_link_clicks": 0
-    },
     {
       "date": "2026-07-05",
       "reach": 41,
@@ -811,6 +793,24 @@
       "story_reach": 0,
       "story_replies": 0,
       "story_link_clicks": 0
+    },
+    {
+      "date": "2026-08-03",
+      "reach": 1,
+      "new_followers": 0,
+      "profile_views": 0,
+      "profile_link_clicks": 0,
+      "content_profile_visits": 0,
+      "content_profile_activity": 0,
+      "content_follows": 0,
+      "bio_link_clicks": 0,
+      "contact_actions": 0,
+      "engagement": 0,
+      "posts": 0,
+      "stories": 0,
+      "story_reach": 0,
+      "story_replies": 0,
+      "story_link_clicks": 0
     }
   ],
   "active_stories": [],
@@ -848,11 +848,11 @@
       "link_clicks": 0
     },
     "avg_reach_story_days": 47.0,
-    "avg_reach_other_days": 7.0,
-    "story_day_reach_delta_pct": 571.4,
+    "avg_reach_other_days": 5.8,
+    "story_day_reach_delta_pct": 710.3,
     "avg_reach_tuesdays": 5.5,
-    "avg_reach_all_days": 8.3,
-    "tuesday_reach_delta_pct": -33.7,
+    "avg_reach_all_days": 7.2,
+    "tuesday_reach_delta_pct": -23.6,
     "recent_stories": [
       {
         "id": "18111467314982913",
@@ -875,38 +875,28 @@
   },
   "profile_summary_30d": {
     "totals": {
-      "reach": 249,
-      "profile_views": 33,
+      "reach": 215,
+      "profile_views": 32,
       "new_followers": 7,
       "profile_link_clicks": 0,
       "outbound_clicks": 0,
-      "content_profile_visits": 3,
+      "content_profile_visits": 1,
       "content_profile_activity": 0,
       "bio_link_clicks": 0,
       "story_link_clicks": 0,
       "contact_actions": 0
     },
     "rates": {
-      "profile_visit_rate_pct": 13.3,
-      "content_profile_visit_rate_pct": 1.2,
+      "profile_visit_rate_pct": 14.9,
+      "content_profile_visit_rate_pct": 0.5,
       "link_click_rate_pct": 0.0,
-      "follow_rate_pct": 21.2
+      "follow_rate_pct": 21.9
     },
     "profile_views_series_available": false,
     "profile_link_clicks_series_available": false,
     "link_clicks_available": true,
     "link_clicks_metric": "profile_links_taps",
     "best_days": [
-      {
-        "date": "2026-07-04",
-        "profile_visits": 2,
-        "content_profile_visits": 2,
-        "profile_activity": 0,
-        "link_clicks": 0,
-        "reach": 35,
-        "posts": 1,
-        "stories": 0
-      },
       {
         "date": "2026-07-05",
         "profile_visits": 1,
@@ -926,7 +916,7 @@
       "saves": 0,
       "shares": 0,
       "total": 0,
-      "posts": 3,
+      "posts": 2,
       "is_current": false
     },
     {
@@ -973,29 +963,15 @@
   "signal_media": [],
   "follower_media": [
     {
-      "id": "18607062142022925",
-      "caption": "Att se siffror och att läsa text är inte min starkaste sida. \n\n4,5:1 vet jag är bra när det gäller ett kontrastvärde. Men det säger mig inte så mycket mer än så. \n\nFör att jag ska veta något behöver jag också känna att något är rätt. Jag behöver helt enkelt både fakta och \"lull lull\".\n\nÄr du lika? Behöver du \"lull lull\" för att förstå siffror?",
-      "media_type": "CAROUSEL_ALBUM",
-      "media_product_type": "FEED",
-      "permalink": "https://www.instagram.com/p/DaXGuDViMxv/",
-      "thumbnail_url": null,
-      "media_url": "https://scontent-sjc6-1.cdninstagram.com/v/t39.30808-6/734218982_122182419812426859_6801475416404584302_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=_cwoVejJCukQ7kNvwGuaHdv&_nc_oc=AdqtwOC7rqSr7AN41ppR8Vz5yXQyX-a9OaRJm3p2FUd99xqZRoJgKyerK3YsQovjTvI&_nc_zt=23&_nc_ht=scontent-sjc6-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=V5FyFrTp-LxU6xyd0D-WCQ&oh=00_AQHer691QyJt2jPoynHNLoqahPxt2uukzoNxAX-4FfR_1Q&oe=6A75EDB9",
-      "timestamp": "2026-07-04T06:32:12+0000",
-      "reach": 58,
-      "follows": 0,
-      "profile_activity": 0,
-      "profile_visits": 2
-    },
-    {
       "id": "18236461327312718",
       "caption": "Som min lärare i \"UX och tillgänglighet för utvecklare\" alltid sa, \"det beror på\".\n\nDet beror på din målgrupp och vem du vill nå ut till. Det finns lagar som talar om för dig om du måste följa WCAG och då kan du inte räkna på WCAG i mjuka värden. \n\nMen om du inte enligt lag behöver följa WCAG utan vill göra det i största mån som en service för dina kunder, då behöver du inte det. OM...\n\n...du tror att din målgrupp trots ett lägre värde fortfarande kan läsa ditt innehåll. Det kan till exempel vara om du använder stor text i ett inlägg på Instagram, en reklamskylt eller en produktförpackning.\n\nMen du kanske ändrar din vilja efter att du har följt mig här. Och jag berättar varför du trots att du inte måste, ändå bör följa WCAG i största mån.",
       "media_type": "CAROUSEL_ALBUM",
       "media_product_type": "FEED",
       "permalink": "https://www.instagram.com/p/DaZs4YBE5qk/",
       "thumbnail_url": null,
-      "media_url": "https://scontent-sjc6-1.cdninstagram.com/v/t39.30808-6/738011467_122182422008426859_3383929314180350612_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=zgxIgemVws0Q7kNvwHPF96M&_nc_oc=AdrsdpbWeX0FjOw6TzuIHkj1Uo6pJ8zm9hSOS1nTSC6kiulOyZfqNWlmt4MfGbOnPm8&_nc_zt=23&_nc_ht=scontent-sjc6-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=V5FyFrTp-LxU6xyd0D-WCQ&oh=00_AQF4mLuBtKoeKm8m_097-8NAzuf0rw3PGxW5jQr0EUwVhA&oe=6A75ED1A",
+      "media_url": "https://scontent-sjc6-1.cdninstagram.com/v/t39.30808-6/738011467_122182422008426859_3383929314180350612_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=eTU93eezH7gQ7kNvwFP49u7&_nc_oc=AdrK6O2coLIwHv-wcb5xQORq4RDCimufHtMuc8VRoW0hLf0zYW8eKkRBWAifc-EoXpI&_nc_zt=23&_nc_ht=scontent-sjc6-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=m3aCYWQaYnV3irfpR3JaGg&oh=00_AQEtm1KOALCX3huGBkCFIg2pfZXzrfhSPNrV_1p1_hmo7g&oe=6A773E9A",
       "timestamp": "2026-07-05T06:44:08+0000",
-      "reach": 54,
+      "reach": 55,
       "follows": 0,
       "profile_activity": 0,
       "profile_visits": 1
@@ -1003,39 +979,21 @@
   ],
   "profile_media": [
     {
-      "id": "18607062142022925",
-      "caption": "Att se siffror och att läsa text är inte min starkaste sida. \n\n4,5:1 vet jag är bra när det gäller ett kontrastvärde. Men det säger mig inte så mycket mer än så. \n\nFör att jag ska veta något behöver jag också känna att något är rätt. Jag behöver helt enkelt både fakta och \"lull lull\".\n\nÄr du lika? Behöver du \"lull lull\" för att förstå siffror?",
-      "media_type": "CAROUSEL_ALBUM",
-      "media_product_type": "FEED",
-      "permalink": "https://www.instagram.com/p/DaXGuDViMxv/",
-      "thumbnail_url": null,
-      "media_url": "https://scontent-sjc6-1.cdninstagram.com/v/t39.30808-6/734218982_122182419812426859_6801475416404584302_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=_cwoVejJCukQ7kNvwGuaHdv&_nc_oc=AdqtwOC7rqSr7AN41ppR8Vz5yXQyX-a9OaRJm3p2FUd99xqZRoJgKyerK3YsQovjTvI&_nc_zt=23&_nc_ht=scontent-sjc6-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=V5FyFrTp-LxU6xyd0D-WCQ&oh=00_AQHer691QyJt2jPoynHNLoqahPxt2uukzoNxAX-4FfR_1Q&oe=6A75EDB9",
-      "timestamp": "2026-07-04T06:32:12+0000",
-      "reach": 58,
-      "follows": 0,
-      "profile_activity": 0,
-      "profile_visits": 2,
-      "bio_link_clicks": 0,
-      "contact_actions": 0,
-      "profile_visit_rate_pct": 3.4,
-      "profile_activity_breakdown": {}
-    },
-    {
       "id": "18236461327312718",
       "caption": "Som min lärare i \"UX och tillgänglighet för utvecklare\" alltid sa, \"det beror på\".\n\nDet beror på din målgrupp och vem du vill nå ut till. Det finns lagar som talar om för dig om du måste följa WCAG och då kan du inte räkna på WCAG i mjuka värden. \n\nMen om du inte enligt lag behöver följa WCAG utan vill göra det i största mån som en service för dina kunder, då behöver du inte det. OM...\n\n...du tror att din målgrupp trots ett lägre värde fortfarande kan läsa ditt innehåll. Det kan till exempel vara om du använder stor text i ett inlägg på Instagram, en reklamskylt eller en produktförpackning.\n\nMen du kanske ändrar din vilja efter att du har följt mig här. Och jag berättar varför du trots att du inte måste, ändå bör följa WCAG i största mån.",
       "media_type": "CAROUSEL_ALBUM",
       "media_product_type": "FEED",
       "permalink": "https://www.instagram.com/p/DaZs4YBE5qk/",
       "thumbnail_url": null,
-      "media_url": "https://scontent-sjc6-1.cdninstagram.com/v/t39.30808-6/738011467_122182422008426859_3383929314180350612_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=zgxIgemVws0Q7kNvwHPF96M&_nc_oc=AdrsdpbWeX0FjOw6TzuIHkj1Uo6pJ8zm9hSOS1nTSC6kiulOyZfqNWlmt4MfGbOnPm8&_nc_zt=23&_nc_ht=scontent-sjc6-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=V5FyFrTp-LxU6xyd0D-WCQ&oh=00_AQF4mLuBtKoeKm8m_097-8NAzuf0rw3PGxW5jQr0EUwVhA&oe=6A75ED1A",
+      "media_url": "https://scontent-sjc6-1.cdninstagram.com/v/t39.30808-6/738011467_122182422008426859_3383929314180350612_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=eTU93eezH7gQ7kNvwFP49u7&_nc_oc=AdrK6O2coLIwHv-wcb5xQORq4RDCimufHtMuc8VRoW0hLf0zYW8eKkRBWAifc-EoXpI&_nc_zt=23&_nc_ht=scontent-sjc6-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=m3aCYWQaYnV3irfpR3JaGg&oh=00_AQEtm1KOALCX3huGBkCFIg2pfZXzrfhSPNrV_1p1_hmo7g&oe=6A773E9A",
       "timestamp": "2026-07-05T06:44:08+0000",
-      "reach": 54,
+      "reach": 55,
       "follows": 0,
       "profile_activity": 0,
       "profile_visits": 1,
       "bio_link_clicks": 0,
       "contact_actions": 0,
-      "profile_visit_rate_pct": 1.9,
+      "profile_visit_rate_pct": 1.8,
       "profile_activity_breakdown": {}
     }
   ],
@@ -1044,41 +1002,20 @@
     "weekday_avg_engagement": 4.0,
     "hour": 22,
     "hour_avg_engagement": 6.0,
-    "posts_analyzed": 3
+    "posts_analyzed": 2
   },
   "top_media": [
-    {
-      "id": "18607062142022925",
-      "caption": "Att se siffror och att läsa text är inte min starkaste sida. \n\n4,5:1 vet jag är bra när det gäller ett kontrastvärde. Men det säger mig inte så mycket mer än så. \n\nFör att jag ska veta något behöver jag också känna att något är rätt. Jag behöver helt enkelt både fakta och \"lull lull\".\n\nÄr du lika? Behöver du \"lull lull\" för att förstå siffror?",
-      "media_type": "CAROUSEL_ALBUM",
-      "media_product_type": "FEED",
-      "permalink": "https://www.instagram.com/p/DaXGuDViMxv/",
-      "media_url": "https://scontent-sjc6-1.cdninstagram.com/v/t39.30808-6/734218982_122182419812426859_6801475416404584302_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=_cwoVejJCukQ7kNvwGuaHdv&_nc_oc=AdqtwOC7rqSr7AN41ppR8Vz5yXQyX-a9OaRJm3p2FUd99xqZRoJgKyerK3YsQovjTvI&_nc_zt=23&_nc_ht=scontent-sjc6-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=V5FyFrTp-LxU6xyd0D-WCQ&oh=00_AQHer691QyJt2jPoynHNLoqahPxt2uukzoNxAX-4FfR_1Q&oe=6A75EDB9",
-      "timestamp": "2026-07-04T06:32:12+0000",
-      "like_count": 2,
-      "comments_count": 0,
-      "reach": 58,
-      "saved": 0,
-      "shares": 0,
-      "follows": 0,
-      "profile_activity": 0,
-      "profile_visits": 2,
-      "profile_activity_breakdown": {},
-      "bio_link_clicks": 0,
-      "contact_actions": 0,
-      "engagement": 2
-    },
     {
       "id": "18134976430601756",
       "caption": "Den här veckan har jag pratat mycket om WCAG.\n\nKontrastvärden och ställt frågan:\n\"Kan man mäta mjuka värden i WCAG\"?\n\nI den här karusellen presenterar jag en hel del text för dig som vill veta mer. Och pallar lite mer text än vad jag gärna gör.\n\nPå mitt Instagram kommer jag fortsätta ge dig tips och prata om kontraster, WCAG och tillgänglighet.\n\nUtifrån ett perspektiv från en person som inte gilar för mycket krånglig text.",
       "media_type": "CAROUSEL_ALBUM",
       "media_product_type": "FEED",
       "permalink": "https://www.instagram.com/p/DabIyH1D5EF/",
-      "media_url": "https://scontent-sjc6-1.cdninstagram.com/v/t39.30808-6/736261520_122182424408426859_5926690705114566004_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=wHKSxQ9ugDoQ7kNvwELAHIb&_nc_oc=AdoS8s3Wb0GYC9nqccTa-FvwDLZIOCnrbeQn5obLt83H1H3cPL7d5dimORnsGGRdQ08&_nc_zt=23&_nc_ht=scontent-sjc6-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=V5FyFrTp-LxU6xyd0D-WCQ&oh=00_AQE4a9FTBFMnKx1cFiYYosvLSOF5aWtE-R3gcLSveeqBWQ&oe=6A75FC99",
+      "media_url": "https://scontent-sjc6-1.cdninstagram.com/v/t39.30808-6/736261520_122182424408426859_5926690705114566004_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=wHKSxQ9ugDoQ7kNvwEHeMmm&_nc_oc=Adobe7NEg57P-m8-NpFQfmq7ZnDA3gL74DsHM39CYHH1BVlV6062W1wyfTsTAXa8N64&_nc_zt=23&_nc_ht=scontent-sjc6-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=m3aCYWQaYnV3irfpR3JaGg&oh=00_AQF8eOc4mwtJSclHLxkXsMy-jhxnuyUGtzlYyqI0PlLaJg&oe=6A7715D9",
       "timestamp": "2026-07-05T20:07:11+0000",
       "like_count": 6,
       "comments_count": 0,
-      "reach": 54,
+      "reach": 55,
       "saved": 0,
       "shares": 0,
       "follows": 0,
@@ -1095,11 +1032,11 @@
       "media_type": "CAROUSEL_ALBUM",
       "media_product_type": "FEED",
       "permalink": "https://www.instagram.com/p/DaZs4YBE5qk/",
-      "media_url": "https://scontent-sjc6-1.cdninstagram.com/v/t39.30808-6/738011467_122182422008426859_3383929314180350612_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=zgxIgemVws0Q7kNvwHPF96M&_nc_oc=AdrsdpbWeX0FjOw6TzuIHkj1Uo6pJ8zm9hSOS1nTSC6kiulOyZfqNWlmt4MfGbOnPm8&_nc_zt=23&_nc_ht=scontent-sjc6-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=V5FyFrTp-LxU6xyd0D-WCQ&oh=00_AQF4mLuBtKoeKm8m_097-8NAzuf0rw3PGxW5jQr0EUwVhA&oe=6A75ED1A",
+      "media_url": "https://scontent-sjc6-1.cdninstagram.com/v/t39.30808-6/738011467_122182422008426859_3383929314180350612_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=eTU93eezH7gQ7kNvwFP49u7&_nc_oc=AdrK6O2coLIwHv-wcb5xQORq4RDCimufHtMuc8VRoW0hLf0zYW8eKkRBWAifc-EoXpI&_nc_zt=23&_nc_ht=scontent-sjc6-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=m3aCYWQaYnV3irfpR3JaGg&oh=00_AQEtm1KOALCX3huGBkCFIg2pfZXzrfhSPNrV_1p1_hmo7g&oe=6A773E9A",
       "timestamp": "2026-07-05T06:44:08+0000",
       "like_count": 2,
       "comments_count": 0,
-      "reach": 54,
+      "reach": 55,
       "saved": 0,
       "shares": 0,
       "follows": 0,
@@ -1117,8 +1054,8 @@
       "avg_engagement": 0
     },
     "CAROUSEL_ALBUM": {
-      "count": 3,
-      "avg_engagement": 3.3
+      "count": 2,
+      "avg_engagement": 4.0
     },
     "VIDEO": {
       "count": 0,
