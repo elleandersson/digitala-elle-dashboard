@@ -1,34 +1,30 @@
 {
-  "updated_at": "2026-08-18T01:49:53.974456+00:00",
+  "updated_at": "2026-08-19T01:52:05.442883+00:00",
   "profile": {
     "username": "digitalaelle.se",
-    "followers_count": 221,
-    "follows_count": 291,
+    "followers_count": 223,
+    "follows_count": 293,
     "media_count": 109,
     "id": "17841456498681952"
   },
   "totals_30d": {
-    "views": 420,
+    "views": 407,
     "profile_views": 33,
     "profile_link_clicks": 0,
     "profile_link_clicks_metric": "profile_links_taps",
     "profile_link_clicks_available": true,
-    "accounts_engaged": 5,
-    "total_interactions": 4,
-    "reach": 80
+    "accounts_engaged": 4,
+    "total_interactions": 3,
+    "reach": 79
   },
   "extras_30d": {
     "saves": 0,
     "shares": 0,
-    "engagement_rate_pct": 5.0,
+    "engagement_rate_pct": 3.8,
     "reach_non_followers_pct": 29.6
   },
   "time_series_30d": {
     "reach": [
-      {
-        "date": "2026-07-19",
-        "value": 3
-      },
       {
         "date": "2026-07-20",
         "value": 1
@@ -143,14 +139,14 @@
       },
       {
         "date": "2026-08-17",
-        "value": 0
+        "value": 1
+      },
+      {
+        "date": "2026-08-18",
+        "value": 1
       }
     ],
     "follower_count": [
-      {
-        "date": "2026-07-19",
-        "value": 1
-      },
       {
         "date": "2026-07-20",
         "value": 1
@@ -266,30 +262,16 @@
       {
         "date": "2026-08-17",
         "value": 0
+      },
+      {
+        "date": "2026-08-18",
+        "value": 0
       }
     ],
     "profile_views": [],
     "profile_link_clicks": []
   },
   "daily_insights": [
-    {
-      "date": "2026-07-19",
-      "reach": 3,
-      "new_followers": 1,
-      "profile_views": 0,
-      "profile_link_clicks": 0,
-      "content_profile_visits": 0,
-      "content_profile_activity": 0,
-      "content_follows": 0,
-      "bio_link_clicks": 0,
-      "contact_actions": 0,
-      "engagement": 0,
-      "posts": 0,
-      "stories": 0,
-      "story_reach": 0,
-      "story_replies": 0,
-      "story_link_clicks": 0
-    },
     {
       "date": "2026-07-20",
       "reach": 1,
@@ -796,7 +778,25 @@
     },
     {
       "date": "2026-08-17",
-      "reach": 0,
+      "reach": 1,
+      "new_followers": 0,
+      "profile_views": 0,
+      "profile_link_clicks": 0,
+      "content_profile_visits": 0,
+      "content_profile_activity": 0,
+      "content_follows": 0,
+      "bio_link_clicks": 0,
+      "contact_actions": 0,
+      "engagement": 0,
+      "posts": 0,
+      "stories": 0,
+      "story_reach": 0,
+      "story_replies": 0,
+      "story_link_clicks": 0
+    },
+    {
+      "date": "2026-08-18",
+      "reach": 1,
       "new_followers": 0,
       "profile_views": 0,
       "profile_link_clicks": 0,
@@ -836,7 +836,7 @@
   "story_summary_30d": {
     "tracking_started": true,
     "story_days": 1,
-    "tuesday_days": 4,
+    "tuesday_days": 5,
     "totals": {
       "stories": 1,
       "impressions": 0,
@@ -850,9 +850,9 @@
     "avg_reach_story_days": 47.0,
     "avg_reach_other_days": 1.1,
     "story_day_reach_delta_pct": 4172.7,
-    "avg_reach_tuesdays": 0.2,
-    "avg_reach_all_days": 2.7,
-    "tuesday_reach_delta_pct": -92.6,
+    "avg_reach_tuesdays": 0.4,
+    "avg_reach_all_days": 2.6,
+    "tuesday_reach_delta_pct": -84.6,
     "recent_stories": [
       {
         "id": "18111467314982913",
@@ -875,9 +875,9 @@
   },
   "profile_summary_30d": {
     "totals": {
-      "reach": 80,
+      "reach": 79,
       "profile_views": 33,
-      "new_followers": 4,
+      "new_followers": 3,
       "profile_link_clicks": 0,
       "outbound_clicks": 0,
       "content_profile_visits": 0,
@@ -887,10 +887,10 @@
       "contact_actions": 0
     },
     "rates": {
-      "profile_visit_rate_pct": 41.2,
+      "profile_visit_rate_pct": 41.8,
       "content_profile_visit_rate_pct": 0.0,
       "link_click_rate_pct": 0.0,
-      "follow_rate_pct": 12.1
+      "follow_rate_pct": 9.1
     },
     "profile_views_series_available": false,
     "profile_link_clicks_series_available": false,
