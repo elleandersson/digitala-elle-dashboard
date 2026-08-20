@@ -1,4 +1,4 @@
-triggered_at=2026-08-17T13:45:52Z
-triggered_local=2026-08-17T15:45:52+0200
+triggered_at=2026-08-20T02:45:10Z
+triggered_local=2026-08-20T04:45:10+0200
 reason=stale-dashboard-data
-details=ERROR: could not load dashboard data: HTTP Error 429: Too Many Requests;
+details=updated_at_utc=2026-08-19T01:52:05.442883+00:00;updated_at_local=2026-08-19T03:52:05.442883+02:00;today_local=2026-08-20;STALE;
