@@ -3,6 +3,7 @@
     if (!url) return;
 
     const fmt = (n) => new Intl.NumberFormat("sv-SE").format(n ?? 0);
+    const countLabel = (n, singular, plural) => `${fmt(n)} ${n === 1 ? singular : plural}`;
     const pct = (n) => {
         if (n == null) return "–";
         return `${new Intl.NumberFormat("sv-SE", { maximumFractionDigits: 1 }).format(n)}%`;
@@ -94,11 +95,39 @@
         return Math.ceil((((date - yearStart) / 86400000) + 1) / 7);
     };
 
+    const periodBucketKey = (dateString, periodDays) => {
+        if (periodDays === 30) return dateString;
+        if (periodDays === 365) return dateString.slice(0, 7);
+        const date = new Date(`${dateString}T00:00:00Z`);
+        const day = date.getUTCDay() || 7;
+        date.setUTCDate(date.getUTCDate() - day + 1);
+        return date.toISOString().slice(0, 10);
+    };
+
+    const actionMetrics = (media) => {
+        const profile = media.profile_visits || 0;
+        const saves = media.saved || 0;
+        const shares = media.shares || 0;
+        const next = (media.bio_link_clicks || 0) + (media.contact_actions || 0) + (media.follows || 0);
+        return { profile, saves, shares, next, total: profile + saves + shares + next };
+    };
+    const meaningfulActions = (media) => actionMetrics(media).total;
+    const actionLine = (media) => {
+        const metrics = actionMetrics(media);
+        return [
+            metrics.profile ? `${fmt(metrics.profile)} profilbesök` : "",
+            metrics.saves ? countLabel(metrics.saves, "sparning", "sparningar") : "",
+            metrics.shares ? countLabel(metrics.shares, "delning", "delningar") : "",
+            metrics.next ? `${fmt(metrics.next)} nästa steg` : "",
+        ].filter(Boolean).join(" · ") || "Ingen registrerad handling";
+    };
+
     const aggregateRows = (selectedRows, periodDays) => {
         const mode = periodDays === 30 ? "day" : periodDays === 365 ? "month" : "week";
         if (mode === "day") {
             return selectedRows.map((row) => ({
                 ...row,
+                date: row.date,
                 profile: profileDayValue(row),
                 outbound: outboundDayValue(row),
                 label: new Date(`${row.date}T00:00:00`).toLocaleDateString("sv-SE", { weekday: "short", month: "2-digit", day: "2-digit" }),
@@ -108,16 +137,13 @@
         const grouped = new Map();
         selectedRows.forEach((row) => {
             const date = new Date(`${row.date}T00:00:00Z`);
-            let key;
+            const key = periodBucketKey(row.date, periodDays);
             let label;
             if (mode === "month") {
-                key = row.date.slice(0, 7);
                 label = date.toLocaleDateString("sv-SE", { month: "long", year: "numeric", timeZone: "UTC" });
             } else {
-                const day = date.getUTCDay() || 7;
-                date.setUTCDate(date.getUTCDate() - day + 1);
-                key = date.toISOString().slice(0, 10);
-                label = `v${isoWeek(row.date)} · ${dateLabel(key)}`;
+                const monday = new Date(`${key}T00:00:00Z`);
+                label = `v${isoWeek(row.date)} · ${dateLabel(monday.toISOString().slice(0, 10))}`;
             }
             if (!grouped.has(key)) {
                 grouped.set(key, { date: key, label, reach: 0, new_followers: 0, profile: 0, outbound: 0, engagement: 0, posts: 0, stories: 0, story_reach: 0 });
@@ -140,21 +166,11 @@
         const date = new Date(media.timestamp).toLocaleDateString("sv-SE", { month: "short", day: "numeric" });
         let lead;
         if (type === "saves") {
-            lead = `${fmt(media.saved || 0)} sparningar · ${fmt(media.shares || 0)} delningar`;
+            lead = `${countLabel(media.saved || 0, "sparning", "sparningar")} · ${countLabel(media.shares || 0, "delning", "delningar")}`;
         } else {
-            lead = (media.profile_visits || 0) > 0
-                ? `${fmt(media.profile_visits)} profilbesök`
-                : (media.bio_link_clicks || 0) > 0
-                    ? `${fmt(media.bio_link_clicks)} bio-klick`
-                    : (media.profile_activity || 0) > 0
-                        ? `${fmt(media.profile_activity)} profilaktiviteter`
-                        : `${fmt(media.follows || 0)} nya följare`;
+            lead = `${fmt(meaningfulActions(media))} värdefulla handlingar`;
         }
-        const actions = type === "saves" ? "" : [
-            media.bio_link_clicks ? `${fmt(media.bio_link_clicks)} bio-klick` : "",
-            media.contact_actions ? `${fmt(media.contact_actions)} kontakt` : "",
-            media.follows ? `${fmt(media.follows)} följare` : "",
-        ].filter(Boolean).join(" · ");
+        const actions = type === "saves" ? "" : actionLine(media);
         return `
             <a class="signal-item" href="${escapeHtml(media.permalink || "#")}" target="_blank" rel="noopener">
                 ${image ? `<img src="${escapeHtml(image)}" alt="" loading="lazy">` : ""}
@@ -163,6 +179,26 @@
                     <span>${mediaLabel(media)} · ${date} · ${fmt(media.reach || 0)} räckvidd</span>
                     ${actions ? `<span>${actions}</span>` : ""}
                     <em>${escapeHtml(shortCaption(media.caption))}</em>
+                </span>
+            </a>`;
+    };
+
+    const responseCard = (media, type) => {
+        if (!media) return `<div class="response-post empty">Det finns inget tydligt jämförelseinlägg i vald period ännu.</div>`;
+        const image = media.thumbnail_url || media.media_url || "";
+        const date = new Date(media.timestamp).toLocaleDateString("sv-SE", { month: "long", day: "numeric" });
+        const total = meaningfulActions(media);
+        const primary = type === "action"
+            ? `${fmt(total)} värdefulla handlingar`
+            : `${fmt(media.reach || 0)} i räckvidd · ingen handling`;
+        return `
+            <a href="${escapeHtml(media.permalink || "#")}" target="_blank" rel="noopener">
+                ${image ? `<img src="${escapeHtml(image)}" alt="" loading="lazy">` : ""}
+                <span class="response-post-copy">
+                    <strong>${primary}</strong>
+                    <span>${date} · ${fmt(media.reach || 0)} i räckvidd</span>
+                    <span>${actionLine(media)}</span>
+                    <p>${escapeHtml(shortCaption(media.caption, 100))}</p>
                 </span>
             </a>`;
     };
@@ -176,10 +212,46 @@
                 return date >= cutoffKey && date <= mediaEndDate;
             });
         const aggregates = aggregateRows(selectedRows, periodDays);
+        const aggregateByKey = new Map(aggregates.map((row) => [row.date, row]));
+        aggregates.forEach((row) => {
+            row.action_profile = 0;
+            row.action_saves = 0;
+            row.action_shares = 0;
+            row.action_next = 0;
+            row.meaningful_actions = 0;
+        });
+        selectedMedia.forEach((media) => {
+            const key = periodBucketKey((media.timestamp || "").slice(0, 10), periodDays);
+            const target = aggregateByKey.get(key);
+            if (!target) return;
+            const metrics = actionMetrics(media);
+            target.action_profile += metrics.profile;
+            target.action_saves += metrics.saves;
+            target.action_shares += metrics.shares;
+            target.action_next += metrics.next;
+            target.meaningful_actions += metrics.total;
+        });
         const modeLabel = periodDays === 30 ? "Dagliga" : periodDays === 365 ? "Månadsvisa" : "Veckovisa";
         const periodHeader = periodDays === 30 ? "Datum" : periodDays === 365 ? "Månad" : "Vecka";
+        const totalActions = selectedMedia.reduce((sum, media) => sum + meaningfulActions(media), 0);
+        const mediaReach = selectedMedia.reduce((sum, media) => sum + (media.reach || 0), 0);
+        const actionMedia = selectedMedia
+            .filter((media) => meaningfulActions(media) > 0)
+            .sort((a, b) => meaningfulActions(b) - meaningfulActions(a) || (b.reach || 0) - (a.reach || 0));
+        const bestActionMedia = actionMedia[0];
+        const reachOnlyMedia = selectedMedia
+            .filter((media) => meaningfulActions(media) === 0)
+            .sort((a, b) => (b.reach || 0) - (a.reach || 0))[0];
 
         set("content-period-note", `${fmt(selectedMedia.length)} inlägg från ${periodLabel}.`);
+        set("action-total", fmt(totalActions));
+        set("action-post-count", `${fmt(actionMedia.length)} av ${fmt(selectedMedia.length)}`);
+        set("action-post-share", selectedMedia.length ? `${fmt(Math.round((actionMedia.length / selectedMedia.length) * 100))}% av inläggen ledde vidare` : "inga inlägg i perioden");
+        set("action-rate", mediaReach ? new Intl.NumberFormat("sv-SE", { maximumFractionDigits: 1 }).format((totalActions / mediaReach) * 100) : "–");
+        const actionBestCard = $("action-best-card");
+        if (actionBestCard) actionBestCard.innerHTML = responseCard(bestActionMedia, "action");
+        const reachOnlyCard = $("reach-only-card");
+        if (reachOnlyCard) reachOnlyCard.innerHTML = responseCard(reachOnlyMedia, "reach");
         set("details-summary", `Visa fler detaljer för ${periodLabel}`);
         set("insights-heading", `${modeLabel} insikter`);
         set("insights-period-header", periodHeader);
@@ -196,9 +268,9 @@
                         <a href="${escapeHtml(media.permalink || "#")}" target="_blank" rel="noopener">
                             ${image ? `<img src="${escapeHtml(image)}" alt="" loading="lazy">` : ""}
                             <div class="meta">
-                                <strong>${fmt(media.reach || 0)} räckvidd</strong>
-                                <span>${mediaLabel(media)} · ${date}</span>
-                                <span>${fmt(media.like_count || 0)} gilla · ${fmt(media.comments_count || 0)} kommentarer · ${fmt(media.saved || 0)} sparningar · ${fmt(media.shares || 0)} delningar</span>
+                                <strong>${fmt(meaningfulActions(media))} värdefulla handlingar</strong>
+                                <span>${fmt(media.reach || 0)} i räckvidd · ${mediaLabel(media)} · ${date}</span>
+                                <span>${actionLine(media)}</span>
                                 <p>${escapeHtml(shortCaption(media.caption, 80))}</p>
                             </div>
                         </a>
@@ -206,15 +278,11 @@
             }).join("") : `<p class="signal-empty">Inga inlägg finns sparade för ${periodLabel} ännu.</p>`;
         }
 
-        const profileMedia = selectedMedia
-            .filter((media) => (media.profile_visits || 0) + (media.bio_link_clicks || 0) + (media.contact_actions || 0) + (media.follows || 0) + (media.profile_activity || 0) > 0)
-            .sort((a, b) => ((b.profile_visits || 0) + (b.bio_link_clicks || 0) + (b.contact_actions || 0) + (b.follows || 0)) - ((a.profile_visits || 0) + (a.bio_link_clicks || 0) + (a.contact_actions || 0) + (a.follows || 0)))
-            .slice(0, 6);
         const followerList = $("follower-media-list");
         if (followerList) {
-            followerList.innerHTML = profileMedia.length
-                ? profileMedia.map((media) => signalCard(media, "profile")).join("")
-                : `<p class="signal-empty">Inga profil- eller följarsignaler har registrerats för inlägg under ${periodLabel}.</p>`;
+            followerList.innerHTML = actionMedia.length
+                ? actionMedia.slice(0, 8).map((media) => signalCard(media, "profile")).join("")
+                : `<p class="signal-empty">Inga värdefulla handlingar har registrerats för inlägg under ${periodLabel}.</p>`;
         }
 
         const signalMedia = selectedMedia
@@ -224,7 +292,7 @@
         const totalSaves = selectedMedia.reduce((sum, media) => sum + (media.saved || 0), 0);
         const totalShares = selectedMedia.reduce((sum, media) => sum + (media.shares || 0), 0);
         set("weekly-ss-status", signalMedia.length
-            ? `${fmt(signalMedia.length)} inlägg fick tillsammans ${fmt(totalSaves)} sparningar och ${fmt(totalShares)} delningar under perioden.`
+            ? `${fmt(signalMedia.length)} inlägg fick tillsammans ${countLabel(totalSaves, "sparning", "sparningar")} och ${countLabel(totalShares, "delning", "delningar")} under perioden.`
             : `Inga sparningar eller delningar har registrerats under ${periodLabel}.`);
         const signalList = $("signal-media-list");
         if (signalList) {
@@ -250,8 +318,8 @@
         set("profile-follow-rate", pct(rateOf(newFollowers, reach)));
         set("profile-funnel-story", `${fmt(profile)} profilbesök på ${fmt(reach)} i summerad räckvidd under ${periodLabel}. ${outbound ? `${fmt(outbound)} mätbara nästa steg registrerades.` : "Inga mätbara nästa steg registrerades i perioden."}`);
         set("profile-chart-status", `${modeLabel} värden för vald period.`);
-        set("link-click-story", profileMedia.length
-            ? `${fmt(profileMedia.length)} inlägg gav mätbara profil-, klick- eller följarsignaler under ${periodLabel}.`
+        set("link-click-story", actionMedia.length
+            ? `${fmt(actionMedia.length)} inlägg ledde till ${fmt(totalActions)} värdefulla handlingar under ${periodLabel}. Räckvidden är sammanhanget, handlingen är resultatet.`
             : `Här visas inlägg som leder människor mot profil eller nästa steg under ${periodLabel}.`);
 
         const bestProfileDays = selectedRows.slice().sort((a, b) => profileDayValue(b) - profileDayValue(a)).filter((row) => profileDayValue(row) > 0).slice(0, 5);
@@ -399,6 +467,46 @@
             }).join("") : `<p class="signal-empty">Inga enskilda händelser finns sparade för vald period.</p>`;
         }
 
+        const strongestActionPeriod = aggregates.reduce(
+            (best, row) => !best || (row.meaningful_actions || 0) > (best.meaningful_actions || 0) ? row : best,
+            null,
+        );
+        const intervalText = periodDays === 30 ? "dag för dag" : periodDays === 365 ? "månad för månad" : "vecka för vecka";
+        set("insights-chart-heading", `Handlingar ${intervalText}`);
+        set("insights-chart-summary", strongestActionPeriod && strongestActionPeriod.meaningful_actions
+            ? `${strongestActionPeriod.label} gav flest värdefulla handlingar: ${fmt(strongestActionPeriod.meaningful_actions)} på ${fmt(strongestActionPeriod.posts || 0)} inlägg. Räckvidden visas som jämförelse, inte som huvudresultat.`
+            : `Inga värdefulla handlingar är registrerade ännu. Räckvidden visas som jämförelse medan historiken fylls på.`);
+
+        const actionCanvas = $("chart-period-insights");
+        const oldActionChart = actionCanvas ? Chart.getChart(actionCanvas) : null;
+        if (oldActionChart) oldActionChart.destroy();
+        if (actionCanvas) {
+            new Chart(actionCanvas, {
+                type: "bar",
+                data: {
+                    labels: aggregates.map((row) => row.label),
+                    datasets: [
+                        { label: "Profilbesök", data: aggregates.map((row) => row.action_profile || 0), backgroundColor: "#28745d", stack: "actions", yAxisID: "y" },
+                        { label: "Sparningar", data: aggregates.map((row) => row.action_saves || 0), backgroundColor: "#c85f45", stack: "actions", yAxisID: "y" },
+                        { label: "Delningar", data: aggregates.map((row) => row.action_shares || 0), backgroundColor: "#d49a32", stack: "actions", yAxisID: "y" },
+                        { label: "Andra nästa steg", data: aggregates.map((row) => row.action_next || 0), backgroundColor: "#77727d", stack: "actions", yAxisID: "y" },
+                        { label: "Räckvidd", data: aggregates.map((row) => row.reach || 0), type: "line", borderColor: "#5f5a55", backgroundColor: "transparent", borderWidth: 1.5, pointRadius: periodDays === 30 ? 1 : 2, tension: .25, yAxisID: "y1" },
+                    ],
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: { mode: "index", intersect: false },
+                    plugins: { legend: { position: "bottom", labels: { usePointStyle: true, boxWidth: 8 } } },
+                    scales: {
+                        x: { stacked: true, ticks: { maxTicksLimit: periodDays === 30 ? 10 : 14, maxRotation: 0 }, grid: { display: false } },
+                        y: { stacked: true, beginAtZero: true, ticks: { precision: 0 }, title: { display: true, text: "Handlingar" } },
+                        y1: { beginAtZero: true, position: "right", ticks: { precision: 0 }, title: { display: true, text: "Räckvidd" }, grid: { drawOnChartArea: false } },
+                    },
+                },
+            });
+        }
+
         const arrow = (value, previous) => {
             if (previous == null || previous === 0) return { c: "arrow-flat", s: "→" };
             const delta = (value - previous) / previous;
@@ -411,21 +519,31 @@
             insightsBody.innerHTML = aggregates.map((row, index) => {
                 const previous = aggregates[index - 1];
                 const reachArrow = arrow(row.reach || 0, previous?.reach);
+                const actionArrow = arrow(row.meaningful_actions || 0, previous?.meaningful_actions);
                 const followerArrow = arrow(row.new_followers || 0, previous?.new_followers);
-                const engagementArrow = arrow(row.engagement || 0, previous?.engagement);
                 return `
                     <tr>
                         <td>${escapeHtml(row.label)}</td>
                         <td>${fmt(row.reach || 0)} <span class="${reachArrow.c}">${reachArrow.s}</span></td>
+                        <td>${fmt(row.meaningful_actions || 0)} <span class="${actionArrow.c}">${actionArrow.s}</span></td>
+                        <td>${row.action_profile ? fmt(row.action_profile) : "–"}</td>
+                        <td>${row.action_saves ? fmt(row.action_saves) : "–"}</td>
+                        <td>${row.action_shares ? fmt(row.action_shares) : "–"}</td>
                         <td>${fmt(row.new_followers || 0)} <span class="${followerArrow.c}">${followerArrow.s}</span></td>
-                        <td>${row.profile ? fmt(row.profile) : "–"}</td>
-                        <td>${row.outbound ? fmt(row.outbound) : "–"}</td>
-                        <td>${fmt(row.engagement || 0)} <span class="${engagementArrow.c}">${engagementArrow.s}</span></td>
                         <td>${row.posts ? fmt(row.posts) : "–"}</td>
-                        <td>${row.stories ? `${fmt(row.stories)} (${fmt(row.story_reach || 0)})` : "–"}</td>
                     </tr>`;
             }).reverse().join("");
         }
+
+        document.querySelectorAll(".content-results img, .top-media img, .stories-card img").forEach((image) => {
+            const hideBrokenImage = () => {
+                image.hidden = true;
+                const link = image.closest("a");
+                if (link) link.classList.add("image-missing");
+            };
+            image.addEventListener("error", hideBrokenImage, { once: true });
+            if (image.complete && !image.naturalWidth) hideBrokenImage();
+        });
     };
 
     const renderHistory = (periodDays) => {
@@ -1006,7 +1124,7 @@
         details.addEventListener("toggle", () => {
             if (!details.open) return;
             requestAnimationFrame(() => {
-                ["chart-profile", "chart-format", "chart-weekly-ss"].forEach((id) => {
+                ["chart-profile", "chart-format", "chart-weekly-ss", "chart-period-insights"].forEach((id) => {
                     const canvas = $(id);
                     const chart = canvas ? Chart.getChart(canvas) : null;
                     if (chart) chart.resize();

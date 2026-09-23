@@ -105,14 +105,29 @@ function igdash_shortcode() {
         <section class="content-results">
             <div class="section-heading">
                 <div>
-                    <span class="section-kicker">Innehåll som gav respons</span>
-                    <h2>Vad människor reagerade på</h2>
+                    <span class="section-kicker">Från uppmärksamhet till handling</span>
+                    <h2>Vad människor gjorde efteråt</h2>
                 </div>
                 <p id="content-period-note">Inlägg från vald period.</p>
             </div>
+            <div class="action-overview" aria-label="Värdefulla handlingar i vald period">
+                <div><span>Värdefulla handlingar</span><strong id="action-total">–</strong><em>profilbesök, sparat, delat eller nästa steg</em></div>
+                <div><span>Inlägg som ledde vidare</span><strong id="action-post-count">–</strong><em id="action-post-share">av inläggen i perioden</em></div>
+                <div><span>Handlingar per 100 i räckvidd</span><strong id="action-rate">–</strong><em>för inläggen i perioden</em></div>
+            </div>
+            <div class="response-comparison">
+                <div>
+                    <span class="section-kicker">Tydligast nästa steg</span>
+                    <div id="action-best-card" class="response-post"></div>
+                </div>
+                <div>
+                    <span class="section-kicker">Räckvidd utan handling</span>
+                    <div id="reach-only-card" class="response-post"></div>
+                </div>
+            </div>
             <div class="content-result-grid">
                 <div>
-                    <h3>Ledde mot profil eller nästa steg</h3>
+                    <h3>Ledde till värdefull handling</h3>
                     <p id="link-click-story">–</p>
                     <div id="follower-media-list" class="signal-media-list"></div>
                 </div>
@@ -127,9 +142,10 @@ function igdash_shortcode() {
         <section class="top-media">
             <div class="section-heading">
                 <div>
-                    <span class="section-kicker">Bäst räckvidd</span>
-                    <h2>Inlägg som nådde längst</h2>
+                    <span class="section-kicker">Räckvidd i sitt sammanhang</span>
+                    <h2>Inlägg som nådde långt</h2>
                 </div>
+                <p>Räckvidden visar att innehållet sågs. Handlingarna visar om det väckte ett nästa steg.</p>
             </div>
             <div id="top-media-grid" class="top-media-grid"></div>
         </section>
@@ -196,9 +212,17 @@ function igdash_shortcode() {
                 <section class="daily-insights">
                     <h2 id="insights-heading">Dagliga insikter</h2>
                     <p class="daily-insights-hint" id="insights-hint">Pilarna jämför dagen med föregående dag.</p>
+                    <div class="insights-visual">
+                        <div>
+                            <span class="section-kicker">Handlingar över tid</span>
+                            <h3 id="insights-chart-heading">Vad människor gjorde</h3>
+                            <p id="insights-chart-summary">–</p>
+                        </div>
+                        <div class="insights-chart-wrap"><canvas id="chart-period-insights" height="115"></canvas></div>
+                    </div>
                     <div class="daily-insights-scroll">
                         <table class="daily-insights-table">
-                            <thead><tr><th id="insights-period-header">Datum</th><th>Räckvidd</th><th>Nya följare</th><th>Profil</th><th>Vidare</th><th>Engagemang</th><th>Inlägg</th><th>Händelser</th></tr></thead>
+                            <thead><tr><th id="insights-period-header">Datum</th><th>Räckvidd</th><th>Handlingar</th><th>Profil</th><th>Sparat</th><th>Delat</th><th>Nya följare</th><th>Inlägg</th></tr></thead>
                             <tbody id="daily-insights-body"></tbody>
                         </table>
                     </div>
