@@ -15,9 +15,9 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 define( 'IGDASH_DATA_URL', 'https://raw.githubusercontent.com/elleandersson/digitala-elle-dashboard/main/data/instagram.json' );
 
 function igdash_enqueue() {
-    wp_register_style( 'igdash-css', get_theme_file_uri( 'dashboard.css' ), array(), '1.2' );
+    wp_register_style( 'igdash-css', get_theme_file_uri( 'dashboard.css' ), array(), '1.3' );
     wp_register_script( 'igdash-chartjs', 'https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js', array(), '4.4.1', true );
-    wp_register_script( 'igdash-js', get_theme_file_uri( 'dashboard.js' ), array( 'igdash-chartjs' ), '1.2', true );
+    wp_register_script( 'igdash-js', get_theme_file_uri( 'dashboard.js' ), array( 'igdash-chartjs' ), '1.3', true );
 }
 add_action( 'wp_enqueue_scripts', 'igdash_enqueue' );
 
