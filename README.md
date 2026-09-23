@@ -105,7 +105,7 @@ Lägg till fem:
 
 ### Steg 5 — Testa workflow:et manuellt
 
-1. Gå till repot → fliken **Actions** → välj `Nightly Instagram fetch` → **Run workflow**
+1. Gå till repot → fliken **Actions** → välj `Instagram dashboard update` → **Run workflow**
 2. Vänta ~30 sek. När den blir grön: kontrollera att `data/instagram.json` har uppdaterats med riktiga siffror.
 
 ### Steg 6 — Lägg dashboarden på digitalaelle.se
@@ -134,8 +134,8 @@ Lägg till fem:
 - **Token förnyas automatiskt** varje natt av skriptet (giltig 60 dagar, refreshas i tid).
   - När Meta returnerar en ny token skriver workflowet tillbaka den till GitHub-secret `IG_ACCESS_TOKEN`.
   - Om `SECRET_UPDATE_TOKEN` saknas uppdateras dashboard-datan ändå, men workflowet visar en varning om att token inte kunde sparas automatiskt.
-- **Händelser/Stories:** Instagram Graph API lämnar bara ut händelser medan de är aktiva. Dashboarden kan därför inte återskapa gamla händelse-resultat, men den bygger historik framåt när nattkörningen eller watchdoggen hinner fånga aktiva Stories.
-- **Cron-tid:** Kör `00:17 UTC` varje natt, vilket motsvarar **02:17 svensk sommartid** och **01:17 vintertid**. GitHub Actions kan starta schemalagda jobb senare än utsatt tid, men watchdoggen fungerar som reserv om nattkörningen inte har uppdaterat datan.
+- **Händelser/Stories:** Instagram Graph API lämnar bara ut händelser medan de är aktiva. Dashboarden kan därför inte återskapa gamla händelse-resultat, men den bygger historik framåt när nattkörningen hinner fånga aktiva Stories.
+- **Körtid:** En enda nattkörning läggs i GitHubs kö `21:17 UTC` och väntar vid behov till `00:05 UTC` innan Instagram hämtas. Det ger marginal för GitHubs köförseningar och ska normalt vara klart före kl. 05 svensk tid.
 - **Manuell körning:** Actions-fliken → Run workflow.
 
 ## Felsökning

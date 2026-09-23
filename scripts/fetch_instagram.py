@@ -67,6 +67,7 @@ def refresh_token():
                    client_secret=os.environ.get("FB_APP_SECRET", ""))
         new_token = data.get("access_token")
         if new_token and (gh_out := os.environ.get("GITHUB_OUTPUT")):
+            print(f"::add-mask::{new_token}")
             with open(gh_out, "a") as f:
                 f.write(f"new_token={new_token}\n")
     except Exception as e:

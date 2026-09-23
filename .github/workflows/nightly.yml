@@ -1,10 +1,10 @@
-name: Nightly Instagram fetch
+name: Instagram dashboard update
 
 on:
   schedule:
-    # Kör efter nytt UTC-dygn så gårdagens Instagram-data finns med.
-    # Watchdoggen triggar en separat reservkörning om GitHub skulle missa schemat.
-    - cron: "17 0 * * *"  # 02:17 CEST / 01:17 CET
+    # Lägg körningen i kön tidigt. Jobbet väntar till 00:05 UTC så att
+    # gårdagens Instagram-data är komplett, även om GitHub startar direkt.
+    - cron: "17 21 * * *"
   workflow_dispatch:  # gör att du kan köra manuellt från GitHub-fliken "Actions"
 
 permissions:
@@ -17,8 +17,30 @@ concurrency:
 jobs:
   fetch:
     runs-on: ubuntu-latest
+    timeout-minutes: 240
     steps:
       - uses: actions/checkout@v4
+
+      - name: Vänta tills föregående UTC-dygn är komplett
+        if: github.event_name == 'schedule'
+        shell: bash
+        run: |
+          utc_hour=$((10#$(date -u +%H)))
+          utc_minute=$((10#$(date -u +%M)))
+
+          if (( utc_hour >= 21 )); then
+            target_epoch=$(date -u -d 'tomorrow 00:05' +%s)
+          elif (( utc_hour == 0 && utc_minute < 5 )); then
+            target_epoch=$(date -u -d 'today 00:05' +%s)
+          else
+            exit 0
+          fi
+
+          wait_seconds=$((target_epoch - $(date -u +%s)))
+          if (( wait_seconds > 0 )); then
+            echo "Väntar $wait_seconds sekunder tills 00:05 UTC."
+            sleep "$wait_seconds"
+          fi
 
       - uses: actions/setup-python@v5
         with:
@@ -55,7 +77,6 @@ jobs:
 
       - name: Uppdatera IG_ACCESS_TOKEN secret
         if: steps.fetch.outputs.new_token != ''
-        continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.SECRET_UPDATE_TOKEN }}
           NEW_TOKEN: ${{ steps.fetch.outputs.new_token }}
@@ -65,4 +86,4 @@ jobs:
             exit 0
           fi
 
-          printf '%s' "$NEW_TOKEN" | gh secret set IG_ACCESS_TOKEN --body-file -
+          printf '%s' "$NEW_TOKEN" | gh secret set IG_ACCESS_TOKEN
