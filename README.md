@@ -5,7 +5,7 @@ Nattlig hämtning av Instagram-statistik via Meta Graph API → JSON i GitHub-re
 ## Översikt
 
 ```
-GitHub Actions (kör 23:00 UTC = 01:00 svensk sommartid)
+GitHub Actions (köas 21:17 UTC och hämtar efter 00:05 UTC)
         ↓
 scripts/fetch_instagram.py (hämtar via Graph API)
         ↓
@@ -21,8 +21,9 @@ Chart.js renderar grafer
 Dashboarden ska vara redo när du börjar dagen:
 
 - GitHub Actions hämtar ny Instagram-data en gång per natt/tidig morgon.
+- Datafilen behåller upp till 366 dagars historik för periodvyerna 30 dagar, 3 månader, 6 månader och 1 år.
 - Aktiva händelser/Stories försöker hämtas vid varje körning och sparas som 30-dagarshistorik i JSON-filen.
-- Watchdoggen kan trigga en separat reservkörning om den schemalagda nattkörningen inte har uppdaterat datan i tid.
+- En enda Codex-morgonkontroll verifierar kl. 04:50 att nattkörningen lyckades och rapporterar bara om något behöver åtgärdas.
 - `https://digitalaelle.se/dashboard` visar den senaste publicerade JSON-filen.
 - `scripts/open_dashboard.sh` öppnar dashboarden i webbläsaren.
 - `scripts/install_morning_dashboard.sh` installerar en macOS LaunchAgent som öppnar dashboarden varje dag kl. 08:00.
@@ -135,6 +136,7 @@ Lägg till fem:
   - När Meta returnerar en ny token skriver workflowet tillbaka den till GitHub-secret `IG_ACCESS_TOKEN`.
   - Om `SECRET_UPDATE_TOKEN` saknas uppdateras dashboard-datan ändå, men workflowet visar en varning om att token inte kunde sparas automatiskt.
 - **Händelser/Stories:** Instagram Graph API lämnar bara ut händelser medan de är aktiva. Dashboarden kan därför inte återskapa gamla händelse-resultat, men den bygger historik framåt när nattkörningen hinner fånga aktiva Stories.
+- **Långtidshistorik:** `history.daily` och `history.snapshots` i `data/instagram.json` byggs på varje natt och behålls i 366 dagar. Den första historiken återskapades från tidigare Git-versioner med `scripts/backfill_history.py`.
 - **Körtid:** En enda nattkörning läggs i GitHubs kö `21:17 UTC` och väntar vid behov till `00:05 UTC` innan Instagram hämtas. Det ger marginal för GitHubs köförseningar och ska normalt vara klart före kl. 05 svensk tid.
 - **Manuell körning:** Actions-fliken → Run workflow.
 

@@ -21,6 +21,7 @@ GRAPH = "https://graph.facebook.com/v21.0"
 TOKEN = os.environ["IG_ACCESS_TOKEN"]
 IG_ID = os.environ["IG_USER_ID"]
 OUT = Path(__file__).resolve().parent.parent / "data" / "instagram.json"
+HISTORY_DAYS = 366
 
 WEEKDAYS_SV = ["Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag", "Lördag", "Söndag"]
 UNSUPPORTED_MEDIA_METRICS = set()
@@ -209,6 +210,44 @@ def load_existing_payload():
     except (OSError, json.JSONDecodeError) as e:
         print(f"Kunde inte läsa befintlig JSON för historik: {e}", file=sys.stderr)
         return {}
+
+
+def merge_daily_history(existing_payload, daily_rows, days=HISTORY_DAYS):
+    """Behåll dagliga mätvärden så dashboarden kan jämföra upp till ett år."""
+    history = existing_payload.get("history", {})
+    by_date = {
+        row.get("date"): row
+        for row in history.get("daily", [])
+        if row.get("date")
+    }
+    for row in daily_rows:
+        if row.get("date"):
+            by_date[row["date"]] = row
+
+    cutoff = datetime.now(timezone.utc).date() - timedelta(days=days)
+    return [
+        by_date[date]
+        for date in sorted(by_date)
+        if datetime.strptime(date, "%Y-%m-%d").date() >= cutoff
+    ]
+
+
+def merge_snapshot_history(existing_payload, snapshot, days=HISTORY_DAYS):
+    """Spara en kompakt kontoögonblicksbild per dag."""
+    history = existing_payload.get("history", {})
+    by_date = {
+        row.get("date"): row
+        for row in history.get("snapshots", [])
+        if row.get("date")
+    }
+    by_date[snapshot["date"]] = snapshot
+
+    cutoff = datetime.now(timezone.utc).date() - timedelta(days=days)
+    return [
+        by_date[date]
+        for date in sorted(by_date)
+        if datetime.strptime(date, "%Y-%m-%d").date() >= cutoff
+    ]
 
 
 def fetch_active_stories():
@@ -753,12 +792,38 @@ def main():
             profile_views_series,
             profile_link_clicks_series,
         )
+        extras = extras_30d(media_list, totals)
+        profile_summary_payload = profile_summary(
+            totals,
+            reach,
+            followers,
+            daily_rows,
+            media_list,
+            story_history,
+            profile_views_series,
+            profile_link_clicks_series,
+        )
+        snapshot = {
+            "date": datetime.now(timezone.utc).date().isoformat(),
+            "followers": prof.get("followers_count", 0),
+            "following": prof.get("follows_count", 0),
+            "media_count": prof.get("media_count", 0),
+            "reach_30d": totals.get("reach", 0),
+            "profile_views_30d": totals.get("profile_views", 0),
+            "new_followers_30d": sum(d.get("value", 0) for d in followers),
+            "outbound_clicks_30d": profile_summary_payload.get("totals", {}).get("outbound_clicks", 0),
+            "engagement_rate_30d": extras.get("engagement_rate_pct", 0),
+            "posts_30d": sum(d.get("posts", 0) for d in daily_rows),
+            "saves_shares_30d": extras.get("saves", 0) + extras.get("shares", 0),
+        }
+        history_daily = merge_daily_history(existing_payload, daily_rows)
+        history_snapshots = merge_snapshot_history(existing_payload, snapshot)
 
         payload = {
             "updated_at": datetime.now(timezone.utc).isoformat(),
             "profile": prof,
             "totals_30d": totals,
-            "extras_30d": extras_30d(media_list, totals),
+            "extras_30d": extras,
             "time_series_30d": {
                 "reach": reach,
                 "follower_count": followers,
@@ -769,16 +834,13 @@ def main():
             "active_stories": active_stories,
             "story_history_30d": story_history,
             "story_summary_30d": story_summary(story_history, daily_rows),
-            "profile_summary_30d": profile_summary(
-                totals,
-                reach,
-                followers,
-                daily_rows,
-                media_list,
-                story_history,
-                profile_views_series,
-                profile_link_clicks_series,
-            ),
+            "profile_summary_30d": profile_summary_payload,
+            "history": {
+                "retention_days": HISTORY_DAYS,
+                "available_from": history_daily[0]["date"] if history_daily else snapshot["date"],
+                "daily": history_daily,
+                "snapshots": history_snapshots,
+            },
             "weekly_saves_shares": weekly_saves_shares(media_list, weeks=6),
             "signal_media": signal_media(media_list),
             "follower_media": follower_media(media_list),

@@ -42,6 +42,9 @@
     const rows = data.daily_insights || [];
     const timeSeries = data.time_series_30d || {};
     const totals30 = data.totals_30d || {};
+    const history = data.history || {};
+    const historyDaily = history.daily || rows;
+    const historySnapshots = history.snapshots || [];
     const profileSummary = data.profile_summary_30d || {};
     const profileTotals = profileSummary.totals || {};
     const profileRates = profileSummary.rates || {};
@@ -59,6 +62,177 @@
     const followRate = profileRates.follow_rate_pct ?? rateOf(newFollowers30, profileViews);
     const updatedAt = new Date(data.updated_at);
     const dataAge = daysBetween(new Date(), updatedAt);
+
+    const periodLabels = {
+        30: "Senaste 30 dagarna",
+        90: "Senaste 3 månaderna",
+        180: "Senaste 6 månaderna",
+        365: "Senaste året",
+    };
+    const signed = (n) => `${n > 0 ? "+" : ""}${fmt(n)}`;
+    const average = (list, key) => list.length
+        ? list.reduce((sum, row) => sum + (row[key] || 0), 0) / list.length
+        : 0;
+    const dateLabel = (date) => new Date(`${date}T00:00:00`).toLocaleDateString("sv-SE", {
+        day: "numeric",
+        month: "short",
+    });
+    let historyChart;
+
+    const renderHistory = (periodDays) => {
+        if (!historyDaily.length) return;
+
+        const latestDate = historyDaily[historyDaily.length - 1].date;
+        const latest = new Date(`${latestDate}T00:00:00`);
+        const cutoff = new Date(latest);
+        cutoff.setDate(cutoff.getDate() - periodDays + 1);
+        const cutoffKey = cutoff.toISOString().slice(0, 10);
+        const selectedRows = historyDaily.filter((row) => row.date >= cutoffKey && row.date <= latestDate);
+        const selectedSnapshots = historySnapshots.filter((row) => row.date >= cutoffKey);
+        const firstSnapshot = selectedSnapshots[0] || historySnapshots[0] || {};
+        const lastSnapshot = selectedSnapshots[selectedSnapshots.length - 1]
+            || historySnapshots[historySnapshots.length - 1]
+            || {};
+        const currentFollowers = lastSnapshot.followers ?? (data.profile || {}).followers_count ?? 0;
+        const hasFollowerBaseline = selectedSnapshots.length >= 2 && firstSnapshot.followers != null;
+        const followerDelta = !hasFollowerBaseline
+            ? null
+            : currentFollowers - firstSnapshot.followers;
+        const reach = selectedRows.reduce((sum, row) => sum + (row.reach || 0), 0);
+        const newFollowers = selectedRows.reduce((sum, row) => sum + (row.new_followers || 0), 0);
+        const posts = selectedRows.reduce((sum, row) => sum + (row.posts || 0), 0);
+        const postRows = selectedRows.filter((row) => (row.posts || 0) > 0);
+        const quietRows = selectedRows.filter((row) => (row.posts || 0) === 0);
+        const avgPostReach = average(postRows, "reach");
+        const avgQuietReach = average(quietRows, "reach");
+        const impactDelta = avgQuietReach > 0
+            ? Math.round(((avgPostReach - avgQuietReach) / avgQuietReach) * 100)
+            : null;
+        const bestDay = selectedRows.reduce(
+            (best, row) => !best || (row.reach || 0) > (best.reach || 0) ? row : best,
+            null,
+        );
+        const coverageDays = selectedRows.length;
+        const coverageStart = selectedRows[0] ? dateLabel(selectedRows[0].date) : "–";
+        const coverageEnd = selectedRows[selectedRows.length - 1] ? dateLabel(selectedRows[selectedRows.length - 1].date) : "–";
+
+        set("journey-period", periodLabels[periodDays]);
+        set("period-followers", fmt(currentFollowers));
+        set("period-followers-delta", followerDelta == null
+            ? `${fmt(newFollowers)} nya följare registrerade`
+            : `${signed(followerDelta)} sedan ${dateLabel(firstSnapshot.date)}`);
+        set("period-posts", `${fmt(posts)} inlägg`);
+        set("period-active-days", `${fmt(postRows.length)} publiceringsdagar`);
+        set("period-reach", fmt(reach));
+        set("period-reach-note", `summerad daglig räckvidd`);
+        set("period-new-followers", fmt(newFollowers));
+        set("period-follow-rate", reach ? `${new Intl.NumberFormat("sv-SE", { maximumFractionDigits: 1 }).format((newFollowers / reach) * 1000)} per 1 000 i räckvidd` : "–");
+
+        const growthTitle = followerDelta == null
+            ? newFollowers > 0
+                ? `${fmt(newFollowers)} nya följare är registrerade`
+                : "Din långtidshistorik fortsätter byggas"
+            : followerDelta > 0
+                ? `Du har vuxit med ${fmt(followerDelta)} följare`
+                : followerDelta < 0
+                    ? `Du har ${fmt(Math.abs(followerDelta))} färre följare i perioden`
+                    : "Följarantalet är stabilt";
+        set("journey-title", growthTitle);
+        set("journey-summary", posts
+            ? `Du publicerade ${fmt(posts)} inlägg på ${fmt(postRows.length)} dagar. De dagarna syns som tydliga markeringar i grafen, så att du kan se vad som hände runt din aktivitet.`
+            : "Ingen publicering är registrerad i den del av perioden vi har data för. Historiken ligger kvar och fortsätter fyllas på." );
+        set("history-coverage", coverageDays < periodDays
+            ? `Tillgänglig data: ${coverageStart}–${coverageEnd} (${fmt(coverageDays)} av ${fmt(periodDays)} dagar).`
+            : `Visar ${coverageStart}–${coverageEnd}`);
+
+        set("impact-post-days", fmt(postRows.length));
+        set("impact-post-days-note", `${fmt(posts)} inlägg totalt`);
+        set("impact-post-reach", fmt(Math.round(avgPostReach)));
+        set("impact-post-reach-note", impactDelta == null
+            ? "fler dagar behövs för jämförelse"
+            : `${impactDelta > 0 ? "+" : ""}${fmt(impactDelta)}% mot övriga dagar`);
+        set("impact-quiet-reach", fmt(Math.round(avgQuietReach)));
+        set("impact-best-day", bestDay ? dateLabel(bestDay.date) : "–");
+        set("impact-best-day-note", bestDay
+            ? `${fmt(bestDay.reach || 0)} räckvidd${bestDay.posts ? ` · ${fmt(bestDay.posts)} inlägg` : ""}`
+            : "–");
+        set("history-chart-caption", `Daglig räckvidd och nya följare under ${periodLabels[periodDays].toLowerCase()}. Punkterna visar dagar då du publicerade.`);
+
+        const canvas = $("chart-history");
+        if (!canvas) return;
+        if (historyChart) historyChart.destroy();
+        historyChart = new Chart(canvas, {
+            type: "line",
+            data: {
+                labels: selectedRows.map((row) => dateLabel(row.date)),
+                datasets: [
+                    {
+                        label: "Räckvidd",
+                        data: selectedRows.map((row) => row.reach || 0),
+                        borderColor: "#c85f45",
+                        backgroundColor: "rgba(200,95,69,.09)",
+                        borderWidth: 2,
+                        pointRadius: 0,
+                        tension: .25,
+                        fill: true,
+                        yAxisID: "y",
+                    },
+                    {
+                        label: "Nya följare",
+                        data: selectedRows.map((row) => row.new_followers || 0),
+                        borderColor: "#28745d",
+                        backgroundColor: "#28745d",
+                        borderWidth: 2,
+                        pointRadius: 1.5,
+                        tension: .2,
+                        fill: false,
+                        yAxisID: "y1",
+                    },
+                    {
+                        label: "Publicerat",
+                        data: selectedRows.map((row) => row.posts ? row.reach || 0 : null),
+                        borderColor: "#111111",
+                        backgroundColor: "#ffffff",
+                        pointBorderWidth: 2,
+                        pointRadius: selectedRows.map((row) => row.posts ? 4 : 0),
+                        pointHoverRadius: 6,
+                        showLine: false,
+                        yAxisID: "y",
+                    },
+                ],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: "index", intersect: false },
+                plugins: {
+                    legend: { position: "bottom", labels: { usePointStyle: true, boxWidth: 8 } },
+                    tooltip: {
+                        callbacks: {
+                            afterBody: (items) => {
+                                const row = selectedRows[items[0].dataIndex];
+                                return row && row.posts ? `${fmt(row.posts)} publicerade inlägg` : "";
+                            },
+                        },
+                    },
+                },
+                scales: {
+                    x: { ticks: { maxTicksLimit: periodDays > 90 ? 8 : 10, maxRotation: 0 }, grid: { display: false } },
+                    y: { beginAtZero: true, title: { display: true, text: "Räckvidd" }, ticks: { precision: 0 } },
+                    y1: { beginAtZero: true, position: "right", title: { display: true, text: "Nya följare" }, ticks: { precision: 0 }, grid: { drawOnChartArea: false } },
+                },
+            },
+        });
+    };
+
+    const periodButtons = Array.from(document.querySelectorAll("[data-period-days]"));
+    periodButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            periodButtons.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+            renderHistory(Number(button.dataset.periodDays));
+        });
+    });
+    renderHistory(90);
 
     set("updated-at", new Date(data.updated_at).toLocaleString("sv-SE"));
     set("kpi-followers", fmt((data.profile || {}).followers_count));
@@ -137,6 +311,8 @@
     const storySummary = data.story_summary_30d || {};
     const storyTotals = storySummary.totals || {};
     const recentStories = storySummary.recent_stories || [];
+    const storiesBlock = $("stories-block");
+    if (storiesBlock) storiesBlock.hidden = !storySummary.tracking_started;
     set("kpi-stories", fmt(storyTotals.stories || 0));
     set("story-reach", fmt(storyTotals.reach || 0));
     set("story-impressions", fmt(storyTotals.impressions || 0));
@@ -225,6 +401,8 @@
     if ($("best-hour")) $("best-hour").textContent = bp.hour != null ? `kl ${bp.hour}:00` : "–";
     if ($("best-posts-analyzed")) $("best-posts-analyzed").textContent = fmt(bp.posts_analyzed || 0);
     const bestHint = document.querySelector(".best-posting-hint");
+    const bestPostingBlock = $("best-posting-block");
+    if (bestPostingBlock) bestPostingBlock.hidden = (bp.posts_analyzed || 0) < 8;
     if (bestHint && (bp.posts_analyzed || 0) < 8) {
         bestHint.textContent += " För få inlägg för säker slutsats.";
     }
@@ -233,6 +411,10 @@
     if (profileCanvas) {
         const profileValues = rows.map(profileDayValue);
         const outboundValues = rows.map(outboundDayValue);
+        const profileChartBlock = $("profile-chart-block");
+        if (profileChartBlock) {
+            profileChartBlock.hidden = !profileValues.some(Boolean) && !outboundValues.some(Boolean);
+        }
         new Chart(profileCanvas, {
             type: "bar",
             data: {
@@ -255,39 +437,50 @@
 
     const reach = timeSeries.reach || [];
     const followers = timeSeries.follower_count || [];
-    new Chart($("chart-reach"), {
-        type: "line",
-        data: {
-            labels: reach.map((d) => d.date),
-            datasets: [
-                { label: "Räckvidd (dagligen)", data: reach.map((d) => d.value), borderColor: "#e91e63", backgroundColor: "rgba(233,30,99,.1)", tension: .3, fill: true, yAxisID: "y" },
-                { label: "Nya följare", data: followers.map((d) => d.value), borderColor: "#3f51b5", backgroundColor: "rgba(63,81,181,.1)", tension: .3, fill: false, yAxisID: "y1" }
-            ]
-        },
-        options: {
-            responsive: true,
-            plugins: { legend: { position: "bottom" } },
-            scales: {
-                y: { type: "linear", position: "left", title: { display: true, text: "Räckvidd" } },
-                y1: { type: "linear", position: "right", title: { display: true, text: "Nya följare" }, grid: { drawOnChartArea: false } }
+    const reachCanvas = $("chart-reach");
+    if (reachCanvas) {
+        new Chart(reachCanvas, {
+            type: "line",
+            data: {
+                labels: reach.map((d) => d.date),
+                datasets: [
+                    { label: "Räckvidd (dagligen)", data: reach.map((d) => d.value), borderColor: "#c85f45", backgroundColor: "rgba(200,95,69,.1)", tension: .3, fill: true, yAxisID: "y" },
+                    { label: "Nya följare", data: followers.map((d) => d.value), borderColor: "#28745d", backgroundColor: "rgba(40,116,93,.1)", tension: .3, fill: false, yAxisID: "y1" }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { position: "bottom" } },
+                scales: {
+                    y: { type: "linear", position: "left", title: { display: true, text: "Räckvidd" } },
+                    y1: { type: "linear", position: "right", title: { display: true, text: "Nya följare" }, grid: { drawOnChartArea: false } }
+                }
             }
-        }
-    });
+        });
+    }
 
     const fb = data.format_breakdown || {};
     const labels = { IMAGE: "Bild", CAROUSEL_ALBUM: "Karusell", VIDEO: "Video", REELS: "Reels" };
-    new Chart($("chart-format"), {
-        type: "bar",
-        data: {
-            labels: Object.keys(fb).map((k) => labels[k] || k),
-            datasets: [{
-                label: "Snitt-engagemang",
-                data: Object.values(fb).map((v) => v.avg_engagement),
-                backgroundColor: ["#e91e63", "#3f51b5", "#009688", "#ff9800"]
-            }]
-        },
-        options: { responsive: true, plugins: { legend: { display: false } } }
-    });
+    const formatCanvas = $("chart-format");
+    const formatEntries = Object.entries(fb).filter(([, value]) => (value.count || 0) > 0);
+    const formatPostCount = formatEntries.reduce((sum, [, value]) => sum + (value.count || 0), 0);
+    const formatBlock = $("format-block");
+    if (formatBlock) formatBlock.hidden = formatPostCount < 3 || formatEntries.length < 2;
+    if (formatCanvas && formatPostCount >= 3 && formatEntries.length >= 2) {
+        set("format-status", `Baserat på ${fmt(formatPostCount)} inlägg i ${fmt(formatEntries.length)} format.`);
+        new Chart(formatCanvas, {
+            type: "bar",
+            data: {
+                labels: formatEntries.map(([key]) => labels[key] || key),
+                datasets: [{
+                    label: "Snitt-engagemang",
+                    data: formatEntries.map(([, value]) => value.avg_engagement),
+                    backgroundColor: ["#c85f45", "#28745d", "#d49a32", "#6a6a78"]
+                }]
+            },
+            options: { responsive: true, plugins: { legend: { display: false } } }
+        });
+    }
 
     // Top media
     const grid = $("top-media-grid");
@@ -295,14 +488,16 @@
         grid.innerHTML = (data.top_media || []).map((m) => {
             const img = m.thumbnail_url || m.media_url || "";
             const caption = (m.caption || "").slice(0, 80) + ((m.caption || "").length > 80 ? "…" : "");
+            const date = new Date(m.timestamp).toLocaleDateString("sv-SE", { month: "short", day: "numeric" });
             return `
                 <div class="media-card">
                     <a href="${m.permalink}" target="_blank" rel="noopener">
                         <img src="${img}" alt="" loading="lazy">
                         <div class="meta">
                             <strong>${fmt(m.reach)} räckvidd</strong>
-                            ❤ ${fmt(m.like_count)} · 💬 ${fmt(m.comments_count)} · 🔖 ${fmt(m.saved)}
-                            <p style="margin:.5rem 0 0;color:#666;">${caption}</p>
+                            <span>${mediaLabel(m)} · ${date}</span>
+                            <span>${fmt(m.like_count)} gilla · ${fmt(m.comments_count)} kommentarer · ${fmt(m.saved)} sparningar</span>
+                            <p>${caption}</p>
                         </div>
                     </a>
                 </div>
@@ -455,5 +650,19 @@
                 </tr>
             `;
         }).join("");
+    }
+
+    const details = document.querySelector(".dashboard-details");
+    if (details) {
+        details.addEventListener("toggle", () => {
+            if (!details.open) return;
+            requestAnimationFrame(() => {
+                ["chart-profile", "chart-format", "chart-weekly-ss"].forEach((id) => {
+                    const canvas = $(id);
+                    const chart = canvas ? Chart.getChart(canvas) : null;
+                    if (chart) chart.resize();
+                });
+            });
+        });
     }
 })();
