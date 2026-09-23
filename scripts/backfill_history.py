@@ -52,6 +52,22 @@ def main():
     commits = git("log", "--format=%H", "--", "data/instagram.json").splitlines()
     daily_by_date = {}
     snapshots_by_date = {}
+    media_by_id = {}
+
+    def collect_media(payload):
+        history = payload.get("history", {})
+        sources = [
+            history.get("media", []),
+            payload.get("top_media", []),
+            payload.get("signal_media", []),
+            payload.get("follower_media", []),
+            payload.get("profile_media", []),
+        ]
+        for source in sources:
+            for media in source:
+                key = media.get("id") or media.get("permalink")
+                if key:
+                    media_by_id[key] = {**media_by_id.get(key, {}), **media}
 
     for commit in reversed(commits):
         try:
@@ -66,6 +82,7 @@ def main():
         snapshot = snapshot_from(payload)
         if snapshot:
             snapshots_by_date[snapshot["date"]] = snapshot
+        collect_media(payload)
 
     current = json.loads(DATA_FILE.read_text())
     for row in current.get("daily_insights", []):
@@ -74,6 +91,7 @@ def main():
     current_snapshot = snapshot_from(current)
     if current_snapshot:
         snapshots_by_date[current_snapshot["date"]] = current_snapshot
+    collect_media(current)
 
     cutoff = datetime.now(timezone.utc).date() - timedelta(days=RETENTION_DAYS)
     daily = [
@@ -86,16 +104,33 @@ def main():
         for date in sorted(snapshots_by_date)
         if datetime.strptime(date, "%Y-%m-%d").date() >= cutoff
     ]
+    media = []
+    for item in media_by_id.values():
+        timestamp = item.get("timestamp")
+        if not timestamp:
+            continue
+        try:
+            published = datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%S%z").date()
+        except ValueError:
+            try:
+                published = datetime.fromisoformat(timestamp.replace("Z", "+00:00")).date()
+            except ValueError:
+                continue
+        if published >= cutoff:
+            media.append(item)
+    media.sort(key=lambda item: item.get("timestamp", ""), reverse=True)
+
     current["history"] = {
         "retention_days": RETENTION_DAYS,
         "available_from": daily[0]["date"] if daily else current_snapshot["date"],
         "daily": daily,
         "snapshots": snapshots,
+        "media": media,
     }
     DATA_FILE.write_text(json.dumps(current, indent=2, ensure_ascii=False) + "\n")
     print(
         f"Historik klar: {len(daily)} dagar från {current['history']['available_from']} "
-        f"och {len(snapshots)} kontoögonblicksbilder."
+        f"{len(snapshots)} kontoögonblicksbilder och {len(media)} inlägg."
     )
 
 

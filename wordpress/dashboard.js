@@ -25,6 +25,12 @@
         const clean = (text || "").replace(/\s+/g, " ").trim();
         return clean.length > length ? `${clean.slice(0, length)}…` : clean || "Ingen caption";
     };
+    const escapeHtml = (value) => String(value || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
 
     let data;
     try {
@@ -45,6 +51,7 @@
     const history = data.history || {};
     const historyDaily = history.daily || rows;
     const historySnapshots = history.snapshots || [];
+    const historyMedia = history.media || data.top_media || [];
     const profileSummary = data.profile_summary_30d || {};
     const profileTotals = profileSummary.totals || {};
     const profileRates = profileSummary.rates || {};
@@ -79,13 +86,355 @@
     });
     let historyChart;
 
+    const isoWeek = (dateString) => {
+        const date = new Date(`${dateString}T00:00:00Z`);
+        const day = date.getUTCDay() || 7;
+        date.setUTCDate(date.getUTCDate() + 4 - day);
+        const yearStart = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
+        return Math.ceil((((date - yearStart) / 86400000) + 1) / 7);
+    };
+
+    const aggregateRows = (selectedRows, periodDays) => {
+        const mode = periodDays === 30 ? "day" : periodDays === 365 ? "month" : "week";
+        if (mode === "day") {
+            return selectedRows.map((row) => ({
+                ...row,
+                profile: profileDayValue(row),
+                outbound: outboundDayValue(row),
+                label: new Date(`${row.date}T00:00:00`).toLocaleDateString("sv-SE", { weekday: "short", month: "2-digit", day: "2-digit" }),
+            }));
+        }
+
+        const grouped = new Map();
+        selectedRows.forEach((row) => {
+            const date = new Date(`${row.date}T00:00:00Z`);
+            let key;
+            let label;
+            if (mode === "month") {
+                key = row.date.slice(0, 7);
+                label = date.toLocaleDateString("sv-SE", { month: "long", year: "numeric", timeZone: "UTC" });
+            } else {
+                const day = date.getUTCDay() || 7;
+                date.setUTCDate(date.getUTCDate() - day + 1);
+                key = date.toISOString().slice(0, 10);
+                label = `v${isoWeek(row.date)} · ${dateLabel(key)}`;
+            }
+            if (!grouped.has(key)) {
+                grouped.set(key, { date: key, label, reach: 0, new_followers: 0, profile: 0, outbound: 0, engagement: 0, posts: 0, stories: 0, story_reach: 0 });
+            }
+            const target = grouped.get(key);
+            target.reach += row.reach || 0;
+            target.new_followers += row.new_followers || 0;
+            target.profile += profileDayValue(row);
+            target.outbound += outboundDayValue(row);
+            target.engagement += row.engagement || 0;
+            target.posts += row.posts || 0;
+            target.stories += row.stories || 0;
+            target.story_reach += row.story_reach || 0;
+        });
+        return Array.from(grouped.values());
+    };
+
+    const signalCard = (media, type) => {
+        const image = media.thumbnail_url || media.media_url || "";
+        const date = new Date(media.timestamp).toLocaleDateString("sv-SE", { month: "short", day: "numeric" });
+        let lead;
+        if (type === "saves") {
+            lead = `${fmt(media.saved || 0)} sparningar · ${fmt(media.shares || 0)} delningar`;
+        } else {
+            lead = (media.profile_visits || 0) > 0
+                ? `${fmt(media.profile_visits)} profilbesök`
+                : (media.bio_link_clicks || 0) > 0
+                    ? `${fmt(media.bio_link_clicks)} bio-klick`
+                    : (media.profile_activity || 0) > 0
+                        ? `${fmt(media.profile_activity)} profilaktiviteter`
+                        : `${fmt(media.follows || 0)} nya följare`;
+        }
+        const actions = type === "saves" ? "" : [
+            media.bio_link_clicks ? `${fmt(media.bio_link_clicks)} bio-klick` : "",
+            media.contact_actions ? `${fmt(media.contact_actions)} kontakt` : "",
+            media.follows ? `${fmt(media.follows)} följare` : "",
+        ].filter(Boolean).join(" · ");
+        return `
+            <a class="signal-item" href="${escapeHtml(media.permalink || "#")}" target="_blank" rel="noopener">
+                ${image ? `<img src="${escapeHtml(image)}" alt="" loading="lazy">` : ""}
+                <span class="signal-copy">
+                    <strong>${lead}</strong>
+                    <span>${mediaLabel(media)} · ${date} · ${fmt(media.reach || 0)} räckvidd</span>
+                    ${actions ? `<span>${actions}</span>` : ""}
+                    <em>${escapeHtml(shortCaption(media.caption))}</em>
+                </span>
+            </a>`;
+    };
+
+    const renderPeriodDetails = (periodDays, selectedRows, cutoffKey, latestDate) => {
+        const periodLabel = periodLabels[periodDays].toLowerCase();
+        const mediaEndDate = (data.updated_at || latestDate).slice(0, 10);
+        const selectedMedia = historyMedia
+            .filter((media) => {
+                const date = (media.timestamp || "").slice(0, 10);
+                return date >= cutoffKey && date <= mediaEndDate;
+            });
+        const aggregates = aggregateRows(selectedRows, periodDays);
+        const modeLabel = periodDays === 30 ? "Dagliga" : periodDays === 365 ? "Månadsvisa" : "Veckovisa";
+        const periodHeader = periodDays === 30 ? "Datum" : periodDays === 365 ? "Månad" : "Vecka";
+
+        set("content-period-note", `${fmt(selectedMedia.length)} inlägg från ${periodLabel}.`);
+        set("details-summary", `Visa fler detaljer för ${periodLabel}`);
+        set("insights-heading", `${modeLabel} insikter`);
+        set("insights-period-header", periodHeader);
+        set("insights-hint", `Pilarna jämför med föregående ${periodDays === 30 ? "dag" : periodDays === 365 ? "månad" : "vecka"}.`);
+
+        const topMedia = selectedMedia.slice().sort((a, b) => (b.reach || 0) - (a.reach || 0)).slice(0, 5);
+        const topGrid = $("top-media-grid");
+        if (topGrid) {
+            topGrid.innerHTML = topMedia.length ? topMedia.map((media) => {
+                const image = media.thumbnail_url || media.media_url || "";
+                const date = new Date(media.timestamp).toLocaleDateString("sv-SE", { month: "short", day: "numeric" });
+                return `
+                    <div class="media-card">
+                        <a href="${escapeHtml(media.permalink || "#")}" target="_blank" rel="noopener">
+                            ${image ? `<img src="${escapeHtml(image)}" alt="" loading="lazy">` : ""}
+                            <div class="meta">
+                                <strong>${fmt(media.reach || 0)} räckvidd</strong>
+                                <span>${mediaLabel(media)} · ${date}</span>
+                                <span>${fmt(media.like_count || 0)} gilla · ${fmt(media.comments_count || 0)} kommentarer · ${fmt(media.saved || 0)} sparningar · ${fmt(media.shares || 0)} delningar</span>
+                                <p>${escapeHtml(shortCaption(media.caption, 80))}</p>
+                            </div>
+                        </a>
+                    </div>`;
+            }).join("") : `<p class="signal-empty">Inga inlägg finns sparade för ${periodLabel} ännu.</p>`;
+        }
+
+        const profileMedia = selectedMedia
+            .filter((media) => (media.profile_visits || 0) + (media.bio_link_clicks || 0) + (media.contact_actions || 0) + (media.follows || 0) + (media.profile_activity || 0) > 0)
+            .sort((a, b) => ((b.profile_visits || 0) + (b.bio_link_clicks || 0) + (b.contact_actions || 0) + (b.follows || 0)) - ((a.profile_visits || 0) + (a.bio_link_clicks || 0) + (a.contact_actions || 0) + (a.follows || 0)))
+            .slice(0, 6);
+        const followerList = $("follower-media-list");
+        if (followerList) {
+            followerList.innerHTML = profileMedia.length
+                ? profileMedia.map((media) => signalCard(media, "profile")).join("")
+                : `<p class="signal-empty">Inga profil- eller följarsignaler har registrerats för inlägg under ${periodLabel}.</p>`;
+        }
+
+        const signalMedia = selectedMedia
+            .filter((media) => (media.saved || 0) + (media.shares || 0) > 0)
+            .sort((a, b) => ((b.saved || 0) + (b.shares || 0)) - ((a.saved || 0) + (a.shares || 0)))
+            .slice(0, 8);
+        const totalSaves = selectedMedia.reduce((sum, media) => sum + (media.saved || 0), 0);
+        const totalShares = selectedMedia.reduce((sum, media) => sum + (media.shares || 0), 0);
+        set("weekly-ss-status", signalMedia.length
+            ? `${fmt(signalMedia.length)} inlägg fick tillsammans ${fmt(totalSaves)} sparningar och ${fmt(totalShares)} delningar under perioden.`
+            : `Inga sparningar eller delningar har registrerats under ${periodLabel}.`);
+        const signalList = $("signal-media-list");
+        if (signalList) {
+            signalList.innerHTML = signalMedia.length
+                ? signalMedia.map((media) => signalCard(media, "saves")).join("")
+                : `<p class="signal-empty">När ett inlägg sparas eller delas visas själva inlägget här.</p>`;
+        }
+
+        const reach = selectedRows.reduce((sum, row) => sum + (row.reach || 0), 0);
+        const newFollowers = selectedRows.reduce((sum, row) => sum + (row.new_followers || 0), 0);
+        const rowProfile = selectedRows.reduce((sum, row) => sum + profileDayValue(row), 0);
+        const rowOutbound = selectedRows.reduce((sum, row) => sum + outboundDayValue(row), 0);
+        const mediaProfile = selectedMedia.reduce((sum, media) => sum + (media.profile_visits || 0), 0);
+        const mediaOutbound = selectedMedia.reduce((sum, media) => sum + (media.bio_link_clicks || 0) + (media.contact_actions || 0), 0);
+        const profile = rowProfile || mediaProfile;
+        const outbound = rowOutbound || mediaOutbound;
+        set("funnel-reach", fmt(reach));
+        set("funnel-profile-views", fmt(profile));
+        set("funnel-outbound-clicks", fmt(outbound));
+        set("funnel-new-followers", fmt(newFollowers));
+        set("profile-rate", pct(rateOf(profile, reach)));
+        set("profile-click-rate", pct(rateOf(outbound, profile)));
+        set("profile-follow-rate", pct(rateOf(newFollowers, reach)));
+        set("profile-funnel-story", `${fmt(profile)} profilbesök på ${fmt(reach)} i summerad räckvidd under ${periodLabel}. ${outbound ? `${fmt(outbound)} mätbara nästa steg registrerades.` : "Inga mätbara nästa steg registrerades i perioden."}`);
+        set("profile-chart-status", `${modeLabel} värden för vald period.`);
+        set("link-click-story", profileMedia.length
+            ? `${fmt(profileMedia.length)} inlägg gav mätbara profil-, klick- eller följarsignaler under ${periodLabel}.`
+            : `Här visas inlägg som leder människor mot profil eller nästa steg under ${periodLabel}.`);
+
+        const bestProfileDays = selectedRows.slice().sort((a, b) => profileDayValue(b) - profileDayValue(a)).filter((row) => profileDayValue(row) > 0).slice(0, 5);
+        const profileDayList = $("profile-day-list");
+        if (profileDayList) {
+            profileDayList.innerHTML = bestProfileDays.length ? bestProfileDays.map((row) => `
+                <div class="profile-day-item">
+                    <span>${new Date(`${row.date}T00:00:00`).toLocaleDateString("sv-SE", { weekday: "short", month: "short", day: "numeric" })}</span>
+                    <strong>${fmt(profileDayValue(row))} profilbesök</strong>
+                    <em>${fmt(row.reach || 0)} räckvidd · ${row.posts ? `${fmt(row.posts)} inlägg` : "ingen publicering"}${outboundDayValue(row) ? ` · ${fmt(outboundDayValue(row))} vidare` : ""}</em>
+                </div>`).join("") : `<p class="signal-empty">Inga dagar med registrerade profilbesök i vald period.</p>`;
+        }
+
+        const profileCanvas = $("chart-profile");
+        const oldProfileChart = profileCanvas ? Chart.getChart(profileCanvas) : null;
+        if (oldProfileChart) oldProfileChart.destroy();
+        const hasProfileData = aggregates.some((row) => row.profile || row.outbound);
+        const profileChartBlock = $("profile-chart-block");
+        if (profileChartBlock) profileChartBlock.hidden = !hasProfileData;
+        if (profileCanvas && hasProfileData) {
+            new Chart(profileCanvas, {
+                type: "bar",
+                data: {
+                    labels: aggregates.map((row) => row.label),
+                    datasets: [
+                        { label: "Profilbesök", data: aggregates.map((row) => row.profile), backgroundColor: "#6d5bd0", yAxisID: "y" },
+                        { label: "Vidare", data: aggregates.map((row) => row.outbound), type: "line", borderColor: "#0f766e", backgroundColor: "rgba(15,118,110,.12)", tension: .3, fill: false, yAxisID: "y1" },
+                    ],
+                },
+                options: { responsive: true, plugins: { legend: { position: "bottom" } }, scales: { y: { beginAtZero: true, ticks: { precision: 0 } }, y1: { beginAtZero: true, position: "right", ticks: { precision: 0 }, grid: { drawOnChartArea: false } } } },
+            });
+        }
+
+        const formatGroups = new Map();
+        selectedMedia.forEach((media) => {
+            const key = media.media_product_type === "REELS" ? "REELS" : media.media_type || "OTHER";
+            const value = formatGroups.get(key) || { count: 0, engagement: 0 };
+            value.count += 1;
+            value.engagement += media.engagement ?? ((media.like_count || 0) + (media.comments_count || 0) + (media.saved || 0) + (media.shares || 0));
+            formatGroups.set(key, value);
+        });
+        const formatEntries = Array.from(formatGroups.entries()).filter(([, value]) => value.count > 0);
+        const formatBlock = $("format-block");
+        const showFormats = selectedMedia.length >= 3 && formatEntries.length >= 2;
+        if (formatBlock) formatBlock.hidden = !showFormats;
+        const formatCanvas = $("chart-format");
+        const oldFormatChart = formatCanvas ? Chart.getChart(formatCanvas) : null;
+        if (oldFormatChart) oldFormatChart.destroy();
+        if (formatCanvas && showFormats) {
+            set("format-status", `Baserat på ${fmt(selectedMedia.length)} inlägg i ${fmt(formatEntries.length)} format under ${periodLabel}.`);
+            new Chart(formatCanvas, {
+                type: "bar",
+                data: {
+                    labels: formatEntries.map(([key]) => ({ IMAGE: "Bild", CAROUSEL_ALBUM: "Karusell", VIDEO: "Video", REELS: "Reels" }[key] || key)),
+                    datasets: [{ label: "Snitt-engagemang", data: formatEntries.map(([, value]) => Math.round(value.engagement / value.count * 10) / 10), backgroundColor: ["#c85f45", "#28745d", "#d49a32", "#6a6a78"] }],
+                },
+                options: { responsive: true, plugins: { legend: { display: false } } },
+            });
+        }
+
+        const saveGroups = new Map();
+        selectedMedia.slice().reverse().forEach((media) => {
+            const date = (media.timestamp || "").slice(0, 10);
+            const key = periodDays === 365 ? date.slice(0, 7) : `${date.slice(0, 4)}-W${String(isoWeek(date)).padStart(2, "0")}`;
+            const label = periodDays === 365
+                ? new Date(`${date.slice(0, 7)}-01T00:00:00`).toLocaleDateString("sv-SE", { month: "short" })
+                : `v${isoWeek(date)}`;
+            const target = saveGroups.get(key) || { label, saves: 0, shares: 0 };
+            target.saves += media.saved || 0;
+            target.shares += media.shares || 0;
+            saveGroups.set(key, target);
+        });
+        const saveRows = Array.from(saveGroups.values());
+        set("save-share-heading", periodDays === 365 ? "Sparningar och delningar månad för månad" : "Sparningar och delningar vecka för vecka");
+        const saveCanvas = $("chart-weekly-ss");
+        const oldSaveChart = saveCanvas ? Chart.getChart(saveCanvas) : null;
+        if (oldSaveChart) oldSaveChart.destroy();
+        if (saveCanvas) {
+            new Chart(saveCanvas, {
+                type: "bar",
+                data: { labels: saveRows.map((row) => row.label), datasets: [
+                    { label: "Sparningar", data: saveRows.map((row) => row.saves), backgroundColor: "#2e7d32", stack: "ss" },
+                    { label: "Delningar", data: saveRows.map((row) => row.shares), backgroundColor: "#66bb6a", stack: "ss" },
+                ] },
+                options: { responsive: true, plugins: { legend: { position: "bottom" } }, scales: { y: { stacked: true, beginAtZero: true, ticks: { precision: 0 } }, x: { stacked: true, ticks: { maxTicksLimit: 12 } } } },
+            });
+        }
+
+        const bestPostingBlock = $("best-posting-block");
+        if (bestPostingBlock) bestPostingBlock.hidden = selectedMedia.length < 8;
+        if (selectedMedia.length >= 8) {
+            const weekdayScores = new Map();
+            const hourScores = new Map();
+            selectedMedia.forEach((media) => {
+                const date = new Date(media.timestamp);
+                const score = media.engagement ?? ((media.like_count || 0) + (media.comments_count || 0) + (media.saved || 0) + (media.shares || 0));
+                const weekday = date.toLocaleDateString("sv-SE", { weekday: "long", timeZone: "Europe/Stockholm" });
+                const hour = new Intl.DateTimeFormat("sv-SE", { hour: "2-digit", hour12: false, timeZone: "Europe/Stockholm" }).format(date).slice(0, 2);
+                for (const [map, key] of [[weekdayScores, weekday], [hourScores, hour]]) {
+                    const value = map.get(key) || { total: 0, count: 0 };
+                    value.total += score;
+                    value.count += 1;
+                    map.set(key, value);
+                }
+            });
+            const best = (map) => Array.from(map.entries()).sort((a, b) => (b[1].total / b[1].count) - (a[1].total / a[1].count))[0]?.[0];
+            set("best-weekday", best(weekdayScores) || "–");
+            set("best-hour", best(hourScores) ? `kl ${best(hourScores)}:00` : "–");
+            set("best-posts-analyzed", fmt(selectedMedia.length));
+            const hint = document.querySelector(".best-posting-hint");
+            if (hint) hint.innerHTML = `Baserat på <span id="best-posts-analyzed">${fmt(selectedMedia.length)}</span> inlägg under ${periodLabel}.`;
+        }
+
+        const storySummary = data.story_summary_30d || {};
+        const selectedStories = (storySummary.recent_stories || []).filter((story) => {
+            const date = (story.timestamp || story.first_seen_at || "").slice(0, 10);
+            return date >= cutoffKey && date <= mediaEndDate;
+        });
+        const storyDays = selectedRows.filter((row) => (row.stories || 0) > 0);
+        const storyCount = storyDays.reduce((sum, row) => sum + (row.stories || 0), 0) || selectedStories.length;
+        const storyReach = storyDays.reduce((sum, row) => sum + (row.story_reach || 0), 0) || selectedStories.reduce((sum, story) => sum + (story.reach || 0), 0);
+        const storyImpressions = selectedStories.reduce((sum, story) => sum + (story.impressions || 0), 0);
+        const storyReplies = selectedStories.reduce((sum, story) => sum + (story.replies || 0), 0);
+        const storyTapsBack = selectedStories.reduce((sum, story) => sum + (story.taps_back || 0), 0);
+        const storiesBlock = $("stories-block");
+        if (storiesBlock) storiesBlock.hidden = storyCount === 0 && selectedStories.length === 0;
+        set("kpi-stories", fmt(storyCount));
+        set("story-reach", fmt(storyReach));
+        set("story-impressions", fmt(storyImpressions));
+        set("story-replies", fmt(storyReplies));
+        set("story-taps-back", fmt(storyTapsBack));
+        set("stories-result", storyCount
+            ? `${fmt(storyCount)} händelser har fångats under ${periodLabel}, med ${fmt(storyReach)} i registrerad Story-räckvidd.`
+            : `Inga händelser har fångats under ${periodLabel}.`);
+        const storyList = $("story-list");
+        if (storyList) {
+            storyList.innerHTML = selectedStories.length ? selectedStories.map((story) => {
+                const image = story.thumbnail_url || story.media_url || "";
+                const date = new Date(story.timestamp || story.first_seen_at).toLocaleDateString("sv-SE", { weekday: "short", month: "short", day: "numeric" });
+                return `
+                    <a class="story-item" href="${escapeHtml(story.permalink || "#")}" target="_blank" rel="noopener">
+                        ${image ? `<img src="${escapeHtml(image)}" alt="" loading="lazy">` : ""}
+                        <span><strong>${date}</strong><em>${fmt(story.reach || 0)} räckvidd · ${fmt(story.impressions || 0)} visningar · ${fmt(story.replies || 0)} svar</em></span>
+                    </a>`;
+            }).join("") : `<p class="signal-empty">Inga enskilda händelser finns sparade för vald period.</p>`;
+        }
+
+        const arrow = (value, previous) => {
+            if (previous == null || previous === 0) return { c: "arrow-flat", s: "→" };
+            const delta = (value - previous) / previous;
+            if (delta > .1) return { c: "arrow-up", s: "↑" };
+            if (delta < -.1) return { c: "arrow-down", s: "↓" };
+            return { c: "arrow-flat", s: "→" };
+        };
+        const insightsBody = $("daily-insights-body");
+        if (insightsBody) {
+            insightsBody.innerHTML = aggregates.map((row, index) => {
+                const previous = aggregates[index - 1];
+                const reachArrow = arrow(row.reach || 0, previous?.reach);
+                const followerArrow = arrow(row.new_followers || 0, previous?.new_followers);
+                const engagementArrow = arrow(row.engagement || 0, previous?.engagement);
+                return `
+                    <tr>
+                        <td>${escapeHtml(row.label)}</td>
+                        <td>${fmt(row.reach || 0)} <span class="${reachArrow.c}">${reachArrow.s}</span></td>
+                        <td>${fmt(row.new_followers || 0)} <span class="${followerArrow.c}">${followerArrow.s}</span></td>
+                        <td>${row.profile ? fmt(row.profile) : "–"}</td>
+                        <td>${row.outbound ? fmt(row.outbound) : "–"}</td>
+                        <td>${fmt(row.engagement || 0)} <span class="${engagementArrow.c}">${engagementArrow.s}</span></td>
+                        <td>${row.posts ? fmt(row.posts) : "–"}</td>
+                        <td>${row.stories ? `${fmt(row.stories)} (${fmt(row.story_reach || 0)})` : "–"}</td>
+                    </tr>`;
+            }).reverse().join("");
+        }
+    };
+
     const renderHistory = (periodDays) => {
         if (!historyDaily.length) return;
 
         const latestDate = historyDaily[historyDaily.length - 1].date;
-        const latest = new Date(`${latestDate}T00:00:00`);
+        const latest = new Date(`${latestDate}T00:00:00Z`);
         const cutoff = new Date(latest);
-        cutoff.setDate(cutoff.getDate() - periodDays + 1);
+        cutoff.setUTCDate(cutoff.getUTCDate() - periodDays + 1);
         const cutoffKey = cutoff.toISOString().slice(0, 10);
         const selectedRows = historyDaily.filter((row) => row.date >= cutoffKey && row.date <= latestDate);
         const selectedSnapshots = historySnapshots.filter((row) => row.date >= cutoffKey);
@@ -157,6 +506,8 @@
             ? `${fmt(bestDay.reach || 0)} räckvidd${bestDay.posts ? ` · ${fmt(bestDay.posts)} inlägg` : ""}`
             : "–");
         set("history-chart-caption", `Daglig räckvidd och nya följare under ${periodLabels[periodDays].toLowerCase()}. Punkterna visar dagar då du publicerade.`);
+
+        renderPeriodDetails(periodDays, selectedRows, cutoffKey, latestDate);
 
         const canvas = $("chart-history");
         if (!canvas) return;
@@ -232,8 +583,6 @@
             renderHistory(Number(button.dataset.periodDays));
         });
     });
-    renderHistory(90);
-
     set("updated-at", new Date(data.updated_at).toLocaleString("sv-SE"));
     set("kpi-followers", fmt((data.profile || {}).followers_count));
     set("kpi-reach", fmt(reach30));
@@ -665,4 +1014,6 @@
             });
         });
     }
+
+    renderHistory(90);
 })();

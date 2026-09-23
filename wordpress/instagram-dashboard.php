@@ -108,7 +108,7 @@ function igdash_shortcode() {
                     <span class="section-kicker">Innehåll som gav respons</span>
                     <h2>Vad människor reagerade på</h2>
                 </div>
-                <p>Inlägg från de senaste 30 dagarna, medan den längre historiken fortsätter byggas upp.</p>
+                <p id="content-period-note">Inlägg från vald period.</p>
             </div>
             <div class="content-result-grid">
                 <div>
@@ -135,7 +135,7 @@ function igdash_shortcode() {
         </section>
 
         <details class="dashboard-details">
-            <summary>Visa fler detaljer för de senaste 30 dagarna</summary>
+            <summary id="details-summary">Visa fler detaljer för vald period</summary>
             <div class="details-body">
                 <section class="profile-funnel-card">
                     <div class="profile-funnel-summary">
@@ -152,7 +152,7 @@ function igdash_shortcode() {
                     <div class="profile-rates">
                         <div><span>Profilbesöksgrad</span><strong id="profile-rate">–</strong></div>
                         <div><span>Klick från profil</span><strong id="profile-click-rate">–</strong></div>
-                        <div><span>Följare från profil</span><strong id="profile-follow-rate">–</strong></div>
+                        <div><span>Nya följare / räckvidd</span><strong id="profile-follow-rate">–</strong></div>
                     </div>
                     <div class="profile-chart" id="profile-chart-block">
                         <div><h3>Profilbesök över tid</h3><p id="profile-chart-status">–</p></div>
@@ -184,7 +184,7 @@ function igdash_shortcode() {
                 </section>
 
                 <section class="chart-card">
-                    <h2>Sparningar och delningar vecka för vecka</h2>
+                    <h2 id="save-share-heading">Sparningar och delningar vecka för vecka</h2>
                     <canvas id="chart-weekly-ss" height="95"></canvas>
                 </section>
 
@@ -194,11 +194,11 @@ function igdash_shortcode() {
                 </section>
 
                 <section class="daily-insights">
-                    <h2>Dagliga insikter</h2>
-                    <p class="daily-insights-hint">Pilarna jämför dagen med det föregående rullande sjudagarssnittet.</p>
+                    <h2 id="insights-heading">Dagliga insikter</h2>
+                    <p class="daily-insights-hint" id="insights-hint">Pilarna jämför dagen med föregående dag.</p>
                     <div class="daily-insights-scroll">
                         <table class="daily-insights-table">
-                            <thead><tr><th>Datum</th><th>Räckvidd</th><th>Nya följare</th><th>Profil</th><th>Vidare</th><th>Engagemang</th><th>Inlägg</th><th>Händelser</th></tr></thead>
+                            <thead><tr><th id="insights-period-header">Datum</th><th>Räckvidd</th><th>Nya följare</th><th>Profil</th><th>Vidare</th><th>Engagemang</th><th>Inlägg</th><th>Händelser</th></tr></thead>
                             <tbody id="daily-insights-body"></tbody>
                         </table>
                     </div>

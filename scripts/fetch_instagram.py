@@ -250,6 +250,32 @@ def merge_snapshot_history(existing_payload, snapshot, days=HISTORY_DAYS):
     ]
 
 
+def merge_media_history(existing_payload, media_list, days=HISTORY_DAYS):
+    """Behåll inlägg och deras senaste mätvärden för periodjämförelser."""
+    history = existing_payload.get("history", {})
+    by_id = {}
+    for media in [*history.get("media", []), *media_list]:
+        key = media.get("id") or media.get("permalink")
+        if not key:
+            continue
+        by_id[key] = {**by_id.get(key, {}), **media}
+
+    cutoff = datetime.now(timezone.utc) - timedelta(days=days)
+    recent = []
+    for media in by_id.values():
+        timestamp = media.get("timestamp")
+        if not timestamp:
+            continue
+        try:
+            published_at = datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%S%z")
+        except ValueError:
+            published_at = datetime.fromisoformat(timestamp.replace("Z", "+00:00"))
+        if published_at >= cutoff:
+            recent.append(media)
+
+    return sorted(recent, key=lambda media: media.get("timestamp", ""), reverse=True)
+
+
 def fetch_active_stories():
     """Hämta aktiva händelser. Instagram lämnar bara ut Stories medan de är aktiva."""
     try:
@@ -818,6 +844,7 @@ def main():
         }
         history_daily = merge_daily_history(existing_payload, daily_rows)
         history_snapshots = merge_snapshot_history(existing_payload, snapshot)
+        history_media = merge_media_history(existing_payload, media_list)
 
         payload = {
             "updated_at": datetime.now(timezone.utc).isoformat(),
@@ -840,6 +867,7 @@ def main():
                 "available_from": history_daily[0]["date"] if history_daily else snapshot["date"],
                 "daily": history_daily,
                 "snapshots": history_snapshots,
+                "media": history_media,
             },
             "weekly_saves_shares": weekly_saves_shares(media_list, weeks=6),
             "signal_media": signal_media(media_list),
