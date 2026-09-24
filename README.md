@@ -26,7 +26,7 @@ Dashboarden ska vara redo när du börjar dagen:
 - En enda Codex-morgonkontroll verifierar kl. 04:50 att nattkörningen lyckades och rapporterar bara om något behöver åtgärdas.
 - `https://digitalaelle.se/dashboard` visar den senaste publicerade JSON-filen.
 - `scripts/open_dashboard.sh` öppnar dashboarden i webbläsaren.
-- `scripts/install_morning_dashboard.sh` installerar en macOS LaunchAgent som öppnar dashboarden varje dag kl. 08:00.
+- `scripts/install_morning_dashboard.sh` installerar en macOS LaunchAgent som efter kl. 05:00 öppnar dashboarden när dagens data är färsk.
 
 Installera morgonöppningen på datorn:
 

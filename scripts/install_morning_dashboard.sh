@@ -29,7 +29,7 @@ cat > "$PLIST_PATH" <<PLIST
   <key>StartCalendarInterval</key>
   <dict>
     <key>Hour</key>
-    <integer>8</integer>
+    <integer>5</integer>
     <key>Minute</key>
     <integer>0</integer>
   </dict>
@@ -52,7 +52,7 @@ PLIST
 launchctl unload "$PLIST_PATH" >/dev/null 2>&1 || true
 launchctl load "$PLIST_PATH"
 
-echo "Installerat: dashboarden öppnas en gång per dag efter kl 08:00."
-echo "Den kontrollerar även var 15:e minut, så den funkar bättre om datorn sover kl 08:00."
+echo "Installerat: dashboarden öppnas en gång per dag efter kl 05:00 när dagens data är färsk."
+echo "Den kontrollerar var 15:e minut och öppnar när datorn är vaken och nattkörningen är klar."
 echo "LaunchAgent: $PLIST_PATH"
 echo "Logg: ${LOG_DIR}/morning-dashboard.log"
