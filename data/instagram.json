@@ -1,34 +1,30 @@
 {
-  "updated_at": "2026-09-23T05:32:46.786337+00:00",
+  "updated_at": "2026-09-24T00:05:16.496737+00:00",
   "profile": {
     "username": "digitalaelle.se",
-    "followers_count": 238,
-    "follows_count": 327,
+    "followers_count": 239,
+    "follows_count": 334,
     "media_count": 110,
     "id": "17841456498681952"
   },
   "totals_30d": {
-    "views": 1418,
-    "profile_views": 72,
+    "views": 1399,
+    "profile_views": 76,
     "profile_link_clicks": 0,
     "profile_link_clicks_metric": "profile_links_taps",
     "profile_link_clicks_available": true,
     "accounts_engaged": 21,
     "total_interactions": 50,
-    "reach": 568
+    "reach": 569
   },
   "extras_30d": {
     "saves": 1,
     "shares": 0,
-    "engagement_rate_pct": 8.8,
-    "reach_non_followers_pct": 63.2
+    "engagement_rate_pct": 8.79,
+    "reach_non_followers_pct": 63.0
   },
   "time_series_30d": {
     "reach": [
-      {
-        "date": "2026-08-24",
-        "value": 1
-      },
       {
         "date": "2026-08-25",
         "value": 2
@@ -144,13 +140,13 @@
       {
         "date": "2026-09-22",
         "value": 5
+      },
+      {
+        "date": "2026-09-23",
+        "value": 2
       }
     ],
     "follower_count": [
-      {
-        "date": "2026-08-24",
-        "value": 0
-      },
       {
         "date": "2026-08-25",
         "value": 0
@@ -265,6 +261,10 @@
       },
       {
         "date": "2026-09-22",
+        "value": 3
+      },
+      {
+        "date": "2026-09-23",
         "value": 0
       }
     ],
@@ -272,24 +272,6 @@
     "profile_link_clicks": []
   },
   "daily_insights": [
-    {
-      "date": "2026-08-24",
-      "reach": 1,
-      "new_followers": 0,
-      "profile_views": 0,
-      "profile_link_clicks": 0,
-      "content_profile_visits": 0,
-      "content_profile_activity": 0,
-      "content_follows": 0,
-      "bio_link_clicks": 0,
-      "contact_actions": 0,
-      "engagement": 0,
-      "posts": 0,
-      "stories": 0,
-      "story_reach": 0,
-      "story_replies": 0,
-      "story_link_clicks": 0
-    },
     {
       "date": "2026-08-25",
       "reach": 2,
@@ -797,6 +779,24 @@
     {
       "date": "2026-09-22",
       "reach": 5,
+      "new_followers": 3,
+      "profile_views": 0,
+      "profile_link_clicks": 0,
+      "content_profile_visits": 0,
+      "content_profile_activity": 0,
+      "content_follows": 0,
+      "bio_link_clicks": 0,
+      "contact_actions": 0,
+      "engagement": 0,
+      "posts": 0,
+      "stories": 0,
+      "story_reach": 0,
+      "story_replies": 0,
+      "story_link_clicks": 0
+    },
+    {
+      "date": "2026-09-23",
+      "reach": 2,
       "new_followers": 0,
       "profile_views": 0,
       "profile_link_clicks": 0,
@@ -830,18 +830,18 @@
       "link_clicks": 0
     },
     "avg_reach_story_days": 0,
-    "avg_reach_other_days": 18.9,
+    "avg_reach_other_days": 19.0,
     "story_day_reach_delta_pct": -100.0,
     "avg_reach_tuesdays": 29.0,
-    "avg_reach_all_days": 18.9,
-    "tuesday_reach_delta_pct": 53.4,
+    "avg_reach_all_days": 19.0,
+    "tuesday_reach_delta_pct": 52.6,
     "recent_stories": []
   },
   "profile_summary_30d": {
     "totals": {
-      "reach": 568,
-      "profile_views": 72,
-      "new_followers": 14,
+      "reach": 569,
+      "profile_views": 76,
+      "new_followers": 17,
       "profile_link_clicks": 0,
       "outbound_clicks": 0,
       "content_profile_visits": 1,
@@ -851,10 +851,10 @@
       "contact_actions": 0
     },
     "rates": {
-      "profile_visit_rate_pct": 12.7,
+      "profile_visit_rate_pct": 13.4,
       "content_profile_visit_rate_pct": 0.2,
       "link_click_rate_pct": 0.0,
-      "follow_rate_pct": 19.4
+      "follow_rate_pct": 22.4
     },
     "profile_views_series_available": false,
     "profile_link_clicks_series_available": false,
@@ -873,156 +873,6 @@
       }
     ],
     "profile_activity_actions": {}
-  },
-  "weekly_saves_shares": [
-    {
-      "week": "2026-W34",
-      "saves": 0,
-      "shares": 0,
-      "total": 0,
-      "posts": 0,
-      "is_current": false
-    },
-    {
-      "week": "2026-W35",
-      "saves": 0,
-      "shares": 0,
-      "total": 0,
-      "posts": 0,
-      "is_current": false
-    },
-    {
-      "week": "2026-W36",
-      "saves": 0,
-      "shares": 0,
-      "total": 0,
-      "posts": 0,
-      "is_current": false
-    },
-    {
-      "week": "2026-W37",
-      "saves": 0,
-      "shares": 0,
-      "total": 0,
-      "posts": 0,
-      "is_current": false
-    },
-    {
-      "week": "2026-W38",
-      "saves": 1,
-      "shares": 0,
-      "total": 1,
-      "posts": 1,
-      "is_current": false
-    },
-    {
-      "week": "2026-W39",
-      "saves": 0,
-      "shares": 0,
-      "total": 0,
-      "posts": 0,
-      "is_current": true
-    }
-  ],
-  "signal_media": [
-    {
-      "id": "18133690807887015",
-      "caption": "Jag såg en annons som jag vill dela med dig som vill automatisera vissa DM.\n\nÖnskade du att du hade en administratör som skötte allt detta åt dig? Jag är anställningsbar.",
-      "media_type": "CAROUSEL_ALBUM",
-      "media_product_type": "FEED",
-      "permalink": "https://www.instagram.com/p/DddnWAyGyT3/",
-      "thumbnail_url": null,
-      "media_url": "https://scontent-sjc6-1.cdninstagram.com/v/t51.82787-15/814908122_18028824359883290_176960503711830327_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=kNdWqLKEg04Q7kNvwEvwd0D&_nc_oc=Adriox9euz_mLuu3aSY-U4eRJTD4Xw3u5Cnw05tyJjTzft_EMEevaPMoJzFljm4FraE&_nc_zt=23&_nc_ht=scontent-sjc6-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=OzBfy5-r8OUl_m8OySZVsA&oh=00_AQL81EXmRC04mqlSeonjFHA9AcsyqDSxSpgb9jlh04xgIg&oe=6AB94FB4",
-      "timestamp": "2026-09-19T08:47:07+0000",
-      "reach": 114,
-      "saved": 1,
-      "shares": 0,
-      "signal_score": 1
-    }
-  ],
-  "follower_media": [
-    {
-      "id": "18133690807887015",
-      "caption": "Jag såg en annons som jag vill dela med dig som vill automatisera vissa DM.\n\nÖnskade du att du hade en administratör som skötte allt detta åt dig? Jag är anställningsbar.",
-      "media_type": "CAROUSEL_ALBUM",
-      "media_product_type": "FEED",
-      "permalink": "https://www.instagram.com/p/DddnWAyGyT3/",
-      "thumbnail_url": null,
-      "media_url": "https://scontent-sjc6-1.cdninstagram.com/v/t51.82787-15/814908122_18028824359883290_176960503711830327_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=kNdWqLKEg04Q7kNvwEvwd0D&_nc_oc=Adriox9euz_mLuu3aSY-U4eRJTD4Xw3u5Cnw05tyJjTzft_EMEevaPMoJzFljm4FraE&_nc_zt=23&_nc_ht=scontent-sjc6-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=OzBfy5-r8OUl_m8OySZVsA&oh=00_AQL81EXmRC04mqlSeonjFHA9AcsyqDSxSpgb9jlh04xgIg&oe=6AB94FB4",
-      "timestamp": "2026-09-19T08:47:07+0000",
-      "reach": 114,
-      "follows": 0,
-      "profile_activity": 0,
-      "profile_visits": 1
-    }
-  ],
-  "profile_media": [
-    {
-      "id": "18133690807887015",
-      "caption": "Jag såg en annons som jag vill dela med dig som vill automatisera vissa DM.\n\nÖnskade du att du hade en administratör som skötte allt detta åt dig? Jag är anställningsbar.",
-      "media_type": "CAROUSEL_ALBUM",
-      "media_product_type": "FEED",
-      "permalink": "https://www.instagram.com/p/DddnWAyGyT3/",
-      "thumbnail_url": null,
-      "media_url": "https://scontent-sjc6-1.cdninstagram.com/v/t51.82787-15/814908122_18028824359883290_176960503711830327_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=kNdWqLKEg04Q7kNvwEvwd0D&_nc_oc=Adriox9euz_mLuu3aSY-U4eRJTD4Xw3u5Cnw05tyJjTzft_EMEevaPMoJzFljm4FraE&_nc_zt=23&_nc_ht=scontent-sjc6-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=OzBfy5-r8OUl_m8OySZVsA&oh=00_AQL81EXmRC04mqlSeonjFHA9AcsyqDSxSpgb9jlh04xgIg&oe=6AB94FB4",
-      "timestamp": "2026-09-19T08:47:07+0000",
-      "reach": 114,
-      "follows": 0,
-      "profile_activity": 0,
-      "profile_visits": 1,
-      "bio_link_clicks": 0,
-      "contact_actions": 0,
-      "profile_visit_rate_pct": 0.9,
-      "profile_activity_breakdown": {}
-    }
-  ],
-  "best_posting": {
-    "weekday": "Lördag",
-    "weekday_avg_engagement": 8.0,
-    "hour": 10,
-    "hour_avg_engagement": 8.0,
-    "posts_analyzed": 1
-  },
-  "top_media": [
-    {
-      "id": "18133690807887015",
-      "caption": "Jag såg en annons som jag vill dela med dig som vill automatisera vissa DM.\n\nÖnskade du att du hade en administratör som skötte allt detta åt dig? Jag är anställningsbar.",
-      "media_type": "CAROUSEL_ALBUM",
-      "media_product_type": "FEED",
-      "permalink": "https://www.instagram.com/p/DddnWAyGyT3/",
-      "media_url": "https://scontent-sjc6-1.cdninstagram.com/v/t51.82787-15/814908122_18028824359883290_176960503711830327_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=kNdWqLKEg04Q7kNvwEvwd0D&_nc_oc=Adriox9euz_mLuu3aSY-U4eRJTD4Xw3u5Cnw05tyJjTzft_EMEevaPMoJzFljm4FraE&_nc_zt=23&_nc_ht=scontent-sjc6-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=OzBfy5-r8OUl_m8OySZVsA&oh=00_AQL81EXmRC04mqlSeonjFHA9AcsyqDSxSpgb9jlh04xgIg&oe=6AB94FB4",
-      "timestamp": "2026-09-19T08:47:07+0000",
-      "like_count": 3,
-      "comments_count": 4,
-      "reach": 114,
-      "saved": 1,
-      "shares": 0,
-      "follows": 0,
-      "profile_activity": 0,
-      "profile_visits": 1,
-      "profile_activity_breakdown": {},
-      "bio_link_clicks": 0,
-      "contact_actions": 0,
-      "engagement": 8
-    }
-  ],
-  "format_breakdown": {
-    "IMAGE": {
-      "count": 0,
-      "avg_engagement": 0
-    },
-    "CAROUSEL_ALBUM": {
-      "count": 1,
-      "avg_engagement": 8.0
-    },
-    "VIDEO": {
-      "count": 0,
-      "avg_engagement": 0
-    },
-    "REELS": {
-      "count": 0,
-      "avg_engagement": 0
-    }
   },
   "history": {
     "retention_days": 366,
@@ -3445,6 +3295,24 @@
       {
         "date": "2026-09-22",
         "reach": 5,
+        "new_followers": 3,
+        "profile_views": 0,
+        "profile_link_clicks": 0,
+        "content_profile_visits": 0,
+        "content_profile_activity": 0,
+        "content_follows": 0,
+        "bio_link_clicks": 0,
+        "contact_actions": 0,
+        "engagement": 0,
+        "posts": 0,
+        "stories": 0,
+        "story_reach": 0,
+        "story_replies": 0,
+        "story_link_clicks": 0
+      },
+      {
+        "date": "2026-09-23",
+        "reach": 2,
         "new_followers": 0,
         "profile_views": 0,
         "profile_link_clicks": 0,
@@ -5047,6 +4915,19 @@
         "engagement_rate_30d": 8.8,
         "posts_30d": 1,
         "saves_shares_30d": 1
+      },
+      {
+        "date": "2026-09-24",
+        "followers": 239,
+        "following": 334,
+        "media_count": 110,
+        "reach_30d": 569,
+        "profile_views_30d": 76,
+        "new_followers_30d": 17,
+        "outbound_clicks_30d": 0,
+        "engagement_rate_30d": 8.79,
+        "posts_30d": 1,
+        "saves_shares_30d": 1
       }
     ],
     "media": [
@@ -5056,11 +4937,11 @@
         "media_type": "CAROUSEL_ALBUM",
         "media_product_type": "FEED",
         "permalink": "https://www.instagram.com/p/DddnWAyGyT3/",
-        "media_url": "https://scontent-sjc6-1.cdninstagram.com/v/t51.82787-15/814908122_18028824359883290_176960503711830327_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=kNdWqLKEg04Q7kNvwEvwd0D&_nc_oc=Adriox9euz_mLuu3aSY-U4eRJTD4Xw3u5Cnw05tyJjTzft_EMEevaPMoJzFljm4FraE&_nc_zt=23&_nc_ht=scontent-sjc6-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=OzBfy5-r8OUl_m8OySZVsA&oh=00_AQL81EXmRC04mqlSeonjFHA9AcsyqDSxSpgb9jlh04xgIg&oe=6AB94FB4",
+        "media_url": "https://scontent-sjc6-1.cdninstagram.com/v/t51.82787-15/814908122_18028824359883290_176960503711830327_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=kNdWqLKEg04Q7kNvwHyn7Tt&_nc_oc=Adpz2aCm3a19tBEfeP0-_AYdQ6gPVDccOzQAJrvW1fcRVNFYTc9qbjkZuxiptRQEogs&_nc_zt=23&_nc_ht=scontent-sjc6-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=4SNTkojUgJaMqxRbcRZ4Lg&oh=00_AQKAUMiNL--szC_v8N98qi3MwPBTuFHQ6EGgmUoNRiLbpg&oe=6ABA30B4",
         "timestamp": "2026-09-19T08:47:07+0000",
         "like_count": 3,
         "comments_count": 4,
-        "reach": 114,
+        "reach": 116,
         "saved": 1,
         "shares": 0,
         "follows": 0,
@@ -5590,5 +5471,155 @@
         "engagement": 5
       }
     ]
+  },
+  "weekly_saves_shares": [
+    {
+      "week": "2026-W34",
+      "saves": 0,
+      "shares": 0,
+      "total": 0,
+      "posts": 0,
+      "is_current": false
+    },
+    {
+      "week": "2026-W35",
+      "saves": 0,
+      "shares": 0,
+      "total": 0,
+      "posts": 0,
+      "is_current": false
+    },
+    {
+      "week": "2026-W36",
+      "saves": 0,
+      "shares": 0,
+      "total": 0,
+      "posts": 0,
+      "is_current": false
+    },
+    {
+      "week": "2026-W37",
+      "saves": 0,
+      "shares": 0,
+      "total": 0,
+      "posts": 0,
+      "is_current": false
+    },
+    {
+      "week": "2026-W38",
+      "saves": 1,
+      "shares": 0,
+      "total": 1,
+      "posts": 1,
+      "is_current": false
+    },
+    {
+      "week": "2026-W39",
+      "saves": 0,
+      "shares": 0,
+      "total": 0,
+      "posts": 0,
+      "is_current": true
+    }
+  ],
+  "signal_media": [
+    {
+      "id": "18133690807887015",
+      "caption": "Jag såg en annons som jag vill dela med dig som vill automatisera vissa DM.\n\nÖnskade du att du hade en administratör som skötte allt detta åt dig? Jag är anställningsbar.",
+      "media_type": "CAROUSEL_ALBUM",
+      "media_product_type": "FEED",
+      "permalink": "https://www.instagram.com/p/DddnWAyGyT3/",
+      "thumbnail_url": null,
+      "media_url": "https://scontent-sjc6-1.cdninstagram.com/v/t51.82787-15/814908122_18028824359883290_176960503711830327_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=kNdWqLKEg04Q7kNvwHyn7Tt&_nc_oc=Adpz2aCm3a19tBEfeP0-_AYdQ6gPVDccOzQAJrvW1fcRVNFYTc9qbjkZuxiptRQEogs&_nc_zt=23&_nc_ht=scontent-sjc6-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=4SNTkojUgJaMqxRbcRZ4Lg&oh=00_AQKAUMiNL--szC_v8N98qi3MwPBTuFHQ6EGgmUoNRiLbpg&oe=6ABA30B4",
+      "timestamp": "2026-09-19T08:47:07+0000",
+      "reach": 116,
+      "saved": 1,
+      "shares": 0,
+      "signal_score": 1
+    }
+  ],
+  "follower_media": [
+    {
+      "id": "18133690807887015",
+      "caption": "Jag såg en annons som jag vill dela med dig som vill automatisera vissa DM.\n\nÖnskade du att du hade en administratör som skötte allt detta åt dig? Jag är anställningsbar.",
+      "media_type": "CAROUSEL_ALBUM",
+      "media_product_type": "FEED",
+      "permalink": "https://www.instagram.com/p/DddnWAyGyT3/",
+      "thumbnail_url": null,
+      "media_url": "https://scontent-sjc6-1.cdninstagram.com/v/t51.82787-15/814908122_18028824359883290_176960503711830327_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=kNdWqLKEg04Q7kNvwHyn7Tt&_nc_oc=Adpz2aCm3a19tBEfeP0-_AYdQ6gPVDccOzQAJrvW1fcRVNFYTc9qbjkZuxiptRQEogs&_nc_zt=23&_nc_ht=scontent-sjc6-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=4SNTkojUgJaMqxRbcRZ4Lg&oh=00_AQKAUMiNL--szC_v8N98qi3MwPBTuFHQ6EGgmUoNRiLbpg&oe=6ABA30B4",
+      "timestamp": "2026-09-19T08:47:07+0000",
+      "reach": 116,
+      "follows": 0,
+      "profile_activity": 0,
+      "profile_visits": 1
+    }
+  ],
+  "profile_media": [
+    {
+      "id": "18133690807887015",
+      "caption": "Jag såg en annons som jag vill dela med dig som vill automatisera vissa DM.\n\nÖnskade du att du hade en administratör som skötte allt detta åt dig? Jag är anställningsbar.",
+      "media_type": "CAROUSEL_ALBUM",
+      "media_product_type": "FEED",
+      "permalink": "https://www.instagram.com/p/DddnWAyGyT3/",
+      "thumbnail_url": null,
+      "media_url": "https://scontent-sjc6-1.cdninstagram.com/v/t51.82787-15/814908122_18028824359883290_176960503711830327_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=kNdWqLKEg04Q7kNvwHyn7Tt&_nc_oc=Adpz2aCm3a19tBEfeP0-_AYdQ6gPVDccOzQAJrvW1fcRVNFYTc9qbjkZuxiptRQEogs&_nc_zt=23&_nc_ht=scontent-sjc6-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=4SNTkojUgJaMqxRbcRZ4Lg&oh=00_AQKAUMiNL--szC_v8N98qi3MwPBTuFHQ6EGgmUoNRiLbpg&oe=6ABA30B4",
+      "timestamp": "2026-09-19T08:47:07+0000",
+      "reach": 116,
+      "follows": 0,
+      "profile_activity": 0,
+      "profile_visits": 1,
+      "bio_link_clicks": 0,
+      "contact_actions": 0,
+      "profile_visit_rate_pct": 0.9,
+      "profile_activity_breakdown": {}
+    }
+  ],
+  "best_posting": {
+    "weekday": "Lördag",
+    "weekday_avg_engagement": 8.0,
+    "hour": 10,
+    "hour_avg_engagement": 8.0,
+    "posts_analyzed": 1
+  },
+  "top_media": [
+    {
+      "id": "18133690807887015",
+      "caption": "Jag såg en annons som jag vill dela med dig som vill automatisera vissa DM.\n\nÖnskade du att du hade en administratör som skötte allt detta åt dig? Jag är anställningsbar.",
+      "media_type": "CAROUSEL_ALBUM",
+      "media_product_type": "FEED",
+      "permalink": "https://www.instagram.com/p/DddnWAyGyT3/",
+      "media_url": "https://scontent-sjc6-1.cdninstagram.com/v/t51.82787-15/814908122_18028824359883290_176960503711830327_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=kNdWqLKEg04Q7kNvwHyn7Tt&_nc_oc=Adpz2aCm3a19tBEfeP0-_AYdQ6gPVDccOzQAJrvW1fcRVNFYTc9qbjkZuxiptRQEogs&_nc_zt=23&_nc_ht=scontent-sjc6-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=4SNTkojUgJaMqxRbcRZ4Lg&oh=00_AQKAUMiNL--szC_v8N98qi3MwPBTuFHQ6EGgmUoNRiLbpg&oe=6ABA30B4",
+      "timestamp": "2026-09-19T08:47:07+0000",
+      "like_count": 3,
+      "comments_count": 4,
+      "reach": 116,
+      "saved": 1,
+      "shares": 0,
+      "follows": 0,
+      "profile_activity": 0,
+      "profile_visits": 1,
+      "profile_activity_breakdown": {},
+      "bio_link_clicks": 0,
+      "contact_actions": 0,
+      "engagement": 8
+    }
+  ],
+  "format_breakdown": {
+    "IMAGE": {
+      "count": 0,
+      "avg_engagement": 0
+    },
+    "CAROUSEL_ALBUM": {
+      "count": 1,
+      "avg_engagement": 8.0
+    },
+    "VIDEO": {
+      "count": 0,
+      "avg_engagement": 0
+    },
+    "REELS": {
+      "count": 0,
+      "avg_engagement": 0
+    }
   }
 }
