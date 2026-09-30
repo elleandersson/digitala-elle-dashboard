@@ -1,34 +1,30 @@
 {
-  "updated_at": "2026-09-29T01:00:36.212997+00:00",
+  "updated_at": "2026-09-30T00:28:25.413674+00:00",
   "profile": {
     "username": "digitalaelle.se",
-    "followers_count": 240,
-    "follows_count": 335,
-    "media_count": 110,
+    "followers_count": 241,
+    "follows_count": 336,
+    "media_count": 111,
     "id": "17841456498681952"
   },
   "totals_30d": {
-    "views": 2260,
+    "views": 2450,
     "profile_views": 77,
     "profile_link_clicks": 0,
     "profile_link_clicks_metric": "profile_links_taps",
     "profile_link_clicks_available": true,
-    "accounts_engaged": 20,
-    "total_interactions": 49,
-    "reach": 1269
+    "accounts_engaged": 22,
+    "total_interactions": 52,
+    "reach": 1373
   },
   "extras_30d": {
     "saves": 1,
     "shares": 0,
-    "engagement_rate_pct": 3.86,
-    "reach_non_followers_pct": 86.9
+    "engagement_rate_pct": 3.79,
+    "reach_non_followers_pct": 87.6
   },
   "time_series_30d": {
     "reach": [
-      {
-        "date": "2026-08-30",
-        "value": 4
-      },
       {
         "date": "2026-08-31",
         "value": 48
@@ -143,14 +139,14 @@
       },
       {
         "date": "2026-09-28",
-        "value": 749
+        "value": 817
+      },
+      {
+        "date": "2026-09-29",
+        "value": 40
       }
     ],
     "follower_count": [
-      {
-        "date": "2026-08-30",
-        "value": 1
-      },
       {
         "date": "2026-08-31",
         "value": 0
@@ -266,30 +262,16 @@
       {
         "date": "2026-09-28",
         "value": 0
+      },
+      {
+        "date": "2026-09-29",
+        "value": 0
       }
     ],
     "profile_views": [],
     "profile_link_clicks": []
   },
   "daily_insights": [
-    {
-      "date": "2026-08-30",
-      "reach": 4,
-      "new_followers": 1,
-      "profile_views": 0,
-      "profile_link_clicks": 0,
-      "content_profile_visits": 0,
-      "content_profile_activity": 0,
-      "content_follows": 0,
-      "bio_link_clicks": 0,
-      "contact_actions": 0,
-      "engagement": 0,
-      "posts": 0,
-      "stories": 0,
-      "story_reach": 0,
-      "story_replies": 0,
-      "story_link_clicks": 0
-    },
     {
       "date": "2026-08-31",
       "reach": 48,
@@ -796,7 +778,7 @@
     },
     {
       "date": "2026-09-28",
-      "reach": 749,
+      "reach": 817,
       "new_followers": 0,
       "profile_views": 0,
       "profile_link_clicks": 0,
@@ -811,40 +793,27 @@
       "story_reach": 799,
       "story_replies": 0,
       "story_link_clicks": 1
-    }
-  ],
-  "active_stories": [
-    {
-      "id": "18438301387131550",
-      "media_type": "VIDEO",
-      "media_url": "https://scontent-iad3-2.cdninstagram.com/o1/v/t2/f2/m78/AQNm4IvyLCWDJe1obZZ3Aex6VjZ2uyjplKnVFAw9GQ851rltSyisOXiUJU7-g83r2MuqKq8vvH-32EDclK0OX9mQLGUwkvdS6-XrPlw.mp4?_nc_cat=103&_nc_sid=5e9851&_nc_ht=scontent-iad3-2.cdninstagram.com&_nc_ohc=VSsoG_Q16-0Q7kNvwGbTR8S&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5JTlNUQUdSQU0uU1RPUlkuQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSIsInhwdl9hc3NldF9pZCI6MTgwMzAwOTE4MDg4ODMyOTAsImFzc2V0X2FnZV9kYXlzIjowLCJ2aV91c2VjYXNlX2lkIjoxMDEwMCwiZHVyYXRpb25fcyI6NSwidXJsZ2VuX3NvdXJjZSI6Ind3dyJ9&ccb=17-1&vs=8f3a93eb3c3768f6&_nc_vs=HBkcFQIYUWlnX3hwdl9wbGFjZW1lbnRfcGVybWFuZW50X3YyL0RCQ0Q0RURGODc3NjQ4NUM5Njk4NzJFMUIzRjUyNzQ0X3ZpZGVvX2Rhc2hpbml0Lm1wNBUAAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACa0icqYvJGHQBUCKAJDMywXQBQAAAAAAAAYEmRhc2hfYmFzZWxpbmVfMV92MREAdegHZeidAQA&_nc_gid=4TcLyoNaCbIPWT0WqSGbhA&edm=AKT8UfUEAAAA&_nc_zt=28&oh=00_AQPs55fTmrtduAyLie5GopuljAKjdJFabk6umGGgEBJ3ng&oe=6ABCECB0",
-      "permalink": "https://www.instagram.com/stories/digitalaelle.se/3995987101417490916",
-      "timestamp": "2026-09-28T07:00:02+0000",
-      "impressions": 0,
-      "reach": 52,
-      "replies": 0,
-      "taps_forward": 0,
-      "taps_back": 0,
-      "exits": 0,
-      "link_clicks": 1,
-      "story_interactions": 1
     },
     {
-      "id": "18398135287207926",
-      "media_type": "IMAGE",
-      "media_url": "https://scontent-iad3-2.cdninstagram.com/v/t51.82787-15/825277071_18030090203883290_1563573445400967861_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=103&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiU1RPUlkuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=Sbmv1rNbHz8Q7kNvwFrII-t&_nc_oc=AdqjfWqZ0tOVFX4VPfn3IXvL8l7M3JnOE8s8leK4jldH4P38hoXdtXXdksnVTB3t7Ew&_nc_zt=23&_nc_ht=scontent-iad3-2.cdninstagram.com&edm=AKT8UfUEAAAA&_nc_gid=4TcLyoNaCbIPWT0WqSGbhA&oh=00_AQO3iqS6gfGWB1skMSAnaQKekvb13oidBX_BUAtnt9_0xA&oe=6AC0E402",
-      "permalink": "https://www.instagram.com/stories/digitalaelle.se/3995979575571245619",
-      "timestamp": "2026-09-28T06:45:07+0000",
-      "impressions": 0,
-      "reach": 747,
-      "replies": 0,
-      "taps_forward": 0,
-      "taps_back": 0,
-      "exits": 0,
-      "link_clicks": 0,
-      "story_interactions": 0
+      "date": "2026-09-29",
+      "reach": 40,
+      "new_followers": 0,
+      "profile_views": 0,
+      "profile_link_clicks": 0,
+      "content_profile_visits": 1,
+      "content_profile_activity": 0,
+      "content_follows": 0,
+      "bio_link_clicks": 0,
+      "contact_actions": 0,
+      "engagement": 3,
+      "posts": 1,
+      "stories": 0,
+      "story_reach": 0,
+      "story_replies": 0,
+      "story_link_clicks": 0
     }
   ],
+  "active_stories": [],
   "story_history_30d": [
     {
       "id": "18398135287207926",
@@ -884,7 +853,7 @@
   "story_summary_30d": {
     "tracking_started": true,
     "story_days": 1,
-    "tuesday_days": 4,
+    "tuesday_days": 5,
     "totals": {
       "stories": 2,
       "impressions": 0,
@@ -895,12 +864,12 @@
       "exits": 0,
       "link_clicks": 1
     },
-    "avg_reach_story_days": 749.0,
-    "avg_reach_other_days": 17.9,
-    "story_day_reach_delta_pct": 4084.4,
-    "avg_reach_tuesdays": 35.8,
-    "avg_reach_all_days": 42.3,
-    "tuesday_reach_delta_pct": -15.4,
+    "avg_reach_story_days": 817.0,
+    "avg_reach_other_days": 19.2,
+    "story_day_reach_delta_pct": 4155.2,
+    "avg_reach_tuesdays": 36.6,
+    "avg_reach_all_days": 45.8,
+    "tuesday_reach_delta_pct": -20.1,
     "recent_stories": [
       {
         "id": "18438301387131550",
@@ -940,22 +909,22 @@
   },
   "profile_summary_30d": {
     "totals": {
-      "reach": 1269,
+      "reach": 1373,
       "profile_views": 77,
-      "new_followers": 20,
+      "new_followers": 19,
       "profile_link_clicks": 0,
       "outbound_clicks": 0,
-      "content_profile_visits": 1,
+      "content_profile_visits": 2,
       "content_profile_activity": 0,
       "bio_link_clicks": 0,
       "story_link_clicks": 1,
       "contact_actions": 0
     },
     "rates": {
-      "profile_visit_rate_pct": 6.1,
+      "profile_visit_rate_pct": 5.6,
       "content_profile_visit_rate_pct": 0.1,
       "link_click_rate_pct": 0.0,
-      "follow_rate_pct": 26.0
+      "follow_rate_pct": 24.7
     },
     "profile_views_series_available": false,
     "profile_link_clicks_series_available": false,
@@ -973,12 +942,22 @@
         "stories": 0
       },
       {
+        "date": "2026-09-29",
+        "profile_visits": 1,
+        "content_profile_visits": 1,
+        "profile_activity": 0,
+        "link_clicks": 0,
+        "reach": 40,
+        "posts": 1,
+        "stories": 0
+      },
+      {
         "date": "2026-09-28",
         "profile_visits": 0,
         "content_profile_visits": 0,
         "profile_activity": 0,
         "link_clicks": 1,
-        "reach": 749,
+        "reach": 817,
         "posts": 0,
         "stories": 2
       }
@@ -3513,7 +3492,7 @@
       },
       {
         "date": "2026-09-28",
-        "reach": 749,
+        "reach": 817,
         "new_followers": 0,
         "profile_views": 0,
         "profile_link_clicks": 0,
@@ -3528,6 +3507,24 @@
         "story_reach": 799,
         "story_replies": 0,
         "story_link_clicks": 1
+      },
+      {
+        "date": "2026-09-29",
+        "reach": 40,
+        "new_followers": 0,
+        "profile_views": 0,
+        "profile_link_clicks": 0,
+        "content_profile_visits": 1,
+        "content_profile_activity": 0,
+        "content_follows": 0,
+        "bio_link_clicks": 0,
+        "contact_actions": 0,
+        "engagement": 3,
+        "posts": 1,
+        "stories": 0,
+        "story_reach": 0,
+        "story_replies": 0,
+        "story_link_clicks": 0
       }
     ],
     "snapshots": [
@@ -5194,16 +5191,50 @@
         "engagement_rate_30d": 3.86,
         "posts_30d": 1,
         "saves_shares_30d": 1
+      },
+      {
+        "date": "2026-09-30",
+        "followers": 241,
+        "following": 336,
+        "media_count": 111,
+        "reach_30d": 1373,
+        "profile_views_30d": 77,
+        "new_followers_30d": 19,
+        "outbound_clicks_30d": 0,
+        "engagement_rate_30d": 3.79,
+        "posts_30d": 2,
+        "saves_shares_30d": 1
       }
     ],
     "media": [
+      {
+        "id": "18440800660132649",
+        "caption": "Använder du också upp ditt usage? Och på morgonen också. Du som hade så mycket att göra.\n\nVill du få 3h extra usage varje morgon? \n\nHär är ett knep:\nStarta en automation varje morgon 3 h innan du vanligtvis går upp. Så har du bara 2 h innan du får ny tid i din AI-modell.\n\nDela inlägget till någon som tar slut på sin usage hela tiden.",
+        "media_type": "CAROUSEL_ALBUM",
+        "media_product_type": "FEED",
+        "permalink": "https://www.instagram.com/p/Dd3A47EESDj/",
+        "media_url": "https://scontent-iad3-1.cdninstagram.com/v/t51.82787-15/828562143_18030219275883290_8366182103526859266_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=101&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=IxVkhPwnPFIQ7kNvwHjIdr0&_nc_oc=AdpW3PvhrXDZRUmTQlvQHirbcVqFH0ugsFW2825JyEt1k3me1_wqB0U4R1wUZQ_G3kg&_nc_zt=23&_nc_ht=scontent-iad3-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=srtJF2L7qISqGZMKgs-Org&oh=00_AQOUxVG3rHmOJLKtPezADFO7blefffi-x14pxZxm9O5oiw&oe=6AC21DF9",
+        "timestamp": "2026-09-29T05:31:22+0000",
+        "like_count": 3,
+        "comments_count": 0,
+        "reach": 51,
+        "saved": 0,
+        "shares": 0,
+        "follows": 0,
+        "profile_activity": 0,
+        "profile_visits": 1,
+        "profile_activity_breakdown": {},
+        "bio_link_clicks": 0,
+        "contact_actions": 0,
+        "engagement": 3
+      },
       {
         "id": "18133690807887015",
         "caption": "Jag såg en annons som jag vill dela med dig som vill automatisera vissa DM.\n\nÖnskade du att du hade en administratör som skötte allt detta åt dig? Jag är anställningsbar.",
         "media_type": "CAROUSEL_ALBUM",
         "media_product_type": "FEED",
         "permalink": "https://www.instagram.com/p/DddnWAyGyT3/",
-        "media_url": "https://scontent-iad6-1.cdninstagram.com/v/t51.82787-15/814908122_18028824359883290_176960503711830327_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=-R0rF_H18NcQ7kNvwHec6ee&_nc_oc=AdoKnOiOiFPtZ7k5FLJSMtWL2V3p8FSMKHngXJ6qfKqwWfIz07kcW6V6xFkdJ6Nbpo8&_nc_zt=23&_nc_ht=scontent-iad6-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=tcGwFkvnaEYzg4A0z6JzwQ&oh=00_AQOOk_zWFfYPjcN6sgRh-diY04vf66J9qSN12Yle-PX2hA&oe=6AC0C834",
+        "media_url": "https://scontent-iad6-1.cdninstagram.com/v/t51.82787-15/814908122_18028824359883290_176960503711830327_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=-R0rF_H18NcQ7kNvwFtJrok&_nc_oc=AdpSyX-DmL_O97WZwJ__EWgDaYZ87zCkJAyGEf-cslQLMv-QS2wL-avuYbAYUrkfqOk&_nc_zt=23&_nc_ht=scontent-iad6-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=srtJF2L7qISqGZMKgs-Org&oh=00_AQMYmfG8UyHDeFucX5PpTVfrA1idCBdncTJrbTtYduA9RA&oe=6AC219B4",
         "timestamp": "2026-09-19T08:47:07+0000",
         "like_count": 3,
         "comments_count": 7,
@@ -5784,7 +5815,7 @@
       "saves": 0,
       "shares": 0,
       "total": 0,
-      "posts": 0,
+      "posts": 1,
       "is_current": true
     }
   ],
@@ -5796,7 +5827,7 @@
       "media_product_type": "FEED",
       "permalink": "https://www.instagram.com/p/DddnWAyGyT3/",
       "thumbnail_url": null,
-      "media_url": "https://scontent-iad6-1.cdninstagram.com/v/t51.82787-15/814908122_18028824359883290_176960503711830327_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=-R0rF_H18NcQ7kNvwHec6ee&_nc_oc=AdoKnOiOiFPtZ7k5FLJSMtWL2V3p8FSMKHngXJ6qfKqwWfIz07kcW6V6xFkdJ6Nbpo8&_nc_zt=23&_nc_ht=scontent-iad6-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=tcGwFkvnaEYzg4A0z6JzwQ&oh=00_AQOOk_zWFfYPjcN6sgRh-diY04vf66J9qSN12Yle-PX2hA&oe=6AC0C834",
+      "media_url": "https://scontent-iad6-1.cdninstagram.com/v/t51.82787-15/814908122_18028824359883290_176960503711830327_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=-R0rF_H18NcQ7kNvwFtJrok&_nc_oc=AdpSyX-DmL_O97WZwJ__EWgDaYZ87zCkJAyGEf-cslQLMv-QS2wL-avuYbAYUrkfqOk&_nc_zt=23&_nc_ht=scontent-iad6-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=srtJF2L7qISqGZMKgs-Org&oh=00_AQMYmfG8UyHDeFucX5PpTVfrA1idCBdncTJrbTtYduA9RA&oe=6AC219B4",
       "timestamp": "2026-09-19T08:47:07+0000",
       "reach": 120,
       "saved": 1,
@@ -5812,9 +5843,23 @@
       "media_product_type": "FEED",
       "permalink": "https://www.instagram.com/p/DddnWAyGyT3/",
       "thumbnail_url": null,
-      "media_url": "https://scontent-iad6-1.cdninstagram.com/v/t51.82787-15/814908122_18028824359883290_176960503711830327_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=-R0rF_H18NcQ7kNvwHec6ee&_nc_oc=AdoKnOiOiFPtZ7k5FLJSMtWL2V3p8FSMKHngXJ6qfKqwWfIz07kcW6V6xFkdJ6Nbpo8&_nc_zt=23&_nc_ht=scontent-iad6-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=tcGwFkvnaEYzg4A0z6JzwQ&oh=00_AQOOk_zWFfYPjcN6sgRh-diY04vf66J9qSN12Yle-PX2hA&oe=6AC0C834",
+      "media_url": "https://scontent-iad6-1.cdninstagram.com/v/t51.82787-15/814908122_18028824359883290_176960503711830327_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=-R0rF_H18NcQ7kNvwFtJrok&_nc_oc=AdpSyX-DmL_O97WZwJ__EWgDaYZ87zCkJAyGEf-cslQLMv-QS2wL-avuYbAYUrkfqOk&_nc_zt=23&_nc_ht=scontent-iad6-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=srtJF2L7qISqGZMKgs-Org&oh=00_AQMYmfG8UyHDeFucX5PpTVfrA1idCBdncTJrbTtYduA9RA&oe=6AC219B4",
       "timestamp": "2026-09-19T08:47:07+0000",
       "reach": 120,
+      "follows": 0,
+      "profile_activity": 0,
+      "profile_visits": 1
+    },
+    {
+      "id": "18440800660132649",
+      "caption": "Använder du också upp ditt usage? Och på morgonen också. Du som hade så mycket att göra.\n\nVill du få 3h extra usage varje morgon? \n\nHär är ett knep:\nStarta en automation varje morgon 3 h innan du vanligtvis går upp. Så har du bara 2 h innan du får ny tid i din AI-modell.\n\nDela inlägget till någon som tar slut på sin usage hela tiden.",
+      "media_type": "CAROUSEL_ALBUM",
+      "media_product_type": "FEED",
+      "permalink": "https://www.instagram.com/p/Dd3A47EESDj/",
+      "thumbnail_url": null,
+      "media_url": "https://scontent-iad3-1.cdninstagram.com/v/t51.82787-15/828562143_18030219275883290_8366182103526859266_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=101&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=IxVkhPwnPFIQ7kNvwHjIdr0&_nc_oc=AdpW3PvhrXDZRUmTQlvQHirbcVqFH0ugsFW2825JyEt1k3me1_wqB0U4R1wUZQ_G3kg&_nc_zt=23&_nc_ht=scontent-iad3-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=srtJF2L7qISqGZMKgs-Org&oh=00_AQOUxVG3rHmOJLKtPezADFO7blefffi-x14pxZxm9O5oiw&oe=6AC21DF9",
+      "timestamp": "2026-09-29T05:31:22+0000",
+      "reach": 51,
       "follows": 0,
       "profile_activity": 0,
       "profile_visits": 1
@@ -5828,7 +5873,7 @@
       "media_product_type": "FEED",
       "permalink": "https://www.instagram.com/p/DddnWAyGyT3/",
       "thumbnail_url": null,
-      "media_url": "https://scontent-iad6-1.cdninstagram.com/v/t51.82787-15/814908122_18028824359883290_176960503711830327_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=-R0rF_H18NcQ7kNvwHec6ee&_nc_oc=AdoKnOiOiFPtZ7k5FLJSMtWL2V3p8FSMKHngXJ6qfKqwWfIz07kcW6V6xFkdJ6Nbpo8&_nc_zt=23&_nc_ht=scontent-iad6-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=tcGwFkvnaEYzg4A0z6JzwQ&oh=00_AQOOk_zWFfYPjcN6sgRh-diY04vf66J9qSN12Yle-PX2hA&oe=6AC0C834",
+      "media_url": "https://scontent-iad6-1.cdninstagram.com/v/t51.82787-15/814908122_18028824359883290_176960503711830327_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=-R0rF_H18NcQ7kNvwFtJrok&_nc_oc=AdpSyX-DmL_O97WZwJ__EWgDaYZ87zCkJAyGEf-cslQLMv-QS2wL-avuYbAYUrkfqOk&_nc_zt=23&_nc_ht=scontent-iad6-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=srtJF2L7qISqGZMKgs-Org&oh=00_AQMYmfG8UyHDeFucX5PpTVfrA1idCBdncTJrbTtYduA9RA&oe=6AC219B4",
       "timestamp": "2026-09-19T08:47:07+0000",
       "reach": 120,
       "follows": 0,
@@ -5838,6 +5883,24 @@
       "contact_actions": 0,
       "profile_visit_rate_pct": 0.8,
       "profile_activity_breakdown": {}
+    },
+    {
+      "id": "18440800660132649",
+      "caption": "Använder du också upp ditt usage? Och på morgonen också. Du som hade så mycket att göra.\n\nVill du få 3h extra usage varje morgon? \n\nHär är ett knep:\nStarta en automation varje morgon 3 h innan du vanligtvis går upp. Så har du bara 2 h innan du får ny tid i din AI-modell.\n\nDela inlägget till någon som tar slut på sin usage hela tiden.",
+      "media_type": "CAROUSEL_ALBUM",
+      "media_product_type": "FEED",
+      "permalink": "https://www.instagram.com/p/Dd3A47EESDj/",
+      "thumbnail_url": null,
+      "media_url": "https://scontent-iad3-1.cdninstagram.com/v/t51.82787-15/828562143_18030219275883290_8366182103526859266_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=101&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=IxVkhPwnPFIQ7kNvwHjIdr0&_nc_oc=AdpW3PvhrXDZRUmTQlvQHirbcVqFH0ugsFW2825JyEt1k3me1_wqB0U4R1wUZQ_G3kg&_nc_zt=23&_nc_ht=scontent-iad3-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=srtJF2L7qISqGZMKgs-Org&oh=00_AQOUxVG3rHmOJLKtPezADFO7blefffi-x14pxZxm9O5oiw&oe=6AC21DF9",
+      "timestamp": "2026-09-29T05:31:22+0000",
+      "reach": 51,
+      "follows": 0,
+      "profile_activity": 0,
+      "profile_visits": 1,
+      "bio_link_clicks": 0,
+      "contact_actions": 0,
+      "profile_visit_rate_pct": 2.0,
+      "profile_activity_breakdown": {}
     }
   ],
   "best_posting": {
@@ -5845,7 +5908,7 @@
     "weekday_avg_engagement": 11.0,
     "hour": 10,
     "hour_avg_engagement": 11.0,
-    "posts_analyzed": 1
+    "posts_analyzed": 2
   },
   "top_media": [
     {
@@ -5854,7 +5917,7 @@
       "media_type": "CAROUSEL_ALBUM",
       "media_product_type": "FEED",
       "permalink": "https://www.instagram.com/p/DddnWAyGyT3/",
-      "media_url": "https://scontent-iad6-1.cdninstagram.com/v/t51.82787-15/814908122_18028824359883290_176960503711830327_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=-R0rF_H18NcQ7kNvwHec6ee&_nc_oc=AdoKnOiOiFPtZ7k5FLJSMtWL2V3p8FSMKHngXJ6qfKqwWfIz07kcW6V6xFkdJ6Nbpo8&_nc_zt=23&_nc_ht=scontent-iad6-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=tcGwFkvnaEYzg4A0z6JzwQ&oh=00_AQOOk_zWFfYPjcN6sgRh-diY04vf66J9qSN12Yle-PX2hA&oe=6AC0C834",
+      "media_url": "https://scontent-iad6-1.cdninstagram.com/v/t51.82787-15/814908122_18028824359883290_176960503711830327_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=-R0rF_H18NcQ7kNvwFtJrok&_nc_oc=AdpSyX-DmL_O97WZwJ__EWgDaYZ87zCkJAyGEf-cslQLMv-QS2wL-avuYbAYUrkfqOk&_nc_zt=23&_nc_ht=scontent-iad6-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=srtJF2L7qISqGZMKgs-Org&oh=00_AQMYmfG8UyHDeFucX5PpTVfrA1idCBdncTJrbTtYduA9RA&oe=6AC219B4",
       "timestamp": "2026-09-19T08:47:07+0000",
       "like_count": 3,
       "comments_count": 7,
@@ -5868,6 +5931,27 @@
       "bio_link_clicks": 0,
       "contact_actions": 0,
       "engagement": 11
+    },
+    {
+      "id": "18440800660132649",
+      "caption": "Använder du också upp ditt usage? Och på morgonen också. Du som hade så mycket att göra.\n\nVill du få 3h extra usage varje morgon? \n\nHär är ett knep:\nStarta en automation varje morgon 3 h innan du vanligtvis går upp. Så har du bara 2 h innan du får ny tid i din AI-modell.\n\nDela inlägget till någon som tar slut på sin usage hela tiden.",
+      "media_type": "CAROUSEL_ALBUM",
+      "media_product_type": "FEED",
+      "permalink": "https://www.instagram.com/p/Dd3A47EESDj/",
+      "media_url": "https://scontent-iad3-1.cdninstagram.com/v/t51.82787-15/828562143_18030219275883290_8366182103526859266_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=101&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=IxVkhPwnPFIQ7kNvwHjIdr0&_nc_oc=AdpW3PvhrXDZRUmTQlvQHirbcVqFH0ugsFW2825JyEt1k3me1_wqB0U4R1wUZQ_G3kg&_nc_zt=23&_nc_ht=scontent-iad3-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=srtJF2L7qISqGZMKgs-Org&oh=00_AQOUxVG3rHmOJLKtPezADFO7blefffi-x14pxZxm9O5oiw&oe=6AC21DF9",
+      "timestamp": "2026-09-29T05:31:22+0000",
+      "like_count": 3,
+      "comments_count": 0,
+      "reach": 51,
+      "saved": 0,
+      "shares": 0,
+      "follows": 0,
+      "profile_activity": 0,
+      "profile_visits": 1,
+      "profile_activity_breakdown": {},
+      "bio_link_clicks": 0,
+      "contact_actions": 0,
+      "engagement": 3
     }
   ],
   "format_breakdown": {
@@ -5876,8 +5960,8 @@
       "avg_engagement": 0
     },
     "CAROUSEL_ALBUM": {
-      "count": 1,
-      "avg_engagement": 11.0
+      "count": 2,
+      "avg_engagement": 7.0
     },
     "VIDEO": {
       "count": 0,
