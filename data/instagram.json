@@ -1,34 +1,30 @@
 {
-  "updated_at": "2026-11-11T01:14:34.671814+00:00",
+  "updated_at": "2026-11-12T02:16:16.271972+00:00",
   "profile": {
     "id": "17841456498681952",
     "followers_count": 246,
-    "follows_count": 339,
+    "follows_count": 338,
     "media_count": 111,
     "username": "digitalaelle.se"
   },
   "totals_30d": {
-    "views": 332,
-    "profile_views": 38,
+    "views": 321,
+    "profile_views": 37,
     "profile_link_clicks": 0,
     "profile_link_clicks_metric": "profile_links_taps",
     "profile_link_clicks_available": true,
     "accounts_engaged": 3,
     "total_interactions": 6,
-    "reach": 89
+    "reach": 87
   },
   "extras_30d": {
     "saves": 0,
     "shares": 0,
-    "engagement_rate_pct": 6.74,
-    "reach_non_followers_pct": 16.5
+    "engagement_rate_pct": 6.9,
+    "reach_non_followers_pct": 15.5
   },
   "time_series_30d": {
     "reach": [
-      {
-        "date": "2026-10-12",
-        "value": 2
-      },
       {
         "date": "2026-10-13",
         "value": 3
@@ -144,13 +140,13 @@
       {
         "date": "2026-11-10",
         "value": 1
+      },
+      {
+        "date": "2026-11-11",
+        "value": 0
       }
     ],
     "follower_count": [
-      {
-        "date": "2026-10-12",
-        "value": 0
-      },
       {
         "date": "2026-10-13",
         "value": 1
@@ -266,30 +262,16 @@
       {
         "date": "2026-11-10",
         "value": 0
+      },
+      {
+        "date": "2026-11-11",
+        "value": 0
       }
     ],
     "profile_views": [],
     "profile_link_clicks": []
   },
   "daily_insights": [
-    {
-      "date": "2026-10-12",
-      "reach": 2,
-      "new_followers": 0,
-      "profile_views": 0,
-      "profile_link_clicks": 0,
-      "content_profile_visits": 0,
-      "content_profile_activity": 0,
-      "content_follows": 0,
-      "bio_link_clicks": 0,
-      "contact_actions": 0,
-      "engagement": 0,
-      "posts": 0,
-      "stories": 0,
-      "story_reach": 0,
-      "story_replies": 0,
-      "story_link_clicks": 0
-    },
     {
       "date": "2026-10-13",
       "reach": 3,
@@ -811,6 +793,24 @@
       "story_reach": 0,
       "story_replies": 0,
       "story_link_clicks": 0
+    },
+    {
+      "date": "2026-11-11",
+      "reach": 0,
+      "new_followers": 0,
+      "profile_views": 0,
+      "profile_link_clicks": 0,
+      "content_profile_visits": 0,
+      "content_profile_activity": 0,
+      "content_follows": 0,
+      "bio_link_clicks": 0,
+      "contact_actions": 0,
+      "engagement": 0,
+      "posts": 0,
+      "stories": 0,
+      "story_reach": 0,
+      "story_replies": 0,
+      "story_link_clicks": 0
     }
   ],
   "active_stories": [],
@@ -848,11 +848,11 @@
       "link_clicks": 0
     },
     "avg_reach_story_days": 46.0,
-    "avg_reach_other_days": 1.5,
-    "story_day_reach_delta_pct": 2966.7,
+    "avg_reach_other_days": 1.4,
+    "story_day_reach_delta_pct": 3185.7,
     "avg_reach_tuesdays": 10.4,
-    "avg_reach_all_days": 3.0,
-    "tuesday_reach_delta_pct": 246.7,
+    "avg_reach_all_days": 2.9,
+    "tuesday_reach_delta_pct": 258.6,
     "recent_stories": [
       {
         "id": "18637748440014020",
@@ -875,8 +875,8 @@
   },
   "profile_summary_30d": {
     "totals": {
-      "reach": 89,
-      "profile_views": 38,
+      "reach": 87,
+      "profile_views": 37,
       "new_followers": 7,
       "profile_link_clicks": 0,
       "outbound_clicks": 0,
@@ -887,10 +887,10 @@
       "contact_actions": 0
     },
     "rates": {
-      "profile_visit_rate_pct": 42.7,
+      "profile_visit_rate_pct": 42.5,
       "content_profile_visit_rate_pct": 0.0,
       "link_click_rate_pct": 0.0,
-      "follow_rate_pct": 18.4
+      "follow_rate_pct": 18.9
     },
     "profile_views_series_available": false,
     "profile_link_clicks_series_available": false,
@@ -4216,6 +4216,24 @@
         "story_reach": 0,
         "story_replies": 0,
         "story_link_clicks": 0
+      },
+      {
+        "date": "2026-11-11",
+        "reach": 0,
+        "new_followers": 0,
+        "profile_views": 0,
+        "profile_link_clicks": 0,
+        "content_profile_visits": 0,
+        "content_profile_activity": 0,
+        "content_follows": 0,
+        "bio_link_clicks": 0,
+        "contact_actions": 0,
+        "engagement": 0,
+        "posts": 0,
+        "stories": 0,
+        "story_reach": 0,
+        "story_replies": 0,
+        "story_link_clicks": 0
       }
     ],
     "snapshots": [
@@ -6439,6 +6457,19 @@
         "new_followers_30d": 7,
         "outbound_clicks_30d": 0,
         "engagement_rate_30d": 6.74,
+        "posts_30d": 0,
+        "saves_shares_30d": 0
+      },
+      {
+        "date": "2026-11-12",
+        "followers": 246,
+        "following": 338,
+        "media_count": 111,
+        "reach_30d": 87,
+        "profile_views_30d": 37,
+        "new_followers_30d": 7,
+        "outbound_clicks_30d": 0,
+        "engagement_rate_30d": 6.9,
         "posts_30d": 0,
         "saves_shares_30d": 0
       }
